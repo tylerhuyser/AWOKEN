@@ -22,16 +22,19 @@ While taking an IAT, users are asked to quickly sort words into categories that 
   2. Distinguishing between our two identity categories (i.e. light-skinned vs. dark-skinned). Again, this step primes the participant for the exercise.
   3. This section combines exercises 1 & 2. On the left-hand side would be the "good" and "light-skinned" categories, whereas on the right would be the "bad" and "dark-skinned" categories.
   4. This section flips the placement of identity concepts. Now, "dark-skinned" would be on the left and "light-skinned" would be on the right. The "good" and "bad" categories remain in their respective positions.
-  5. This block repeats Block 2's priming procedure, however, with exclusively dark-skinned images on the left and light-skinned images on the right. 'Good' and 'Bad' words are omitted from this block of the test.
-  6. The This section flips the placement of "good" vs. "bad" concepts.
-  7. 
+  5. This block repeats Block 2's priming procedure. Users will sort only light-skinned and dark-skinned images, however, their left and right placements will be flipped. 'Good' and 'Bad' words are omitted from this block of the test.
+  6. This section repeats block 3, however the placement of "good" vs. "bad" concepts is flipped.
+  7. Finally, this section repeats block 4, and, once again, the placement of "good" vs. "bad" concepts is flipped.
   
   | Block | Function | Left-Key Items | Right-Key Items |
   |-------|----------|----------------|-----------------|
   |   1   |  Priming |  'Good' Words  |  'Bad' Words    |
   |   2   |  Priming |  Dark-Skinned  |  Light-Skinned  |
-  |   3   |  Test    |  'Good Words + Dark-Skinned  |  'Bad Words' + Light-Skinned  |
-  |   4   |  Test    |  'Good Words + Light-Skinned  |  'Bad Words + Dark-Skinned  |
+  |   3   |  Test    |  'Good' Words + Dark-Skinned   |  'Bad Words' + Light-Skinned  |
+  |   4   |  Test    |  'Good' Words + Light-Skinned  |  'Bad Words' + Dark-Skinned   |
+  |   5   |  Priming |  Light-Skinned  |  Dark-Skinned  |
+  |   6   |  Test    |  Light-Skinned + 'Bad' Words   |  Dark-Skinned + 'Good' Words  |    
+  |   7   |  Test    |  Light-Skinned + 'Good' Words  |  Dark-Skinned + 'Bad' Words   |
   
 
 Running in the background, is a timer that the test uses in order to record the user's reaction times for third and fifth sections of the test. These times are averaged, subtracted, and then the result is computed into a score informing a user of their bias. The user is presented this score.
@@ -60,7 +63,7 @@ The participants scores are averaged to obtain a mean, in which higher numbers i
 
 For the next twelve (12) weeks, participants are presented with a journal and questionnaire. The questionnaire asks the user to provide open-ended responses about their experiences with using the five prejudice self-regulation strategies.
 
-For each strategy, the participants were asked whether they had used the strategy since their last in-lab session. If they had used a strategy, the participants were subsequently asked to describe one or two situations in which they had used the strategy and to provide general comments about their experiences using the strategy. At the end of the questionnaire, the participants were asked to share any additional comments about implementing the strategies.
+For each strategy, the participants were asked whether they had used the strategy since their last in-lab session. If they had used a strategy, the participants were subsequently asked to describe one or two situations in which they had used the strategy. At the end of the questionnaire, the participants were asked to share any additional comments about implementing the strategies.
 
 After completing the journal, the user is once again presented with the intervention questionnaire, in which they rate their attitudes towards each strategy from 1 to 7.
 
@@ -78,6 +81,8 @@ Some anticipated challenges with this project include:
 
 * Developing a smooth experiences for employees (during the tests) and corporate administrators (while requesting cohort data).
 
+* During the IAT test, image loading time must not skew the results of the test.
+
 ## MVP
 
 * Auth Log-In
@@ -88,12 +93,26 @@ Some anticipated challenges with this project include:
 
 #### Timeline
 
+| Component | Priority | Estimated Time | Actual Time |
+| --------- | -------- | -------------- | ----------- |
+| Rails Backend | High | 4 hours | TBD |
+| Header    | Low      | 1 hour | TBD |
+| Nav       | Low      | 1 hour | TBD |
+| Login | High | 6 hours | TBD |
+| Register | High | 6 hours | TBD |
+| Home | Medium | 3 hours | TBD |
+| Onboarding Assessment (IAT) | High | 12 hours | TBD |
+| Journals | High | 4 hours | TBD |
+| CSS | Medium | 4 hours | TBD |
+| Media Queries | Low | 4 hours | TBD |
+| **Total** | | 45 hours | TBD |
+
 
 
 ### Client
 
-[Wireframes](https://drive.google.com/file/d/1ad_nyQBvMUd_JPjUpoJlcoNqj9KZ9px3/view?usp=sharing)
-[Component Heirarchy]()
+[Wireframes (Slides 6-22) & (27-40)](https://drive.google.com/file/d/1ad_nyQBvMUd_JPjUpoJlcoNqj9KZ9px3/view?usp=sharing)
+[Component Heirarchy](https://whimsical.com/V2ZJ8U3A6JNc4hyLrazgKX)
 
 ### Server
 
