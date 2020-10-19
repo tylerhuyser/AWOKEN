@@ -1,14 +1,14 @@
 # A-Woke-N
 
-A-Woke-N is an app that helps awaken users to their unconscious biases. Using an Implicit Aptitude Test (IAT), the app measures a user's implicit biases (commonly referred to as unconscious bias). Furthermore, the app also administers an intervention in order to help guide users to a more 'woke' mindset.
-
 ## Overview
+
+**A-Woke-N** is an app that helps _awaken_ users to their unconscious biases. Using an Implicit Aptitude Test (IAT), the app measures a user's implicit biases (commonly referred to as unconscious bias). Following the test, the app administers an intervention that helps guide users to a more _a-woke-n_ mindset. 
 
 ### Features
 
 #### Company & User Auth Log-In
 
-A-Woke-N enables companies to offer digitally-equipped and data-driven diversity & inclusion interventions. Using a React-with-Rails framework, users will become associated with their employer upon registering for the program. 
+A-Woke-N enables companies to offer digitally-equipped and data-driven diversity & inclusion interventions. Upon registration, users will become associated with their employers using a unique access token -- thereby allowing companies to optimie the program throughout its flight. 
 
 #### The Implicit Aptitude Test (IAT)
 
@@ -16,13 +16,23 @@ In short, the Implicit Aptitude Test (IAT)  measures the strength of correlation
 
 The idea is that the faster that people are able to associate an identity with an idea reflects their unconscious biases concerning that identity. For example, if a user is able to more quickly associate the word "good" with images of lighter skinned people, then that would indicate greater bias towards lighter-skinned groups of people.
 
-While taking an IAT, users are asked to quicklysort words into categories that are on the left and right hand side of the computer screen. The test is broken into five parts:
+While taking an IAT, users are asked to quickly sort words into categories that are on the left and right hand side of the computer screen. The test is broken into five parts:
 
   1. Sorting words relating to concepts (i.e. identifying good vs. bad words). This step primes the participant for the exercise.
-  2. Distinguishing between our two identiy categories (i.e. light-skinned vs. dark-skinned). Again, this step primes the participant for the exercise.
+  2. Distinguishing between our two identity categories (i.e. light-skinned vs. dark-skinned). Again, this step primes the participant for the exercise.
   3. This section combines exercises 1 & 2. On the left-hand side would be the "good" and "light-skinned" categories, whereas on the right would be the "bad" and "dark-skinned" categories.
   4. This section flips the placement of identity concepts. Now, "dark-skinned" would be on the left and "light-skinned" would be on the right. The "good" and "bad" categories remain in their respective positions.
-  5. This section flips the placement of "good" vs. "bad" concepts.
+  5. This block repeats Block 2's priming procedure, however, with exclusively dark-skinned images on the left and light-skinned images on the right. 'Good' and 'Bad' words are omitted from this block of the test.
+  6. The This section flips the placement of "good" vs. "bad" concepts.
+  7. 
+  
+  | Block | Function | Left-Key Items | Right-Key Items |
+  |-------|----------|----------------|-----------------|
+  |   1   |  Priming |  'Good' Words  |  'Bad' Words    |
+  |   2   |  Priming |  Dark-Skinned  |  Light-Skinned  |
+  |   3   |  Test    |  'Good Words + Dark-Skinned  |  'Bad Words' + Light-Skinned  |
+  |   4   |  Test    |  'Good Words + Light-Skinned  |  'Bad Words + Dark-Skinned  |
+  
 
 Running in the background, is a timer that the test uses in order to record the user's reaction times for third and fifth sections of the test. These times are averaged, subtracted, and then the result is computed into a score informing a user of their bias. The user is presented this score.
 
@@ -70,7 +80,30 @@ Some anticipated challenges with this project include:
 
 ## MVP
 
+* Auth Log-In
+* React-with-Rails Framework
+* Complete IAT Test
+* Complete Journal Functionality
+* Complete CRUD
 
+#### Timeline
+
+
+
+### Client
+
+[Wireframes](https://drive.google.com/file/d/1ad_nyQBvMUd_JPjUpoJlcoNqj9KZ9px3/view?usp=sharing)
+[Component Heirarchy]()
+
+### Server
+
+[Data Architecture] ()
+
+[Entity-Relationship-Diagram] (https://drive.google.com/file/d/15UhOXcn6zN7cM_tvFxrDskiv1ET3TpuG/view?usp=sharing)
+
+[API Endpoint Doucmentation]()
+
+### Dependencies
 
   
   Faces broken down by Ethnicity: 
