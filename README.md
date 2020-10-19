@@ -101,12 +101,13 @@ Some anticipated challenges with this project include:
 | Login | High | 6 hours | TBD |
 | Register | High | 6 hours | TBD |
 | Home | Medium | 3 hours | TBD |
-| Onboarding Assessment (IAT) | High | 12 hours | TBD |
+| Onboarding Assessment (IAT) | Low | 12 hours | TBD |
 | Journals | High | 4 hours | TBD |
 | CSS | Medium | 4 hours | TBD |
-| Media Queries | Low | 4 hours | TBD |
-| **Total** | | 45 hours | TBD |
-
+| Media Queries | Medium | 4 hours | TBD |
+| Admin LogIn | Low | 4 hours | TBD |
+| Data Visualization | Low | 10 hours | TBD |
+| **Total** | | 59 hours | TBD |
 
 
 ### Client
@@ -116,21 +117,37 @@ Some anticipated challenges with this project include:
 
 ### Server
 
-[Data Architecture] ()
+[Data Architecture] - TBD
 
-[Entity-Relationship-Diagram] (https://drive.google.com/file/d/15UhOXcn6zN7cM_tvFxrDskiv1ET3TpuG/view?usp=sharing)
+[Entity-Relationship-Diagram](https://drive.google.com/file/d/15UhOXcn6zN7cM_tvFxrDskiv1ET3TpuG/view?usp=sharing)
 
-[API Endpoint Doucmentation]()
+[API Endpoint Doucmentation] - TBD
 
 ### Dependencies
 
-  
-  Faces broken down by Ethnicity: 
+* Rails
+* Create-React-App
+* React-Router
+* React-Router-Dom
+* Axios
+* Styled-Components
+* React-Chartsjs-2
+
+## Post-MVP
+
+* Onboarding-Assessment
+* Company Admin-View
+
+## Notes:
+ 
+### APIs:
+
+#### Faces broken down by Ethnicity: 
   Generated Photos: https://generated.photos/datasets
   UTK Face: https://susanqq.github.io/UTKFace/
   U Texas Face: http://live.ece.utexas.edu/research/texas3dfr/
   
-Words broken down by postive or negative connotation:
+#### Words broken down by postive or negative connotation:
  https://www.datamuse.com/api/
  https://www.wordsapi.com/
  https://dictionaryapi.com/products/api-collegiate-thesaurus#:~:text=The%20Collegiate%C2%AE%20Thesaurus%20API,choices%2C%20examples%2C%20and%20explanations.  https://words.bighugelabs.com/site/api
