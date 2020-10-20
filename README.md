@@ -117,6 +117,7 @@ Some anticipated challenges with this project include:
 
 #### Repo Structure
 
+```
 |__ app
           |__ controllers
                         |__ application_controller.rb
@@ -171,13 +172,7 @@ Some anticipated challenges with this project include:
                                      |__ IAT_Test.jsx
                                      |__ Admin_Analytics.jsx
                              
-
-         
-             
-      
-
-               
-           
+```      
 
 
 ### Server
