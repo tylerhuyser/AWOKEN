@@ -112,8 +112,73 @@ Some anticipated challenges with this project include:
 
 ### Client
 
-[Wireframes (Slides 6-22) & (27-40)](https://drive.google.com/file/d/1ad_nyQBvMUd_JPjUpoJlcoNqj9KZ9px3/view?usp=sharing)
+[Wireframes (Slides 6-22) & (27-40)](https://drive.google.com/file/d/1ad_nyQBvMUd_JPjUpoJlcoNqj9KZ9px3/view?usp=sharing) <br>
 [Component Heirarchy](https://whimsical.com/V2ZJ8U3A6JNc4hyLrazgKX)
+
+#### Repo Structure
+
+|__ app
+          |__ controllers
+                        |__ application_controller.rb
+                        |__ authentication_controller.rb
+                        |__ companys_controller.rb
+                        |__ admins_cbontroller.rb
+                        |__ employees_controller.rb
+                        |__ **demographics_responses_controller.rb**
+                        |__ sr_journals_controller.rb
+                        |__ sr_questionnaires_controller.rb
+                        |__ iat_scores_controller.rb
+                        |__ iat_questions_controller.rb
+                        |__ sr_questionnaire_questions.rb
+          |__ models
+                        |__ application_record.rb
+                        |__ company.rb
+                        |__ admin.rb
+                        |__ employee.rb
+                        |__ demographics_response.rb
+                        |__ sr_journal.rb
+                        |__ sr_questionnaire.rb
+                        |__ iat_questions.rb
+                        |__ iat_score.rb
+                        |__ sr_questionnaire.rb
+|__ config
+         |__ routes.rb
+|__ db
+         |__ migrate   
+         |__ seeds.rb
+|__ client
+         |__ src
+                        |__ index.js (Contains BrowserRouter from React-Router-Dom)
+                        |__ App.js (Contains User Authentication)
+                        |__ services
+                                     |__ api-config.js
+                                     |__ auth.js
+                                     |__ **TBD**
+                        |__ components
+                                     |__ 
+                        |__ layouts
+                                     |__ Layout.jsx
+                                     |__ Header.jsx
+                                     |__ Nav.jsx (footer)
+                        |__ screens
+                                     |__ Login.jsx
+                                     |__ Register.jsx
+                                     |__ Home.jsx
+                                     |__ Journals.jsx
+                                     |__ JournalCreate.jsx
+                                     |__ JournalEdit.jsx
+                                     |__ SR_Questionnaire.jsx
+                                     |__ IAT_Test.jsx
+                                     |__ Admin_Analytics.jsx
+                             
+
+         
+             
+      
+
+               
+           
+
 
 ### Server
 
