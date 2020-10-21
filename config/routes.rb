@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :options
+  resources :questions
+  resources :survey_formats
   post '/auth/login', to: 'authentication#login'
   get '/auth/verify', to: 'authentication#verify'
 

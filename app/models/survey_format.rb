@@ -1,0 +1,2 @@
+class SurveyFormat < ApplicationRecord
+end
