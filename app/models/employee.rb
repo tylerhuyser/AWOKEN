@@ -15,4 +15,7 @@ class Employee < ApplicationRecord
   has_secure_password
 
   belongs_to :company
+  has_many :surveys
+  has_many :answers, through: :surveys
+
 end
