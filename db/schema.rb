@@ -10,15 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_224607) do
+ActiveRecord::Schema.define(version: 2020_10_22_032842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.bigint "survey_id", null: false
+    t.bigint "question_id", null: false
+    t.bigint "option_id"
+    t.text "free_response"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_answers_on_employee_id"
+    t.index ["option_id"], name: "index_answers_on_option_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["survey_id"], name: "index_answers_on_survey_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "company_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "username"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.date "date_of_birth"
+    t.boolean "admin", default: false
+    t.bigint "company_id", null: false
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_employees_on_company_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -46,21 +74,22 @@ ActiveRecord::Schema.define(version: 2020_10_21_224607) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.date "date_of_birth"
-    t.boolean "admin", default: false
-    t.bigint "company_id", null: false
-    t.string "password_digest"
+  create_table "surveys", force: :cascade do |t|
+    t.bigint "survey_format_id", null: false
+    t.integer "iteration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_users_on_company_id"
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_surveys_on_employee_id"
+    t.index ["survey_format_id"], name: "index_surveys_on_survey_format_id"
   end
 
+  add_foreign_key "answers", "employees"
+  add_foreign_key "answers", "options"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "surveys"
+  add_foreign_key "employees", "companies"
   add_foreign_key "options", "questions"
   add_foreign_key "questions", "survey_formats"
-  add_foreign_key "users", "companies"
+  add_foreign_key "surveys", "survey_formats"
 end

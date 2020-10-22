@@ -9,14 +9,14 @@
 Option.destroy_all
 Question.destroy_all
 SurveyFormat.destroy_all
-User.destroy_all
+Employee.destroy_all
 Company.destroy_all
 
 @facebook = Company.create!(company_name: 'Facebook')
-@user = User.create!(username: 'admin', first_name: 'John', last_name: 'Doe', email: 'admin@gmail.com', date_of_birth: '1994-02-03', company_id: @facebook.id, password: '123456')
+@employee = Employee.create!(username: 'admin', first_name: 'John', last_name: 'Doe', email: 'admin@gmail.com', date_of_birth: '1994-02-03', company_id: @facebook.id, password: '123456')
 
 puts "#{Company.count} companies created"
-puts "#{User.count} users created"
+puts "#{Employee.count} employee created"
 
 @Demographics = SurveyFormat.create!(survey_name: "Employee Demographics")
 @IMS = SurveyFormat.create!(survey_name: "IMS - Internal Motivation to Respond without Prejudice")

@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class Employee < ApplicationRecord
   before_validation :set_defaults
 
   def set_defaults
