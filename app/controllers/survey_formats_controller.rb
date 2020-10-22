@@ -1,5 +1,6 @@
 class SurveyFormatsController < ApplicationController
   before_action :set_survey_format, only: [:show, :update, :destroy]
+  # before_action :authorize_request, only: [:create, :update, :destroy] 
 
   # GET /survey_formats
   def index

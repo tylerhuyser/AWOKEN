@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :update, :destroy]
+  before_action :authorize_request, only: [:create, :update, :destroy] 
 
   # GET /answers
   def index
@@ -16,6 +17,7 @@ class AnswersController < ApplicationController
   # POST /answers
   def create
     @answer = Answer.new(answer_params)
+    @answer.employee = @current_employee
 
     if @answer.save
       render json: @answer, status: :created, location: @answer
@@ -46,6 +48,6 @@ class AnswersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def answer_params
-      params.require(:answer).permit(:employee_id, :survey_id, :question_id, :option_id, :free_response)
+      params.require(:answer).permit(:survey_id, :question_id, :option_id, :free_response)
     end
 end

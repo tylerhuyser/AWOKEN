@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :update, :destroy]
+  # before_action :authorize_request, only: [:create, :update, :destroy] 
 
   # GET /questions
   def index

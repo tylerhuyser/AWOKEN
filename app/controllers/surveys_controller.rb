@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :update, :destroy]
-  # before_action :authorize_request, only: [:create, :update, :destroy] 
+  before_action :authorize_request, only: [:create, :update, :destroy] 
 
   # GET /surveys
   def index
@@ -17,6 +17,7 @@ class SurveysController < ApplicationController
   # POST /surveys
   def create
     @survey = Survey.new(survey_params)
+    @survey.employee = @current_employee
 
     if @survey.save
       render json: @survey, status: :created, location: @survey
