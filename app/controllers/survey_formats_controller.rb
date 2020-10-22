@@ -10,10 +10,10 @@ class SurveyFormatsController < ApplicationController
 
   # GET /survey_formats/1
   def show
-    render json: @survey_format
+    render json: @survey_format, include: {questions: {include: :options} }
   end
 
-  # POST /survey_formats
+  POST /survey_formats
   def create
     @survey_format = SurveyFormat.new(survey_format_params)
 

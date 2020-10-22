@@ -1,5 +1,6 @@
 class SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :update, :destroy]
+  # before_action :authorize_request, only: [:create, :update, :destroy] 
 
   # GET /surveys
   def index
@@ -10,7 +11,7 @@ class SurveysController < ApplicationController
 
   # GET /surveys/1
   def show
-    render json: @survey
+    render json: @survey, include: [:survey_format, :questions, :answers]
   end
 
   # POST /surveys
@@ -46,6 +47,6 @@ class SurveysController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def survey_params
-      params.require(:survey).permit(:employee_id, :survey_format_id, :iteration)
+      params.require(:survey).permit(:survey_format_id, :iteration)
     end
 end
