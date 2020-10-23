@@ -1,17 +1,21 @@
 import React from 'react'
-import Header from '../components/Header'
+import Header from '../Header/Header.jsx'
+import Nav from '../Nav/Nav.jsx'
+
+import './Layout.css'
 
 export default function Layout (props) {
   
   const { currentUser, handleLogout } = props;
 
   return (
-    <div className="App">
+    <div className="layout-container">
       <Header
         currentUser={currentUser}
         handleLogout={handleLogout}
       />
       {props.children}
+      <Nav />
     </div>
   )
 }

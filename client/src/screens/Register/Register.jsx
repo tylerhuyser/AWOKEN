@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { getAllCompanies } from '../services/admin-info';
+
+import './Register.css'
 
 export default function Register(props) {
 
@@ -13,7 +14,7 @@ export default function Register(props) {
     password: ""
   })
 
-  const { username, first_name, last_name, email, date_of_birth, company_id, password } = formData;
+  const { username, first_name, last_name, email, date_of_birth, password } = formData;
   const { error, handleRegister, companyInfo } = props;
 
   const handleChange = (e) => {

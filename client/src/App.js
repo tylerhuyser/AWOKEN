@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Layout from './layouts/Layouts';
-import Login from './screens/Login';
-import Register from './screens/Register';
+import Layout from './layout/Layout/Layout.jsx';
+import Login from './screens/Login/Login';
+import Register from './screens/Register/Register';
 import { loginEmployee, registerEmployee, removeToken, verifyEmployee } from './services/auth';
 import { getAllCompanies } from './services/admin-info';
 

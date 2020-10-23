@@ -5,7 +5,7 @@ export default function Header(props) {
   const { currentUser, handleLogout } = props;
 
   return (
-    <div>
+    <div className="header"> 
       <h1>Tasteville</h1>
       {
         currentUser ?

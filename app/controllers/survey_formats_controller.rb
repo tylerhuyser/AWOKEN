@@ -14,7 +14,7 @@ class SurveyFormatsController < ApplicationController
     render json: @survey_format, include: {questions: {include: :options} }
   end
 
-  POST /survey_formats
+  # POST /survey_formats
   def create
     @survey_format = SurveyFormat.new(survey_format_params)
 

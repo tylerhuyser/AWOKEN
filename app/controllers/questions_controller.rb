@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1
   def show
-    render json: @question, , include: :options
+    render json: @question, include: :options
   end
 
   # POST /questions
