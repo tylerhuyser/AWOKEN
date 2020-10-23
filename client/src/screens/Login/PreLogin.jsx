@@ -22,7 +22,7 @@ export default function PreLogin (props) {
 
         <div className="preLogin-actions">
           <p className="preLogin-tagline">Embrace New Perspectives</p>
-          <button onClick={handleGetStarted}>Get Started</button>
+          <button className="preLogin-get-started-button" onClick={handleGetStarted}>GET STARTED</button>
         </div>
       </div>
 
