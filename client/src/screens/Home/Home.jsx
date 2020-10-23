@@ -8,13 +8,7 @@ export default function Home(props) {
 
   return (
     <div className="home-container">
-      {
-        currentUser ?
-        
-        
-          
-          
-          : }
+    
     </div>
   )
 }

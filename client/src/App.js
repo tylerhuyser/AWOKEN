@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Layout from './layout/Layout/Layout.jsx';
 import Login from './screens/Login/Login';
-import Register from './screens/Register/Register';
+import Register from "./screens/Register/Register";
 import { loginEmployee, registerEmployee, removeToken, verifyEmployee } from './services/auth';
 import { getAllCompanies } from './services/admin-info';
 
@@ -44,33 +44,35 @@ function App() {
     setCurrentUser(null);
     localStorage.removeItem('authToken');
     removeToken();
+    history.push('/login')
   }
 
   return (
-    <Layout 
-      currentUser={currentUser}
-      handleLogout={handleLogout}
-    >
 
-      <Switch>
+    <div className="app-container">
+      { !currentUser ?
+      
+        <Switch>
 
-        <Route path='/login'>
-          <Login handleLogin={handleLogin} />
-        </Route>
+          <Route path="/login">
+            <Login handleLogin={handleLogin} />
+          </Route>
 
-        <Route path="/register">
-          <Register handleRegister={handleRegister} companyInfo={companyInfo} />
-        </Route>
+          <Route path="/register">
+            <Register handleRegister={handleRegister} companyInfo={companyInfo} />
+          </Route>
+            
+        </Switch>
+        :
 
-        <Route path='/'>
+        <Layout 
+          currentUser={currentUser}
+          handleLogout={handleLogout}
+        >
           <MainContainer />
-        </Route>
-
-      </Switch>
-
-
-    </Layout>
-
+        </Layout>
+      }
+    </div>
   );
 }
 

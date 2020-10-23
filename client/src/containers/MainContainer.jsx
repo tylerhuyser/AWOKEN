@@ -8,11 +8,16 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 // import FoodEdit from '../screens/FoodEdit';
 // import FoodDetail from '../screens/FoodDetail';
 
+import "./MainContainer.css"
+
 
 export default function MainContainer() {
 
 
   return (
-  <div></div>
+  <div className="main-container">
+      
+
+  </div>
   )
 }
