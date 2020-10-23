@@ -4,9 +4,15 @@ class QuestionsController < ApplicationController
 
   # GET /questions
   def index
-    @questions = Question.all
+    if params[:survey_format_id]
+      @survey_format = SurveyFormat.find(params[:survey_format_id])
 
-    render json: @questions
+      render json: @survey_format, include: {questions: {include: :options}}
+    else
+      @questions = Question.all
+
+      render json: @questions
+    end
   end
 
   # GET /questions/1

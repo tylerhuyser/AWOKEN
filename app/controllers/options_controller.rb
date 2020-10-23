@@ -4,9 +4,15 @@ class OptionsController < ApplicationController
 
   # GET /options
   def index
-    @options = Option.all
+    if params[:question_id]
+      @question = Question.find(params[:question_id])
 
-    render json: @options
+      render json: @question, include: :options
+    else
+      @options = Option.all
+
+      render json: @options
+    end
   end
 
   # GET /options/1

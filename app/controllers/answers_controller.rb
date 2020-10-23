@@ -4,9 +4,15 @@ class AnswersController < ApplicationController
 
   # GET /answers
   def index
-    @answers = Answer.all
+    if
+      @survey = Survey.find(params[:survey_id])
 
-    render json: @answers
+      render json: @survey, include: :answers
+    else
+      @answers = Answer.all
+
+      render json: @answers
+    end
   end
 
   # GET /answers/1

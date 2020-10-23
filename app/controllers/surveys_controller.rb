@@ -4,9 +4,15 @@ class SurveysController < ApplicationController
 
   # GET /surveys
   def index
-    @surveys = Survey.all
+    if params[:employee_id]
+      @employee = Employee.find(params[:employee_id])
 
-    render json: @surveys
+      render json: @employee, include: [:surveys, :answers, {surveys: {include: :survey_formats }}]
+    else
+      @surveys = Survey.all
+
+      render json: @surveys
+    end
   end
 
   # GET /surveys/1

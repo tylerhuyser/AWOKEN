@@ -7,4 +7,5 @@ class Answer < ApplicationRecord
   has_many :options, through: :questions
 
   # has_and_belongs_to_many :options
+  # validates :first_name, :last_name, :date_of_birth, :company_id, presence: true
 end
