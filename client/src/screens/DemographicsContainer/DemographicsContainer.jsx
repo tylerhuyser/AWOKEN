@@ -26,10 +26,10 @@ export default function DemographicsContainer(props) {
     <Question
     
       question={question}
+      index={index}
       postDemographicAnswer={postDemographicAnswer}
       postDemographicsSurvey={postDemographicsSurvey}
       demographicsSurvey={demographicsSurvey}
-      index={index}
     
     />
   ))

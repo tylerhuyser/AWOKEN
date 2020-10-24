@@ -74,7 +74,7 @@ function App() {
           currentUser={currentUser}
           handleLogout={handleLogout}
         >
-          <MainContainer />
+          <MainContainer currentUser={currentUser} />
         </Layout>
       }
     </div>

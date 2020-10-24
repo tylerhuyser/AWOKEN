@@ -10,9 +10,10 @@ import { postAnswer } from '../services/answers.js';
 import "./MainContainer.css"
 
 
-export default function MainContainer() {
+export default function MainContainer(props) {
   const [surveyFormats, setSurveyFormats] = useState([])
   const [demographicsQuestionData, setDemographicsQuestionData] = useState([])
+  const {currentUser} = props
   const history = useHistory();
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function MainContainer() {
       <Switch>
 
         <Route path="/complete-profile">
-          <DemographicsContainer demographicsQuestionData={demographicsQuestionData} postDemographicAnswer={postDemographicAnswer} postDemographicsSurvey={postDemographicsSurvey} />
+          <DemographicsContainer currentUser={currentUser} demographicsQuestionData={demographicsQuestionData} postDemographicAnswer={postDemographicAnswer} postDemographicsSurvey={postDemographicsSurvey} />
         </Route>
 
       </Switch>
