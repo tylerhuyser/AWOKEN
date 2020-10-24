@@ -106,7 +106,7 @@ export default function Register(props) {
         />
       </label>
 
-      <button>Register</button>
+      <button className="register">Register</button>
 
     </form>
   )

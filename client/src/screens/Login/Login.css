@@ -1,0 +1,154 @@
+.login-form-container {
+
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+
+}
+
+.login-form {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.login-form-header {
+
+  color: #F39C12;
+  font-size: 4vw;
+  letter-spacing: 0.9px;
+  
+}
+
+.login-logo-orange {
+
+  width: 20vw;
+  margin: 10px 0px;
+
+}
+
+.login-header-subtitle {
+
+  margin: 10px 0px; 
+
+}
+
+.login-form{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #F39C12;
+  font-size: 4vw;
+  letter-spacing: 0.9px;
+  text-align: left;
+
+  margin: 25px 0px;
+}
+
+.login-form-title {
+
+  width: 100%;
+  font-size: 5vw;
+
+}
+
+.login-form-label {
+  margin: 5px 0px;
+  width: 75vw;
+  
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+}
+
+.login-form-input{
+
+  border: none;
+
+  margin: 10px 0px 15px 0px;
+  --webkit-box-shadow: 0 5px 5px -6px lightgray;
+  --Moz-Box-Shadow: 0 5px 5px -6px lightgray;
+  box-shadow: 0 5px 5px -6px lightgray;
+
+}
+
+.sign-in-button {
+
+  width: 40vw;
+  height: 5vh;
+  margin: 25px 0px 15px 0px;
+  padding: 0.5vh;
+
+  background: #F39C12;
+
+  color: white;
+  font-size: 4vw;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 2px;
+
+  border-radius: 15px;
+  border: none;
+
+  cursor: pointer;
+
+
+}
+
+.register-prompt-container {
+
+  color: #F39C12;
+  font-size: 4vw;
+  letter-spacing: 0.9px;
+
+}
+
+.password-recovery-copy {
+  font-size: 3vw;
+  margin: 0px;
+
+}
+
+.register-prompt-copy {
+  margin: 0px;
+}
+
+.register-button {
+
+  width: 40vw;
+  height: 5vh;
+  margin: 15px 0px 25px 0px;
+  padding: 0.5vh;
+
+  background: #F39C12;
+
+  color: white;
+  font-size: 4vw;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 2px;
+
+  border-radius: 15px;
+  border: none;
+
+  cursor: pointer;
+
+
+}
