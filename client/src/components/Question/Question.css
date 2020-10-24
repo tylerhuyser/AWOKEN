@@ -1,0 +1,121 @@
+.question-container {
+
+  width: 100vw;
+  min-height: 100vh;
+  padding: 50px;
+
+  background: #F39C12;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  z-index: 5;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+
+}
+
+.questionnaire-header-container {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.questionnaire-tabs-container {
+
+  width: 100%;
+  margin: 10px 0px;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.questionnaire-tab {
+
+  background: white;
+
+  height: 10px;
+  width: 40px;
+  margin: 5px;
+
+  border-radius: 12px;
+
+}
+
+.active {
+  opacity: 100%;
+}
+
+.inactive {
+  opacity: 60%;
+}
+
+.white {
+  
+  color: white;
+  margin: 5px;
+
+}
+
+.questionnaire-title {
+
+  font-size: 6vw;
+  letter-spacing: 0.9px;
+
+}
+
+.question-form {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.question-copy{
+
+  font-size: 4vw;
+  text-align: left;
+  letter-spacing: 0.9px;
+
+}
+
+.options-container{
+  width: 100%;
+  margin: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.question-button {
+  width: 40vw;
+  height: 5vh;
+  padding: 0.5vh;
+  margin: 20px;
+
+  background: white;
+
+  color: #F39C12;
+  font-size: 4vw;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 2px;
+
+  border-radius: 15px;
+  border: none;
+
+  cursor: pointer;
+
+}

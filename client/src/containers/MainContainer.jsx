@@ -42,7 +42,7 @@ export default function MainContainer(props) {
   }
 
   console.log(demographicsQuestionData)
-
+  console.log(currentUser)
 
 
 

@@ -70,12 +70,8 @@ function App() {
 
         :
 
-        <Layout 
-          currentUser={currentUser}
-          handleLogout={handleLogout}
-        >
-          <MainContainer currentUser={currentUser} />
-        </Layout>
+          <MainContainer currentUser={currentUser} handleLogout={handleLogout} />
+        
       }
     </div>
   );

@@ -3,6 +3,8 @@ import React, {useState} from 'react'
 import Question from '../../components/Question/Question';
 
 export default function DemographicsContainer(props) {
+
+  const [currentQuestion, setCurrentQuestion] = useState(0)
   
   const [demographicsSurvey, setDemographicsSurvey] = useState({
     survey_format: 1
@@ -25,10 +27,18 @@ export default function DemographicsContainer(props) {
   const demographicsQuestions = demographicsQuestionData.questions && demographicsQuestionData.questions.map((question, index) => (
     <Question
     
+      // Data
       question={question}
       index={index}
+      totalQuestions={demographicsQuestionData.questions.length - 1}
+      currentQuestion={currentQuestion}
+      setCurrentQuestion={setCurrentQuestion}
+
+      // Functions
       postDemographicAnswer={postDemographicAnswer}
       postDemographicsSurvey={postDemographicsSurvey}
+
+      // Forms
       demographicsSurvey={demographicsSurvey}
     
     />
