@@ -45,7 +45,6 @@ export default function MainContainer(props) {
   console.log(currentUser)
 
 
-
   return (
   <div className="main-container">
       

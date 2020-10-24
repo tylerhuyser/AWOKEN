@@ -14,7 +14,7 @@
 
   outline: none; 
   border: 1px solid white;
-  background: #F39C12;
+  background-color: #F39C12;
 
 }
 
@@ -22,6 +22,24 @@
 
   outline: none; 
   border: 1px solid white;
-  color: #F39C12;
+  background: #F39C12;
+
+}
+
+.self-describe-textarea {
+
+  width: 90%;
+  height: 10vh;
+  margin-top: 2px;
+  padding: 0px;
+
+  background: #F39C12;
+  color: white;
+  font-weight: 300;
+  text-align: left;
+
+  width: 100%;
+  border: none;
+  flex-grow: 1;
 
 }

@@ -12,8 +12,13 @@ export default function Option(props) {
       return (
         <>
           <label for={`${option.option_copy}`}>{option.option_copy}</label>
-          <input type="text" className="self-describe-input" id={`${option.option_copy}`} value={`${option.option_copy}`} />
-
+          <textarea
+            className="self-describe-textarea"
+            id={`${option.option_copy}`} 
+            rows={2}
+            placeholder="Share you identiy below..."
+            id={`${option.option_copy}`}
+            value={`${option.option_copy}`} />
         </>
       )
     } else if (question_format === "boolean" || question_format === "multiple-choice" || question_format === "likert") {
