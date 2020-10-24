@@ -113,7 +113,7 @@ export default function Register(props) {
           </select>
         </label>
 
-        <label className="register-form-input" className="login-form-label">
+        <label className="register-form-input">
             Password:
           <input
             className="register-form-input"

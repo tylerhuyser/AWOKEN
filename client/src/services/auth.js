@@ -16,11 +16,9 @@ export const registerEmployee = async (registerData) => {
 
 export const verifyEmployee = async () => {
   const token = localStorage.getItem('authToken');
-  console.log(token)
   if (token) {
     api.defaults.headers.common.authorization = `Bearer ${token}`
     const resp = await api.get('/auth/verify');
-    console.log(resp)
     return resp.data
   }
   return null

@@ -5,11 +5,11 @@ export default function Nav () {
 
     return (
       <div className="nav-container">
-        <i class="fas fa-home"></i>
-        <i class="fas fa-calendar-alt"></i>
-        <i class="fas fa-book"></i>
-        <i class="fas fa-layer-group"></i>
-        <i class="fas fa-bell"></i>
+        <i className="fas fa-home"></i>
+        <i className="fas fa-calendar-alt"></i>
+        <i className="fas fa-book"></i>
+        <i className="fas fa-layer-group"></i>
+        <i className="fas fa-bell"></i>
       </div>
     )
 }
