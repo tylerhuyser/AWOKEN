@@ -5,17 +5,13 @@ import Login from './screens/Login/Login';
 import Register from "./screens/Register/Register";
 import { loginEmployee, registerEmployee, removeToken, verifyEmployee } from './services/auth';
 import { getAllCompanies } from './services/admin-info';
-import { getAllSurveyFormats, getOneSurveyFormat } from './services/survey-constructors.js'
 
 import { Route, useHistory, Switch } from 'react-router-dom';
 import MainContainer from './containers/MainContainer';
-import DemographicsContainer from './screens/DemographicsContainer/DemographicsContainer';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [companyInfo, setCompanyInfo] = useState([]);
-  const [surveyFormats, setSurveyFormats] = useState([])
-  const [demographicsQuestionnaire, setDemographicsQuestionnaire] = useState([])
   const history = useHistory();
 
   useEffect(() => {
@@ -23,26 +19,17 @@ function App() {
       const userData = await verifyEmployee();
       setCurrentUser(userData)
     }
+      handleVerify();
+  }, [])
+
+  useEffect(() => {
     const generateCompanyList = async () => {
       const companyInfo = await getAllCompanies();
       setCompanyInfo(companyInfo)
     }
-    const getAllSurveyFormatData = async () => {
-      const surveyFormatData = await getAllSurveyFormats();
-      setSurveyFormats(surveyFormatData);
-    }
-    const getDemographicsSurvey = async () => {
-      const demographicSurveyData = await getOneSurveyFormat(1);
-      setDemographicsQuestionnaire(demographicSurveyData)
-    }
-    handleVerify();
     generateCompanyList();
-    getAllSurveyFormatData();
-    getDemographicsSurvey();
   }, [])
-
-  console.log(surveyFormats)
-  console.log(demographicsQuestionnaire)
+  
 
   const handleLogin = async (loginData) => {
     const employeeData = await loginEmployee(loginData);
@@ -66,6 +53,7 @@ function App() {
   return (
 
     <div className="app-container">
+
       { !currentUser ?
       
         <Switch>
@@ -78,10 +66,6 @@ function App() {
             <Register handleRegister={handleRegister} companyInfo={companyInfo} />
           </Route>
 
-          <Route path="/complete-profile">
-            <DemographicsContainer demographicsQuestionnaire={demographicsQuestionnaire} />
-          </Route>
-
         </Switch>
 
         :
@@ -90,7 +74,7 @@ function App() {
           currentUser={currentUser}
           handleLogout={handleLogout}
         >
-          <MainContainer surveyFormats={surveyFormats} />
+          <MainContainer />
         </Layout>
       }
     </div>

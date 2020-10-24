@@ -17,7 +17,7 @@ export default function PreLogin (props) {
 
         <div className="logo-content">
           <img className="preLogin-logo-white" alt="preLogin-logo-white" src="https://i.imgur.com/6RLVBgP.png" />
-          <p classname="preLogin-App-Name">A<span className="woke-italics">WOKE</span>N</p>
+          <p className="preLogin-App-Name">A<span className="woke-italics">WOKE</span>N</p>
         </div>
 
         <div className="preLogin-actions">
