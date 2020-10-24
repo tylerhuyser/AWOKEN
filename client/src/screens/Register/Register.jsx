@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './Register.css'
 
@@ -26,88 +27,107 @@ export default function Register(props) {
   }
 
   return (
-    <form onSubmit={(e)=>{
-      e.preventDefault();
-      handleRegister(formData);
-    }}>
-      <p className="register-title">Register</p>
-      {
-        error &&
-        <p>{error}</p>
-      }
+    <div className="register-container">
 
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          name="username"
-          onChange={handleChange}
-        />
-      </label>
+      <Link to="/login"><i className="fas fa-chevron-left" /></Link>
 
-      <label>
-        First Name:
-        <input
-          type="text"
-          value={first_name}
-          name="first_name"
-          onChange={handleChange}
-        />
-      </label>
+      <div className="register-form-container">
 
-      <label>
-        Last Name:
-        <input
-          type="text"
-          value={last_name}
-          name="last_name"
-          onChange={handleChange}
-        />
-      </label>
+        <div className="regiser-form-header">
+            <img className="register-logo-orange" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
+            <p className="register-form-subtitle">BEGIN YOUR JOURNEY</p>
+        </div> 
 
-      <label>
-        Email:
-        <input
-          type="text"
-          value={email}
-          name="email"
-          onChange={handleChange}
-        />
-      </label>
+      <form className="register-form" onSubmit={(e)=>{
+        e.preventDefault();
+        handleRegister(formData);
+      }}>
+        <p className="register-form-title">Register</p>
+        {
+          error &&
+          <p>{error}</p>
+        }
 
-      <label>
-        Date of Birth (YYYY/MM/DD):
-        <input
-          type="text"
-          value={date_of_birth}
-          name="date_of_birth"
-          onChange={handleChange}
-        />
-      </label>
+        <label className="register-form-label">
+          Username:
+          <input
+            className="register-form-input"
+            type="text"
+            value={username}
+            name="username"
+            onChange={handleChange}
+          />
+        </label>
 
-      <label>
-        Company Name:
-        <select defaultValue='default' name="company_id" onChange={handleChange}>
-          <option disabled value='default'>-- Select Your Company--</option>
-          {companyInfo.map(company => (
-            <option value={company.id} key={company.id}>{company.company_name}</option>
-          ))}
-        </select>
-      </label>
+        <label className="login-form-label">
+            First Name:
+          <input
+            className="register-form-input"
+            type="text"
+            value={first_name}
+            name="first_name"
+            onChange={handleChange}
+          />
+        </label>
 
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          name="password"
-          onChange={handleChange}
-        />
-      </label>
+        <label className="login-form-label">
+            Last Name:
+          <input
+            className="register-form-input"
+            type="text"
+            value={last_name}
+            name="last_name"
+            onChange={handleChange}
+          />
+        </label>
 
-      <button className="register">Register</button>
+        <label className="login-form-label">
+          Email:
+          <input
+            className="register-form-input"
+            type="text"
+            value={email}
+            name="email"
+            onChange={handleChange}
+          />
+        </label>
 
-    </form>
+        <label>
+          Date of Birth (YYYY/MM/DD):
+          <input
+            className="register-form-input"
+            type="text"
+            value={date_of_birth}
+            name="date_of_birth"
+            onChange={handleChange}
+          />
+        </label>
+
+        <label className="login-form-label">
+          Company Name:
+          <select className="register-form-input" defaultValue='default' name="company_id" onChange={handleChange}>
+            <option disabled value='default'>-- Select Your Company--</option>
+            {companyInfo.map(company => (
+              <option value={company.id} key={company.id}>{company.company_name}</option>
+            ))}
+          </select>
+        </label>
+
+        <label className="register-form-input" className="login-form-label">
+            Password:
+          <input
+            className="register-form-input"
+            type="password"
+            value={password}
+            name="password"
+            onChange={handleChange}
+          />
+        </label>
+
+        <button className="register-button">Register</button>
+
+        </form>
+      </div>
+    </div>
   )
 }

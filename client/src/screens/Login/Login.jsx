@@ -30,7 +30,7 @@ export default function Login(props) {
  
       <div className="login-form-container">
           
-          <div className="login-form-header">
+        <div className="login-form-header">
           <img className="login-logo-orange" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
           <p className="login-header-subtitle">EMBRACE NEW PERSPECTIVES</p>
         </div> 
