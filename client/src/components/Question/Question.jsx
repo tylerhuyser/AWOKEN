@@ -6,22 +6,21 @@ import './Question.css'
 
 export default function Questions(props) {
 
-  const { currentUser, index, totalQuestions, handleSubmit, demographicsSurvey } = props
+  const { currentUser, question, index, totalQuestions, handleSubmit, survey, submitAnswers } = props
   const { currentQuestion, setCurrentQuestion } = props
   const { surveyAnswers, setSurveyAnswers } = props
-  const {submitAnswers, setSubmitAnswers} = props
   const question_format = props.question.question_format
   const history = useHistory()
 
   const [answerData, setAnswerData] = useState({
     employee_id: currentUser.id,
     survey_id: [],
-    question_id: props.question.id,
+    question_id: question.id,
     option_id: [],
     free_response: ""
   });
 
-  console.log(demographicsSurvey)
+  console.log(survey)
   console.log(surveyAnswers)
 
   useEffect(() => {
@@ -53,13 +52,13 @@ export default function Questions(props) {
     }
   }
 
-  function createQuestionButton(demographicsSurvey, surveyAnswers) {
+  function createQuestionButton(survey, surveyAnswers) {
     if (index === totalQuestions) {
 
       return (
         <button className="question-button" onClick={(e) => {
           e.preventDefault();
-          handleSubmit(demographicsSurvey, surveyAnswers);
+          handleSubmit(survey, surveyAnswers);
         }}>SUBMIT</button>
       )
     } else {
@@ -70,7 +69,7 @@ export default function Questions(props) {
     }
   }
 
-  const questionButton = createQuestionButton(demographicsSurvey, surveyAnswers)
+  const questionButton = createQuestionButton(survey, surveyAnswers)
 
   function createQuestionnaireTabs() {
     let tabs = []
@@ -92,8 +91,7 @@ export default function Questions(props) {
       question={props.question.question_copy}
       option={option}
       index={index}
-      answerData={answerData}
-      setAnswerData={setAnswerData}
+
       handleAnswerChange={handleAnswerChange}
       question_format={question_format}
   

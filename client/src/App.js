@@ -8,23 +8,25 @@ import Layout from './layout/Layout/Layout.jsx';
 import Login from './screens/Login/Login';
 import Register from "./screens/Register/Register";
 import MainContainer from './containers/MainContainer';
-import DemographicsContainer from './screens/DemographicsContainer/DemographicsContainer';
+import SurveyContainer from './screens/SurveyContainer/SurveyContainer';
 
 // Functions
 import { loginEmployee, registerEmployee, removeToken, verifyEmployee } from './services/auth';
 import { getAllCompanies } from './services/admin-info';
-import { getAllSurveyFormats, getOneSurveyFormat } from './services/survey-constructors.js'
-import { postSurvey } from './services/surveys';
-import { postAnswer } from './services/answers.js';
+import { getAllSurveyFormats } from './services/survey-constructors.js'
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [companyInfo, setCompanyInfo] = useState([]);
   const [surveyFormats, setSurveyFormats] = useState([])
-  const [demographicsQuestionData, setDemographicsQuestionData] = useState([])
   const history = useHistory();
   const location = useLocation();
+
+  console.log(currentUser)
+  console.log(surveyFormats)
+
+  const demographicsSurvey = surveyFormats[0]
 
   // UseEffects
 
@@ -37,11 +39,11 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const generateCompanyList = async () => {
-      const companyInfo = await getAllCompanies();
-      setCompanyInfo(companyInfo)
-    }
-    generateCompanyList();
+      const generateCompanyList = async () => {
+        const companyInfo = await getAllCompanies();
+        setCompanyInfo(companyInfo)
+      }
+      generateCompanyList();
   }, [])
 
   useEffect(() => {
@@ -52,13 +54,13 @@ function App() {
     getAllSurveyFormatData();
   }, [])
 
-  useEffect(() => {
-    const getDemographicsSurvey = async () => {
-      const demographicSurveyData = await getOneSurveyFormat(1);
-      setDemographicsQuestionData(demographicSurveyData)
-    }
-    getDemographicsSurvey();
-  }, [])
+  // useEffect(() => {
+  //   const getDemographicsSurvey = async () => {
+  //     const demographicSurveyData = await getOneSurveyFormat(1);
+  //     setDemographicsQuestionData(demographicSurveyData)
+  //   }
+  //   getDemographicsSurvey();
+  // }, [])
 
   // Login Functions
 
@@ -81,21 +83,7 @@ function App() {
     history.push('/login')
   }
 
-  // Demographic Survey Functions
-
-  const postDemographicAnswer = async (demographicAnswerData) => {
-    await postAnswer('/answers', { answer: demographicAnswerData });
-  }
-
-  const postDemographicsSurvey = async (demographicsData) => {
-    await postSurvey(demographicsData);
-    history.push('/')
-  }
-
-  const postNewSurvey = async (surveyData, surveyAnswers) => {
-    const survey = await postSurvey(surveyData)
-    return survey
-  }
+  // Survey Functions
 
 
   return (
@@ -120,11 +108,11 @@ function App() {
 
         <>
       
-        { (location.pathname === '/complete-profile') ?
+        { currentUser.surveys === undefined ?
         
           <Switch>
             <Route path="/complete-profile">
-              <DemographicsContainer currentUser={currentUser} demographicsQuestionData={demographicsQuestionData} postNewSurvey={postNewSurvey} />
+              <SurveyContainer currentUser={currentUser} surveyFormat={demographicsSurvey} />
             </Route>
           </Switch>
           

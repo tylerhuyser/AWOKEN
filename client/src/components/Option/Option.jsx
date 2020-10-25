@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './Option.css'
 
 export default function Option(props) {
   
-  const [checked, setChecked] = useState(false)
-  const { option, question_format, index, answerData, handleAnswerChange } = props
+  const { option, question_format, index, handleAnswerChange } = props
 
-  function handleCheck () {
-    setChecked(!checked)
-    handleAnswerChange()
-  }
 
   function createOption() {
     if (option.option_copy === "Prefer to Self-Describe:") {
