@@ -1,13 +1,14 @@
 .option-container{
   width: 100%;
-  margin: 2px;
-  padding: 2px;
+  margin: 5px;
+  padding: 5px;
   
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   border: 1px solid white;
+  border-radius: 15px;
 }
 
 .radio-input {

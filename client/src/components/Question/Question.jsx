@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Option from '../Option/Option.jsx'
 import { useHistory } from 'react-router-dom'
 
@@ -6,22 +6,30 @@ import './Question.css'
 
 export default function Questions(props) {
 
-  const { currentUser, index, totalQuestions } = props
+  const { currentUser, index, totalQuestions, handleSubmit } = props
   const { currentQuestion, setCurrentQuestion } = props
+  const { surveyAnswers, setSurveyAnswers } = props
+  const {submitAnswers, setSubmitAnswers} = props
   const question_format = props.question.question_format
   const history = useHistory()
 
-
   const [answerData, setAnswerData] = useState({
-    employee_id: currentUser,
+    employee_id: currentUser.id,
     survey_id: [],
     question_id: props.question.id,
     option_id: [],
     free_response: ""
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  useEffect(() => {
+    setSurveyAnswers(prevState => ([...prevState, answerData]));
+  }, [submitAnswers])
+
+  const handleAnswerChange = (e) => {
+    let { name, value } = e.target;
+    if (name == "option_id") {
+      value = parseInt(value)
+    }
     setAnswerData(prevState => ({
       ...prevState,
       [name]: value
@@ -43,14 +51,12 @@ export default function Questions(props) {
     if (index === totalQuestions) {
 
       return (
-      <button className="question-button">SUBMIT</button>
+      <button className="question-button" onClick={() => handleSubmit()}>SUBMIT</button>
       )
     } else {
 
       return (
-
         <button className="question-button" onClick={() => changeQuestion(1)}>CONTINUE</button>
-
       )
     }
   }
@@ -61,9 +67,9 @@ export default function Questions(props) {
     let tabs = []
     for (let i = 0; i <= totalQuestions; i++) {
       if (i === index) {
-            tabs[i] = <span className="questionnaire-tab active"></span>
+            tabs[i] = <span className="questionnaire-tab active" key={i}></span>
       } else {
-          tabs[i] = <span className="questionnaire-tab inactive"></span>
+          tabs[i] = <span className="questionnaire-tab inactive" key={i}></span>
       }
     }
     return tabs
@@ -74,10 +80,12 @@ export default function Questions(props) {
   const optionData = props.question.options.map((option, index) => (
     <Option
       
+      question={props.question.question_copy}
       option={option}
       index={index}
       answerData={answerData}
       setAnswerData={setAnswerData}
+      handleAnswerChange={handleAnswerChange}
       question_format={question_format}
   
     />
@@ -90,7 +98,7 @@ export default function Questions(props) {
 
       { currentQuestion === index ?
 
-        <div className="question-container">
+        <div className="question-container" key={index}>
 
           <div className="questionnaire-header-container">
       

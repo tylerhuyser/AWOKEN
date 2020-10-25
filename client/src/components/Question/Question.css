@@ -1,3 +1,7 @@
+#hidden {
+  display: none;
+}
+
 .question-container {
 
   width: 100vw;
@@ -9,7 +13,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 
   position: absolute;
@@ -94,6 +98,7 @@
 
 .question-copy{
 
+  width: 100%;
   font-size: 4vw;
   text-align: left;
   letter-spacing: 0.9px;
@@ -107,6 +112,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex-grow: 1;
 }
 
 .question-button {
