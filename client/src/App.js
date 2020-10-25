@@ -92,17 +92,9 @@ function App() {
     history.push('/')
   }
 
-  const postSurveyAndAnswers = async (surveyData, surveyAnswers) => {
+  const postNewSurvey = async (surveyData, surveyAnswers) => {
     const survey = await postSurvey(surveyData)
-    const surveyID = survey.data.id
-    console.log(survey.data)
-    surveyAnswers.map((pendingAnswer) => {
-      pendingAnswer.survey_id = surveyID
-      const postAnswers = async (pendingAnswer) => {
-        const newAnswer = await postAnswer('/answers', { answer: pendingAnswer });
-        return newAnswer
-      }
-    })
+    return survey
   }
 
 
@@ -132,7 +124,7 @@ function App() {
         
           <Switch>
             <Route path="/complete-profile">
-              <DemographicsContainer currentUser={currentUser} demographicsQuestionData={demographicsQuestionData} postSurveyAndAnswers={postSurveyAndAnswers} />
+              <DemographicsContainer currentUser={currentUser} demographicsQuestionData={demographicsQuestionData} postNewSurvey={postNewSurvey} />
             </Route>
           </Switch>
           

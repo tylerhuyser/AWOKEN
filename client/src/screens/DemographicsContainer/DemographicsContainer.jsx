@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import Question from '../../components/Question/Question';
+import { postAnswer } from '../../services/answers';
 
 export default function DemographicsContainer(props) {
 
+  const [surveyID, setSurveyID] = useState(null)
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const { demographicsQuestionData, postSurveyAndAnswers, currentUser } = props;
+  const { demographicsQuestionData, postNewSurvey, currentUser } = props;
   const [submitAnswers, setSubmitAnswers] = useState(false)
   const history = useHistory();
   
@@ -25,6 +27,7 @@ export default function DemographicsContainer(props) {
   // }
 
 
+
   const handleSubmit = async (demographicsSurvey, surveyAnswers) => {
     console.log(demographicsSurvey)
     setSubmitAnswers(!submitAnswers)
@@ -34,9 +37,27 @@ export default function DemographicsContainer(props) {
 
   const handlePost = async (demographicsSurvey, surveyAnswers) => {
     console.log(surveyAnswers)
-    await postSurveyAndAnswers(demographicsSurvey,surveyAnswers)
+    const newSurveyData = await postNewSurvey(demographicsSurvey)
     // history.push('/')
+    console.log(newSurveyData)
+    const surveyID = newSurveyData.id
+    setSurveyID(surveyID)
   }
+
+  useCallback(() => {
+    surveyAnswers.map((pendingAnswer) => {
+      pendingAnswer.survey_id = surveyID
+      console.log(pendingAnswer)
+      const postAnswers = async (pendingAnswer) => {
+        const newAnswer = await postAnswer('/answers', { answer: pendingAnswer });
+        return newAnswer
+      }
+      postAnswers(pendingAnswer)
+    })
+
+  }, [surveyID])
+  
+
 
 
   const demographicsQuestions = demographicsQuestionData.questions && demographicsQuestionData.questions.map((question, index) => (
