@@ -76,8 +76,8 @@ puts "#{SurveyFormat.count} survey formats created"
   Option.create!(question_id: @Q5.id, scoring_value: 1, option_copy: "Southeast Asian")
   Option.create!(question_id: @Q5.id, scoring_value: 1, option_copy: "White/Caucasian")
   Option.create!(question_id: @Q5.id, scoring_value: 1, option_copy: "Other")
-  Option.create!(question_id: @Q5.id, scoring_value: 1, option_copy: "Prefer to Self-Describe:")
   Option.create!(question_id: @Q5.id, scoring_value: 1, option_copy: "None of the Above")
+  Option.create!(question_id: @Q5.id, scoring_value: 1, option_copy: "Prefer to Self-Describe:")
 
 @Q7 = Question.create!(survey_format_id: @SR_Journal.id, question_format: "boolean", question_category: "stereotype replacement", question_copy: "Since your last journal, have you used the STEREOTYPE REPLACEMENT strategy?")
 @Q8 = Question.create!(survey_format_id: @SR_Journal.id, question_format: "free-response", question_category: "stereotype replacement", question_copy: "If so, please describe a situation in which STEREOTYPE REPLACEMENT was used?")
