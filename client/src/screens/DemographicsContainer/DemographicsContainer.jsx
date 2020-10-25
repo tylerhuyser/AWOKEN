@@ -18,15 +18,6 @@ export default function DemographicsContainer(props) {
 
   const [surveyAnswers, setSurveyAnswers] = useState([])
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setDemographicsSurvey(prevState => ({
-  //     ...prevState,
-  //     [name]: value
-  //   }))
-  // }
-
-
 
   const handleSubmit = async (demographicsSurvey, surveyAnswers) => {
     console.log(demographicsSurvey)
@@ -38,23 +29,24 @@ export default function DemographicsContainer(props) {
   const handlePost = async (demographicsSurvey, surveyAnswers) => {
     console.log(surveyAnswers)
     const newSurveyData = await postNewSurvey(demographicsSurvey)
-    // history.push('/')
     console.log(newSurveyData)
     const surveyID = newSurveyData.id
     setSurveyID(surveyID)
   }
 
-  useCallback(() => {
-    surveyAnswers.map((pendingAnswer) => {
-      pendingAnswer.survey_id = surveyID
-      console.log(pendingAnswer)
-      const postAnswers = async (pendingAnswer) => {
-        const newAnswer = await postAnswer('/answers', { answer: pendingAnswer });
-        return newAnswer
-      }
-      postAnswers(pendingAnswer)
-    })
-
+  useEffect(() => { 
+    if (surveyID !== null) {
+      surveyAnswers.map((pendingAnswer) => {
+        pendingAnswer.survey_id = surveyID
+        console.log(pendingAnswer)
+        const postAnswers = async (pendingAnswer) => {
+          const newAnswer = await postAnswer(pendingAnswer);
+          return newAnswer
+        }
+        postAnswers(pendingAnswer)
+        history.push('/')
+      })
+    }
   }, [surveyID])
   
 

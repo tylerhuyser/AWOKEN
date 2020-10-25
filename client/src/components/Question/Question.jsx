@@ -25,13 +25,16 @@ export default function Questions(props) {
   console.log(surveyAnswers)
 
   useEffect(() => {
-    setSurveyAnswers(prevState => ([...prevState, answerData]));
+    if ((answerData.option_id.length !== 0) || (answerData.free_response !== "")) {
+      console.log("here")
+      setSurveyAnswers(prevState => ([...prevState, answerData]));
+    }
   }, [submitAnswers])
 
   const handleAnswerChange = (e) => {
     let { name, value } = e.target;
     if (name == "option_id") {
-      value = parseInt(value)
+      value = answerData.option_id.push(parseInt(value))
     }
     setAnswerData(prevState => ({
       ...prevState,
