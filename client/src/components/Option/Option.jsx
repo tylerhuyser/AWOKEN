@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './Option.css'
 
 export default function Option(props) {
   
+  const [checked, setChecked] = useState(false)
   const { option, question_format, index, answerData, handleAnswerChange } = props
+
+  function handleCheck () {
+    setChecked(!checked)
+    handleAnswerChange()
+  }
 
   function createOption() {
     if (option.option_copy === "Prefer to Self-Describe:") {
@@ -13,13 +19,15 @@ export default function Option(props) {
         <>
           
           <label
-            htmlFor={`${option.option_copy}`}>
+            htmlFor={`${option.option_copy}`}
+            key={`label-${index}`}>
             {option.option_copy}
           </label>
           
           <textarea
             className="self-describe-textarea"
             id={`${option.option_copy}`} 
+            key={index}
             name="free_response"
             rows={2}
             placeholder="Enter below..."
@@ -30,18 +38,23 @@ export default function Option(props) {
     } else if (question_format === "boolean" || question_format === "multiple-choice" || question_format === "likert") {
       
       return (
-        <div className="option-input-container">
+        <div className="option-input-container" key={index}>
           
           <input
             type="radio"
             className="radio-input"
             id={`${option.option_copy}`}
+            key={index}
             name="option_id"
             value={option.id}
-            onChange={handleAnswerChange} />
+            onChange={handleAnswerChange}
+            // checked={checked? true : false}
+          />
+            
           
           <label
-            htmlFor={`${option.option_copy}`}>
+            htmlFor={`${option.option_copy}`}
+            key={`label-${index}`}>
             {option.option_copy}
           </label>
         </div>
@@ -50,18 +63,22 @@ export default function Option(props) {
     } else if (question_format === "select all that apply") {
 
       return (
-        <div className="option-input-container">
+        <div className="option-input-container" key={index}>
          
           <input
             type="checkbox"
             className="checkbox-input"
             id={`${option.option_copy}`}
+            key={index}
             name="option_id"
             value={option.id}
-            onChange={handleAnswerChange} />
+            onChange={handleAnswerChange}
+            // checked={checked ? true : false}
+          />
           
           <label
-            htmlFor={`${option.option_copy}`}>
+            htmlFor={`${option.option_copy}`}
+            key={`label-${index}`}>
             {option.option_copy}
           </label>
 

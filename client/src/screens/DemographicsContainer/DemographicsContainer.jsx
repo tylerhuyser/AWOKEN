@@ -11,7 +11,7 @@ export default function DemographicsContainer(props) {
   const history = useHistory();
   
   const [demographicsSurvey, setDemographicsSurvey] = useState({
-    survey_format: 1
+    survey_format_id: 1,
   })
 
   const [surveyAnswers, setSurveyAnswers] = useState([])
@@ -24,15 +24,18 @@ export default function DemographicsContainer(props) {
   //   }))
   // }
 
-  useEffect((demographicsSurvey, surveyAnswers) => {
-    const handlePost = async (demographicsSurvey, surveyAnswers) => {
-      await postSurveyAndAnswers(demographicsSurvey,surveyAnswers)
-      history.push('/')
-    }
-  }, [surveyAnswers])
 
-  const handleSubmit = () => {
+  const handleSubmit = async (demographicsSurvey, surveyAnswers) => {
+    console.log(demographicsSurvey)
     setSubmitAnswers(!submitAnswers)
+    console.log(surveyAnswers)
+    await handlePost(demographicsSurvey, surveyAnswers)
+  }
+
+  const handlePost = async (demographicsSurvey, surveyAnswers) => {
+    console.log(surveyAnswers)
+    await postSurveyAndAnswers(demographicsSurvey,surveyAnswers)
+    // history.push('/')
   }
 
 
@@ -46,8 +49,6 @@ export default function DemographicsContainer(props) {
       totalQuestions={demographicsQuestionData.questions.length - 1}
       currentQuestion={currentQuestion}
       setCurrentQuestion={setCurrentQuestion}
-      surveyAnswers={surveyAnswers}
-      setSurveyAnswers={setSurveyAnswers}
       submitAnswers={submitAnswers}
       setSubmitAnswers={setSubmitAnswers}
 
@@ -56,6 +57,8 @@ export default function DemographicsContainer(props) {
 
       // Forms
       demographicsSurvey={demographicsSurvey}
+      surveyAnswers={surveyAnswers}
+      setSurveyAnswers={setSurveyAnswers}
     
     />
   ))

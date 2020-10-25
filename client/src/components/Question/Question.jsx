@@ -6,7 +6,7 @@ import './Question.css'
 
 export default function Questions(props) {
 
-  const { currentUser, index, totalQuestions, handleSubmit } = props
+  const { currentUser, index, totalQuestions, handleSubmit, demographicsSurvey } = props
   const { currentQuestion, setCurrentQuestion } = props
   const { surveyAnswers, setSurveyAnswers } = props
   const {submitAnswers, setSubmitAnswers} = props
@@ -20,6 +20,9 @@ export default function Questions(props) {
     option_id: [],
     free_response: ""
   });
+
+  console.log(demographicsSurvey)
+  console.log(surveyAnswers)
 
   useEffect(() => {
     setSurveyAnswers(prevState => ([...prevState, answerData]));
@@ -47,11 +50,14 @@ export default function Questions(props) {
     }
   }
 
-  function createQuestionButton() {
+  function createQuestionButton(demographicsSurvey, surveyAnswers) {
     if (index === totalQuestions) {
 
       return (
-      <button className="question-button" onClick={() => handleSubmit()}>SUBMIT</button>
+        <button className="question-button" onClick={(e) => {
+          e.preventDefault();
+          handleSubmit(demographicsSurvey, surveyAnswers);
+        }}>SUBMIT</button>
       )
     } else {
 
@@ -61,7 +67,7 @@ export default function Questions(props) {
     }
   }
 
-  const questionButton = createQuestionButton()
+  const questionButton = createQuestionButton(demographicsSurvey, surveyAnswers)
 
   function createQuestionnaireTabs() {
     let tabs = []

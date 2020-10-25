@@ -95,6 +95,7 @@ function App() {
   const postSurveyAndAnswers = async (surveyData, surveyAnswers) => {
     const survey = await postSurvey(surveyData)
     const surveyID = survey.data.id
+    console.log(survey.data)
     surveyAnswers.map((pendingAnswer) => {
       pendingAnswer.survey_id = surveyID
       const postAnswers = async (pendingAnswer) => {
