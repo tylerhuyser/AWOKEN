@@ -9,7 +9,7 @@ import { postAnswer, putAnswer, destroyAnswer } from '../../services/answers';
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat } = props;
+  const { currentUser, surveyFormat, setUserSurveys } = props;
   const [surveyData, setSurveyData] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [surveyID, setSurveyID] = useState(null)
@@ -19,7 +19,7 @@ export default function SurveyContainer(props) {
   console.log(surveyFormat)
   
   const survey = {
-    survey_format_id: surveyFormat.id,
+    survey_format_id: surveyFormat?.id,
   }
 
   const [surveyAnswers, setSurveyAnswers] = useState([])
@@ -28,6 +28,7 @@ export default function SurveyContainer(props) {
 
   const postNewSurvey = async (surveyData) => {
     const newSurvey = await postSurvey(surveyData)
+    setUserSurveys(prevState => [...prevState, newSurvey])
     return newSurvey
   }
 
@@ -43,18 +44,31 @@ export default function SurveyContainer(props) {
 
 
   const handleSubmit = async (survey, surveyAnswers) => {
-    console.log(survey)
+      console.log(survey)
     setSubmitAnswers(!submitAnswers)
-    console.log(surveyAnswers)
+      console.log(surveyAnswers)
     await handlePost(survey, surveyAnswers)
   }
 
   const handlePost = async (survey, surveyAnswers) => {
-    console.log(surveyAnswers)
+      console.log(surveyAnswers)
     const newSurvey = await postNewSurvey(survey)
-    console.log(newSurvey)
+      console.log(newSurvey)
     const surveyID = newSurvey.id
+      
+      console.log(surveyID)
     setSurveyID(surveyID)
+
+    // surveyAnswers.map((pendingAnswer) => {
+    //   pendingAnswer.survey_id = surveyID
+    //     console.log(pendingAnswer)
+    //   const postAnswers = async (pendingAnswer) => {
+    //     const newAnswer = await postAnswer(pendingAnswer);
+    //     return newAnswer
+    //   }
+    //   postAnswers(pendingAnswer)
+    //   history.push('/home')
+    // })
   }
 
   // UseEffects Below:
@@ -62,29 +76,32 @@ export default function SurveyContainer(props) {
   // Grabs Survey-specific data including questions & options
 
   useEffect(() => {
-    const getSurveyData = async () => {
-      const rawSurveyData = await getOneSurveyFormat(surveyFormat.id);
-      setSurveyData(rawSurveyData)
+    if (surveyFormat !== null) {
+      console.log(surveyFormat)
+      const getSurveyData = async () => {
+        const rawSurveyData = await getOneSurveyFormat(surveyFormat.id);
+        setSurveyData(rawSurveyData)
+      }
+      getSurveyData(surveyFormat.id);
     }
-    getSurveyData();
   }, [])
 
   useEffect(() => { 
     if (surveyID !== null) {
-      surveyAnswers.map((pendingAnswer) => {
+      Promise.all(surveyAnswers.map((pendingAnswer) => {
         pendingAnswer.survey_id = surveyID
         console.log(pendingAnswer)
         const postAnswers = async (pendingAnswer) => {
           const newAnswer = await postAnswer(pendingAnswer);
           return newAnswer
         }
-        postAnswers(pendingAnswer)
-        history.push('/')
-      })
+        return postAnswers(pendingAnswer)
+      }))
+      history.push('/home')
     }
   }, [surveyID])
 
-
+  
 
   const surveyQuestions = surveyData.questions && surveyData.questions.map((question, index) => (
     <Question

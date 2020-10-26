@@ -14,7 +14,7 @@ export default function MainContainer(props) {
   <div className="main-container">
       
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/home">
           <Home />
         </Route>
       </Switch>

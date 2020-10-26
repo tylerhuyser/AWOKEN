@@ -20,21 +20,25 @@ export default function Questions(props) {
     free_response: ""
   });
 
-  console.log(survey)
-  console.log(surveyAnswers)
-
   useEffect(() => {
     if ((answerData.option_id.length !== 0) || (answerData.free_response !== "")) {
-      console.log("here")
       setSurveyAnswers(prevState => ([...prevState, answerData]));
     }
   }, [submitAnswers])
 
-  const handleAnswerChange = (e) => {
+  const handleAnswerChange = async(e) => {
+    // const optionID = answerData.option_id
     let { name, value } = e.target;
-    if (name == "option_id") {
-      value = answerData.option_id.push(parseInt(value))
-    }
+    // if ((question_format === "select all that apply") && (name === "option_id")) {
+      
+    //   if (optionID.includes(parseInt(value))) {
+    //     const valueIndex = optionID.indexOf(parseInt(value))
+    //     optionID.splice(valueIndex, 1)
+    //   } else {
+    //     optionID.push(parseInt(value))
+    //   }
+    //   value = optionID
+    // }
     setAnswerData(prevState => ({
       ...prevState,
       [name]: value
