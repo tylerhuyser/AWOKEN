@@ -175,7 +175,8 @@ function App() {
           currentUser={currentUser}
           handleLogout={handleLogout}
           >
-            <MainContainer currentUser={currentUser} srQuestionnaire={srQuestionnaire} srJournal={srJournal} setPendingSurvey={setPendingSurvey} />
+              <MainContainer currentUser={currentUser} srQuestionnaire={srQuestionnaire} srJournal={srJournal} setPendingSurvey={setPendingSurvey}
+              userSurveys={userSurveys}  />
           </Layout>
           }
           
