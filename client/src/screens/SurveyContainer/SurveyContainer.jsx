@@ -54,21 +54,9 @@ export default function SurveyContainer(props) {
       console.log(surveyAnswers)
     const newSurvey = await postNewSurvey(survey)
       console.log(newSurvey)
-    const surveyID = newSurvey.id
-      
-      console.log(surveyID)
-    setSurveyID(surveyID)
-
-    // surveyAnswers.map((pendingAnswer) => {
-    //   pendingAnswer.survey_id = surveyID
-    //     console.log(pendingAnswer)
-    //   const postAnswers = async (pendingAnswer) => {
-    //     const newAnswer = await postAnswer(pendingAnswer);
-    //     return newAnswer
-    //   }
-    //   postAnswers(pendingAnswer)
-    //   history.push('/home')
-    // })
+    const newSurveyID = newSurvey.id
+      console.log(newSurveyID)
+    setSurveyID(newSurveyID)
   }
 
   // UseEffects Below:

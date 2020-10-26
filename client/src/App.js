@@ -92,21 +92,21 @@ function App() {
     }
   }, [currentUser])
 
-  useEffect(() => {
-    if ((userSurveys != null ) && (userSurveys.length !== 0)) {
+  // useEffect(() => {
+  //   if ((userSurveys != null ) && (userSurveys.length !== 0)) {
 
-      const survey = userSurveys[0]
+  //     const survey = userSurveys[0]
 
-      const surveyID = survey.id
+  //     const surveyID = survey.id
  
-      const getOnboardingSurveyAnswers = async (surveyID) => {
-        const onboardingSurveyData = await getSurveyAnswers(surveyID)
-        setOnboardingSurvey(onboardingSurveyData.data)
-      }
-      getOnboardingSurveyAnswers(surveyID)
-      setPendingSurvey(false)
-    }
-  }, [userSurveys])
+  //   const getOnboardingSurveyAnswers = async (surveyID) => {
+  //       const onboardingSurveyData = await getSurveyAnswers(surveyID)
+  //       setOnboardingSurvey(onboardingSurveyData.data)
+  //     }
+  //     getOnboardingSurveyAnswers(surveyID)
+  //     setPendingSurvey(false)
+  //   }
+  // }, [userSurveys])
 
   // Login Functions
 
@@ -164,7 +164,7 @@ function App() {
               </Route>
 
               <Route path="/new-journal">
-                <SurveyContainer currentUser={currentUser} surveyFormat={srJournal} setUserSurveys={setUserSurveys} />
+                <SurveyContainer currentUser={currentUser} surveyFormat={srJournal} setUserSurveys={setUserSurveys} setPendingSurvey={setPendingSurvey} />
               </Route>
               
           </Switch>
