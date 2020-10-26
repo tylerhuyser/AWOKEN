@@ -2,13 +2,13 @@
   display: none;
 }
 
-.question-container {
+.edit-question-container {
 
   width: 100vw;
   min-height: 100vh;
   padding: 50px;
 
-  background: #F39C12;
+  background: #4F2958;
   color: white;
 
   display: flex;

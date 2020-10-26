@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, useHistory, useLocation, Switch } from 'react-router-dom';
+import { Route, useHistory, Switch } from 'react-router-dom';
 
 import './App.css';
 
@@ -8,23 +8,43 @@ import Layout from './layout/Layout/Layout.jsx';
 import Login from './screens/Login/Login';
 import Register from "./screens/Register/Register";
 import MainContainer from './containers/MainContainer';
-import DemographicsContainer from './screens/DemographicsContainer/DemographicsContainer';
+import SurveyContainer from './screens/SurveyContainer/SurveyContainer';
+import EditContainer from './components/EditContainer/EditContainer'
 
 // Functions
 import { loginEmployee, registerEmployee, removeToken, verifyEmployee } from './services/auth';
-import { getAllCompanies } from './services/admin-info';
-import { getAllSurveyFormats, getOneSurveyFormat } from './services/survey-constructors.js'
-import { postSurvey } from './services/surveys';
-import { postAnswer } from './services/answers.js';
-
+import { getAllCompanies, getOneEmployee } from './services/admin-info';
+import { getAllSurveyFormats } from './services/survey-constructors.js'
+import { getSurveyAnswers } from './services/answers'
 
 function App() {
+  // User Data
   const [currentUser, setCurrentUser] = useState(null);
+  const [userSurveys, setUserSurveys] = useState(null)
+  const [pendingSurvey, setPendingSurvey] = useState(false);
+  const [editableSurveyID, setEditableSurveyID] = useState()
+
+  // App Data
   const [companyInfo, setCompanyInfo] = useState([]);
   const [surveyFormats, setSurveyFormats] = useState([])
-  const [demographicsQuestionData, setDemographicsQuestionData] = useState([])
+
+  // Location
   const history = useHistory();
-  const location = useLocation();
+
+  const demographicsSurvey = surveyFormats[0]
+  // const IMS = surveyFormats[1]
+  // const EMS = surveyFormats[2]
+  // const MP = surveyFormats[3]
+  // const IAT = surveyFormats[4]
+  // const shouldsWoulds = surveyFormats[5]
+  // const modernRacism2000 = surveyFormats[6]
+  // const subtleBlatant = surveyFormats[7]
+  // const organizationalInclusivityAudit = surveyFormats[8]
+  // const concern = surveyFormats[9]
+  // const priming = surveyFormats[10]
+  const srQuestionnaire = surveyFormats[11]
+  const srJournal = surveyFormats[12]
+
 
   // UseEffects
 
@@ -32,16 +52,19 @@ function App() {
     const handleVerify = async () => {
       const userData = await verifyEmployee();
       setCurrentUser(userData)
+      if (userData === null) {
+        history.push('/login')
+      }
     }
       handleVerify();
   }, [])
 
   useEffect(() => {
-    const generateCompanyList = async () => {
-      const companyInfo = await getAllCompanies();
-      setCompanyInfo(companyInfo)
-    }
-    generateCompanyList();
+      const generateCompanyList = async () => {
+        const companyInfo = await getAllCompanies();
+        setCompanyInfo(companyInfo)
+      }
+      generateCompanyList();
   }, [])
 
   useEffect(() => {
@@ -53,24 +76,50 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const getDemographicsSurvey = async () => {
-      const demographicSurveyData = await getOneSurveyFormat(1);
-      setDemographicsQuestionData(demographicSurveyData)
+    if (currentUser !== null) {
+      const userID = currentUser.id
+
+      const getEmployeeSurveys = async (userID) => {
+        const employee = await getOneEmployee(userID);
+        const employeeSurveys = employee.surveys
+
+        setUserSurveys(employeeSurveys);
+        if (employeeSurveys === null) {
+          history.push('/complete-profile')
+        }
+      }
+      getEmployeeSurveys(userID)
     }
-    getDemographicsSurvey();
-  }, [])
+  }, [currentUser])
+
+  // useEffect(() => {
+  //   if ((userSurveys != null ) && (userSurveys.length !== 0)) {
+
+  //     const survey = userSurveys[0]
+
+  //     const surveyID = survey.id
+ 
+  //   const getOnboardingSurveyAnswers = async (surveyID) => {
+  //       const onboardingSurveyData = await getSurveyAnswers(surveyID)
+  //       setOnboardingSurvey(onboardingSurveyData.data)
+  //     }
+  //     getOnboardingSurveyAnswers(surveyID)
+  //     setPendingSurvey(false)
+  //   }
+  // }, [userSurveys])
 
   // Login Functions
 
   const handleLogin = async (loginData) => {
     const employeeData = await loginEmployee(loginData);
     setCurrentUser(employeeData);
-    history.push('/');
+    history.push('/home');
   }
 
   const handleRegister = async (registerData) => {
     const employeeData = await registerEmployee(registerData);
     setCurrentUser(employeeData);
+    setPendingSurvey(true)
     history.push('/complete-profile')
   }
 
@@ -81,20 +130,10 @@ function App() {
     history.push('/login')
   }
 
-  // Demographic Survey Functions
-
-  const postDemographicAnswer = async (demographicAnswerData) => {
-    await postAnswer('/answers', { answer: demographicAnswerData });
-  }
-
-  const postDemographicsSurvey = async (demographicsData) => {
-    await postSurvey(demographicsData);
-    history.push('/')
-  }
-
-  const postNewSurvey = async (surveyData, surveyAnswers) => {
-    const survey = await postSurvey(surveyData)
-    return survey
+  const handleEdit = (e) => {
+    setEditableSurveyID(e)
+    setPendingSurvey(true)
+    history.push('/edit-journal')
   }
 
 
@@ -120,12 +159,24 @@ function App() {
 
         <>
       
-        { (location.pathname === '/complete-profile') ?
+          {/* { (onboardingSurvey === null) || (onboardingSurvey.length < 5) ? */}
+          
+          { pendingSurvey ?
         
-          <Switch>
+            <Switch>
+              
             <Route path="/complete-profile">
-              <DemographicsContainer currentUser={currentUser} demographicsQuestionData={demographicsQuestionData} postNewSurvey={postNewSurvey} />
-            </Route>
+              <SurveyContainer currentUser={currentUser} surveyFormat={demographicsSurvey} setUserSurveys={setUserSurveys} setPendingSurvey={setPendingSurvey} />
+              </Route>
+
+              <Route path="/new-journal">
+                <SurveyContainer currentUser={currentUser} surveyFormat={srJournal} setUserSurveys={setUserSurveys} setPendingSurvey={setPendingSurvey} />
+              </Route>
+
+              <Route path="/edit-journal">
+                <EditContainer currentUser={currentUser} surveyFormat={srJournal} setUserSurveys={setUserSurveys} setPendingSurvey={setPendingSurvey} editableSurveyID={editableSurveyID}  />
+              </Route>
+              
           </Switch>
           
         :
@@ -134,7 +185,8 @@ function App() {
           currentUser={currentUser}
           handleLogout={handleLogout}
           >
-            <MainContainer currentUser={currentUser} />
+              <MainContainer currentUser={currentUser} srQuestionnaire={srQuestionnaire} srJournal={srJournal} setPendingSurvey={setPendingSurvey}
+              userSurveys={userSurveys} setUserSurveys={setUserSurveys} handleEdit={handleEdit} />
           </Layout>
           }
           

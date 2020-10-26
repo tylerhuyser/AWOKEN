@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './Option.css'
+import './EditOption.css'
 
-export default function Option(props) {
+export default function EditOption(props) {
   
   const { option, question_format, index, handleAnswerChange } = props
 
@@ -43,7 +43,7 @@ export default function Option(props) {
             name="option_id"
             value={option.id}
             onChange={handleAnswerChange}
-            // checked={checked? true : false}
+            checked="true"
           />
             
           
@@ -68,7 +68,7 @@ export default function Option(props) {
             name="option_id"
             value={option.id}
             onChange={handleAnswerChange}
-            // checked={checked ? true : false}
+            checked="true"
           />
           
           <label

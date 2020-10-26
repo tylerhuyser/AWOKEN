@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import Option from '../Option/Option.jsx'
+import EditOption from './EditOption'
 import { useHistory } from 'react-router-dom'
 
-import './Question.css'
+import './EditQuestion.css'
 
-export default function Questions(props) {
+export default function EditQuestions(props) {
 
-  const { currentUser, question, index, totalQuestions, handleSubmit, survey, submitAnswers } = props
+  const { currentUser, question, index, totalQuestions, handleSubmit, submitAnswers, originalAnswers } = props
   const { currentQuestion, setCurrentQuestion } = props
   const { surveyAnswers, setSurveyAnswers } = props
   const question_format = props.question.question_format
   const history = useHistory()
 
+  const originalAnswer = originalAnswers[index]
+
+
   const [answerData, setAnswerData] = useState({
+    id: originalAnswer.id,
     employee_id: currentUser.id,
     survey_id: [],
     question_id: question.id,
-    option_id: [],
-    free_response: ""
+    option_id: originalAnswer.option_id,
+    free_response: originalAnswer.free_response
   });
 
   useEffect(() => {
-    if ((answerData.option_id.length !== 0) || (answerData.free_response !== "")) {
       setSurveyAnswers(prevState => ([...prevState, answerData]));
-    }
   }, [submitAnswers])
 
   const handleAnswerChange = async (e) => {
@@ -73,7 +75,7 @@ export default function Questions(props) {
     }
   }
 
-  const questionButton = createQuestionButton(survey, surveyAnswers)
+  const questionButton = createQuestionButton(surveyAnswers)
 
   function createQuestionnaireTabs() {
     let tabs = []
@@ -99,7 +101,7 @@ export default function Questions(props) {
           key={index}
           name="free_response"
           rows={2}
-          placeholder="Enter below..."
+          placeholder={originalAnswer.free_response}
           onChange={handleAnswerChange}
           value={answerData.free_response}
         />
@@ -107,7 +109,7 @@ export default function Questions(props) {
       )
     } else if (question.question_format === "boolean") {
       const options = question.options.map((option, index) => (
-          <Option
+          <EditOption
       
             question={question.question_copy}
             option={option}
@@ -131,7 +133,7 @@ export default function Questions(props) {
 
       { currentQuestion === index ?
 
-        <div className="question-container" key={index}>
+        <div className="edit-question-container" key={index}>
 
           <div className="questionnaire-header-container">
       
