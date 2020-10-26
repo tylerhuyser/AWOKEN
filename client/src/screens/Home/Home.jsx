@@ -25,7 +25,7 @@ export default function Home(props) {
         <div className="home-card-content" id="notifications">
           <p className="home-card-copy">Let's get started!</p>
           <p className="home-card-copy">Complete Your Onboarding Assement</p>
-          <button className="journal-button" onClick={beginJournal}>BEGIN</button>
+          <button className="home-journal-button" onClick={beginJournal}>BEGIN</button>
         </div>
 
       <div className="home-card">

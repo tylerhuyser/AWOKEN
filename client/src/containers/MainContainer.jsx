@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom';
 import Home from '../screens/Home/Home'
 import Journals from "../screens/Journals/Journals"
+import { putSurvey, destroySurvey } from '../services/surveys';
 
 import "./MainContainer.css"
 
 
 export default function MainContainer(props) {
-  // const {currentUser} = props
   // const history = useHistory();
 
-  const { setPendingSurvey, userSurveys } = props
+  const [ isDeleted, setIsDeleted] = useState(false)
+  const { currentUser, setPendingSurvey } = props
+  const {userSurveys, setUserSurveys} = props
+ 
+  const deleteJournal = async (id) => {
+    await destroySurvey(id)
+    setIsDeleted(!isDeleted)
+  }
 
 
   return (
@@ -23,7 +30,7 @@ export default function MainContainer(props) {
         </Route>
 
         <Route exact path="/journals">
-          <Journals userSurveys={userSurveys} />
+          <Journals currentUser={currentUser} userSurveys={userSurveys} setUserSurveys={setUserSurveys} isDeleted={isDeleted} setIsDeleted={setIsDeleted} deleteJournal={deleteJournal} />
         </Route>
 
       </Switch>
