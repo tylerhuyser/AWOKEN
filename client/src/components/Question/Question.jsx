@@ -26,7 +26,7 @@ export default function Questions(props) {
     }
   }, [submitAnswers])
 
-  const handleAnswerChange = async(e) => {
+  const handleAnswerChange = async (e) => {
     // const optionID = answerData.option_id
     let { name, value } = e.target;
     // if ((question_format === "select all that apply") && (name === "option_id")) {
@@ -79,9 +79,9 @@ export default function Questions(props) {
     let tabs = []
     for (let i = 0; i <= totalQuestions; i++) {
       if (i === index) {
-            tabs[i] = <span className="questionnaire-tab active" key={i}></span>
+        tabs[i] = <span className="questionnaire-tab active" key={`${i}`}></span>
       } else {
-          tabs[i] = <span className="questionnaire-tab inactive" key={i}></span>
+        tabs[i] = <span className="questionnaire-tab inactive" key={`${i}`}></span>
       }
     }
     return tabs
@@ -89,18 +89,40 @@ export default function Questions(props) {
 
   const questionnaireTabs = createQuestionnaireTabs()
   
-  const optionData = props.question.options.map((option, index) => (
-    <Option
-      
-      question={props.question.question_copy}
-      option={option}
-      index={index}
+  function createOptions(question) {
+    if (question.question_format === "free-response") {
+      return (
 
-      handleAnswerChange={handleAnswerChange}
-      question_format={question_format}
+        <textarea
+          className="free-response-textarea"
+          id={`${question.question_copy}`}
+          key={index}
+          name="free_response"
+          rows={2}
+          placeholder="Enter below..."
+          onChange={handleAnswerChange}
+          value={answerData.free_response}
+        />
+
+      )
+    } else if (question.question_format === "boolean") {
+      const options = question.options.map((option, index) => (
+          <Option
+      
+            question={question.question_copy}
+            option={option}
+            index={index}
+
+            handleAnswerChange={handleAnswerChange}
+            question_format={question_format}
   
-    />
-  ))
+          />
+        ))
+        return options
+        }
+      }
+
+      const optionData = createOptions(question)
 
   
   return (

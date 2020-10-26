@@ -1,11 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import './Home.css'
 
 
 export default function Home(props) {
   
+  const { setPendingSurvey } = props;
+  const history = useHistory();
+
+  function beginJournal(e) {
+    e.preventDefault();
+    setPendingSurvey(true)
+    history.push('/new-journal')
+  }
 
   return (
     <div className="home-container">
@@ -17,7 +25,7 @@ export default function Home(props) {
         <div className="home-card-content" id="notifications">
           <p className="home-card-copy">Let's get started!</p>
           <p className="home-card-copy">Complete Your Onboarding Assement</p>
-          <Link to="new-journal"><button className="journal-button">BEGIN</button></Link>
+          <button className="journal-button" onClick={beginJournal}>BEGIN</button>
         </div>
 
       <div className="home-card">

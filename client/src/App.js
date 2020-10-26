@@ -31,27 +31,19 @@ function App() {
   const history = useHistory();
   const location = useLocation();
 
-  console.log(currentUser)
-  console.log(surveyFormats)
-  console.log(userSurveys)
-
   const demographicsSurvey = surveyFormats[0]
-  const IMS = surveyFormats[1]
-  const EMS = surveyFormats[2]
-  const MP = surveyFormats[3]
-  const IAT = surveyFormats[4]
-  const shouldsWoulds = surveyFormats[5]
-  const modernRacism2000 = surveyFormats[6]
-  const subtleBlatant = surveyFormats[7]
-  const organizationalInclusivityAudit = surveyFormats[8]
-  const concern = surveyFormats[9]
-  const priming = surveyFormats[10]
+  // const IMS = surveyFormats[1]
+  // const EMS = surveyFormats[2]
+  // const MP = surveyFormats[3]
+  // const IAT = surveyFormats[4]
+  // const shouldsWoulds = surveyFormats[5]
+  // const modernRacism2000 = surveyFormats[6]
+  // const subtleBlatant = surveyFormats[7]
+  // const organizationalInclusivityAudit = surveyFormats[8]
+  // const concern = surveyFormats[9]
+  // const priming = surveyFormats[10]
   const srQuestionnaire = surveyFormats[11]
   const srJournal = surveyFormats[12]
-
-
-
-  console.log(onboardingSurvey)
 
 
   // UseEffects
@@ -86,11 +78,11 @@ function App() {
   useEffect(() => {
     if (currentUser !== null) {
       const userID = currentUser.id
-      console.log(userID)
+
       const getEmployeeSurveys = async (userID) => {
         const employee = await getOneEmployee(userID);
         const employeeSurveys = employee.surveys
-        console.log(employee)
+
         setUserSurveys(employeeSurveys);
         if (employeeSurveys === null) {
           history.push('/complete-profile')
@@ -102,11 +94,11 @@ function App() {
 
   useEffect(() => {
     if ((userSurveys != null ) && (userSurveys.length !== 0)) {
-      console.log(userSurveys)
+
       const survey = userSurveys[0]
-      console.log(survey)
+
       const surveyID = survey.id
-      console.log(surveyID)
+ 
       const getOnboardingSurveyAnswers = async (surveyID) => {
         const onboardingSurveyData = await getSurveyAnswers(surveyID)
         setOnboardingSurvey(onboardingSurveyData.data)
@@ -183,7 +175,7 @@ function App() {
           currentUser={currentUser}
           handleLogout={handleLogout}
           >
-            <MainContainer currentUser={currentUser} srQuestionnaire={srQuestionnaire} srJournal={srJournal} />
+            <MainContainer currentUser={currentUser} srQuestionnaire={srQuestionnaire} srJournal={srJournal} setPendingSurvey={setPendingSurvey} />
           </Layout>
           }
           

@@ -86,7 +86,7 @@ export default function Option(props) {
 
   return(
 
-    <div className="option-container" key={index}>
+    <div className="option-container" key={`${index}`}>
 
       {optionInput}
 

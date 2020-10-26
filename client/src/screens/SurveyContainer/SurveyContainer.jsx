@@ -97,8 +97,8 @@ export default function SurveyContainer(props) {
         }
         return postAnswers(pendingAnswer)
       }))
-      setPendingSurvey(false)
       history.push('/home')
+      setPendingSurvey(false)
     }
   }, [surveyID])
 

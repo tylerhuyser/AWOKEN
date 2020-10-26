@@ -9,13 +9,15 @@ export default function MainContainer(props) {
   // const {currentUser} = props
   // const history = useHistory();
 
+  const { setPendingSurvey } = props
+
 
   return (
   <div className="main-container">
       
       <Switch>
         <Route exact path="/home">
-          <Home />
+          <Home setPendingSurvey={setPendingSurvey} />
         </Route>
       </Switch>
 
