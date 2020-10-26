@@ -9,12 +9,7 @@ export default function Journals(props) {
 
   const { currentUser, deleteJournal } = props;
   const { userSurveys, setUserSurveys } = props
-  const { isDeleted, setIsDeleted } = props
-
-  // const deleteJournal = async (id) => {
-  //   await destroySurvey(id)
-  //   setIsDeleted(!isDeleted)
-  // }
+  const { isDeleted } = props
 
   useEffect(() => {
       const userID = currentUser.id
@@ -28,14 +23,37 @@ export default function Journals(props) {
 
   console.log(userSurveys)
 
-  const journals = userSurveys.map((journal, index) => {
+  const journals = userSurveys?.map((journal, index) => {
 
-    if (journal.survey_format_id === 13) {
+    if ((journal.survey_format_id === 13) && (index % 2 == 0)) {
       return (
 
         <div className="journal-card-container">
 
-          <div className="journal-card">
+          <div className="journal-card-orange">
+
+            <p className="journal-title">{`Journal ${journal.iteration}`}</p>
+
+            {/* <p className="journal-date">{Date.parse(parseInt(journal.created_at.split("").splice(10).join("")))}</p> */}
+
+            <div className="journal-buttons-container">
+
+              <button className="journal-button" id="journal-edit-button">EDIT</button>
+              <button className="journal-button" id="journal-delete-button" onClick={() => deleteJournal(journal.id)}>DELETE</button>
+
+            </div>
+
+          </div>
+          
+        </div>
+
+      )
+    } else if (journal.survey_format_id === 13) {
+      return (
+
+        <div className="journal-card-container">
+
+          <div className="journal-card-purple">
 
             <p className="journal-title">{`Journal ${journal.iteration}`}</p>
 
