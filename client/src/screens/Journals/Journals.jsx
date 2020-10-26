@@ -7,7 +7,7 @@ import './Journals.css'
 
 export default function Journals(props) {
 
-  const { currentUser, deleteJournal } = props;
+  const { currentUser, deleteJournal, handleEdit } = props;
   const { userSurveys, setUserSurveys } = props
   const { isDeleted } = props
 
@@ -21,7 +21,6 @@ export default function Journals(props) {
       getEmployeeSurveys(userID)
   }, [isDeleted])
 
-  console.log(userSurveys)
 
   const journals = userSurveys?.map((journal, index) => {
 
@@ -38,7 +37,7 @@ export default function Journals(props) {
 
             <div className="journal-buttons-container">
 
-              <button className="journal-button" id="journal-edit-button">EDIT</button>
+              <button className="journal-button" id="journal-edit-button" onClick={() => handleEdit(journal.id)}>EDIT</button>
               <button className="journal-button" id="journal-delete-button" onClick={() => deleteJournal(journal.id)}>DELETE</button>
 
             </div>

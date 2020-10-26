@@ -1,0 +1,47 @@
+.option-container{
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border: 1px solid white;
+  border-radius: 12px;
+}
+
+.radio-input {
+
+  outline: none; 
+  border: 1px solid white;
+  background-color: #F39C12;
+
+}
+
+.checkbox-input {
+
+  outline: none; 
+  border: 1px solid white;
+  background: #F39C12;
+  color: white;
+
+}
+
+.self-describe-textarea {
+
+  width: 90%;
+  height: 10vh;
+  margin-top: 2px;
+  padding: 0px;
+
+  background: #F39C12;
+  color: white;
+  font-weight: 300;
+  text-align: left;
+
+  width: 100%;
+  border: none;
+  flex-grow: 1;
+
+}

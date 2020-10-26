@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, useHistory, useLocation, Switch } from 'react-router-dom';
+import { Route, useHistory, Switch } from 'react-router-dom';
 
 import './App.css';
 
@@ -9,6 +9,7 @@ import Login from './screens/Login/Login';
 import Register from "./screens/Register/Register";
 import MainContainer from './containers/MainContainer';
 import SurveyContainer from './screens/SurveyContainer/SurveyContainer';
+import EditContainer from './components/EditContainer/EditContainer'
 
 // Functions
 import { loginEmployee, registerEmployee, removeToken, verifyEmployee } from './services/auth';
@@ -20,8 +21,8 @@ function App() {
   // User Data
   const [currentUser, setCurrentUser] = useState(null);
   const [userSurveys, setUserSurveys] = useState(null)
-  const [onboardingSurvey, setOnboardingSurvey] = useState([]);
   const [pendingSurvey, setPendingSurvey] = useState(false);
+  const [editableSurveyID, setEditableSurveyID] = useState()
 
   // App Data
   const [companyInfo, setCompanyInfo] = useState([]);
@@ -29,7 +30,6 @@ function App() {
 
   // Location
   const history = useHistory();
-  const location = useLocation();
 
   const demographicsSurvey = surveyFormats[0]
   // const IMS = surveyFormats[1]
@@ -130,6 +130,12 @@ function App() {
     history.push('/login')
   }
 
+  const handleEdit = (e) => {
+    setEditableSurveyID(e)
+    setPendingSurvey(true)
+    history.push('/edit-journal')
+  }
+
 
   return (
 
@@ -166,6 +172,10 @@ function App() {
               <Route path="/new-journal">
                 <SurveyContainer currentUser={currentUser} surveyFormat={srJournal} setUserSurveys={setUserSurveys} setPendingSurvey={setPendingSurvey} />
               </Route>
+
+              <Route path="/edit-journal">
+                <EditContainer currentUser={currentUser} surveyFormat={srJournal} setUserSurveys={setUserSurveys} setPendingSurvey={setPendingSurvey} editableSurveyID={editableSurveyID}  />
+              </Route>
               
           </Switch>
           
@@ -176,7 +186,7 @@ function App() {
           handleLogout={handleLogout}
           >
               <MainContainer currentUser={currentUser} srQuestionnaire={srQuestionnaire} srJournal={srJournal} setPendingSurvey={setPendingSurvey}
-              userSurveys={userSurveys} setUserSurveys={setUserSurveys}  />
+              userSurveys={userSurveys} setUserSurveys={setUserSurveys} handleEdit={handleEdit} />
           </Layout>
           }
           
