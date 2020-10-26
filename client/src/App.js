@@ -20,7 +20,8 @@ function App() {
   // User Data
   const [currentUser, setCurrentUser] = useState(null);
   const [userSurveys, setUserSurveys] = useState(null)
-  const [onboardingSurvey, setOnboardingSurvey] = useState([])
+  const [onboardingSurvey, setOnboardingSurvey] = useState([]);
+  const [pendingSurvey, setPendingSurvey] = useState(false);
 
   // App Data
   const [companyInfo, setCompanyInfo] = useState([]);
@@ -35,13 +36,20 @@ function App() {
   console.log(userSurveys)
 
   const demographicsSurvey = surveyFormats[0]
-  const
+  const IMS = surveyFormats[1]
+  const EMS = surveyFormats[2]
+  const MP = surveyFormats[3]
+  const IAT = surveyFormats[4]
+  const shouldsWoulds = surveyFormats[5]
+  const modernRacism2000 = surveyFormats[6]
+  const subtleBlatant = surveyFormats[7]
+  const organizationalInclusivityAudit = surveyFormats[8]
+  const concern = surveyFormats[9]
+  const priming = surveyFormats[10]
+  const srQuestionnaire = surveyFormats[11]
+  const srJournal = surveyFormats[12]
 
-  // let onboardingSurvey
-  // if (userSurveys !== null) {
-  //   onboardingSurvey = userSurveys[0]
-  //   onboardingSurvey = onboardingSurvey.id
-  // }
+
 
   console.log(onboardingSurvey)
 
@@ -104,6 +112,7 @@ function App() {
         setOnboardingSurvey(onboardingSurveyData.data)
       }
       getOnboardingSurveyAnswers(surveyID)
+      setPendingSurvey(false)
     }
   }, [userSurveys])
 
@@ -118,6 +127,7 @@ function App() {
   const handleRegister = async (registerData) => {
     const employeeData = await registerEmployee(registerData);
     setCurrentUser(employeeData);
+    setPendingSurvey(true)
     history.push('/complete-profile')
   }
 
@@ -151,12 +161,20 @@ function App() {
 
         <>
       
-        { (onboardingSurvey === null) || (onboardingSurvey.length < 5) ?
+          {/* { (onboardingSurvey === null) || (onboardingSurvey.length < 5) ? */}
+          
+          { pendingSurvey ?
         
-          <Switch>
+            <Switch>
+              
             <Route path="/complete-profile">
-              <SurveyContainer currentUser={currentUser} surveyFormat={demographicsSurvey} setUserSurveys={setUserSurveys} />
-            </Route>
+              <SurveyContainer currentUser={currentUser} surveyFormat={demographicsSurvey} setUserSurveys={setUserSurveys} setPendingSurvey={setPendingSurvey} />
+              </Route>
+
+              <Route path="/new-journal">
+                <SurveyContainer currentUser={currentUser} surveyFormat={srJournal} setUserSurveys={setUserSurveys} />
+              </Route>
+              
           </Switch>
           
         :
@@ -165,7 +183,7 @@ function App() {
           currentUser={currentUser}
           handleLogout={handleLogout}
           >
-            <MainContainer currentUser={currentUser} />
+            <MainContainer currentUser={currentUser} srQuestionnaire={srQuestionnaire} srJournal={srJournal} />
           </Layout>
           }
           

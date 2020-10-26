@@ -9,7 +9,7 @@ import { postAnswer, putAnswer, destroyAnswer } from '../../services/answers';
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat, setUserSurveys } = props;
+  const { currentUser, surveyFormat, setUserSurveys, setPendingSurvey } = props;
   const [surveyData, setSurveyData] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [surveyID, setSurveyID] = useState(null)
@@ -97,6 +97,7 @@ export default function SurveyContainer(props) {
         }
         return postAnswers(pendingAnswer)
       }))
+      setPendingSurvey(false)
       history.push('/home')
     }
   }, [surveyID])
