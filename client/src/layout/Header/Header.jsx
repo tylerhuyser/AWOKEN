@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './Header.css'
 
 export default function Header(props) {
-  const { currentUser, handleLogout } = props;
+  const { handleLogout } = props;
 
   return (
     <div className="header-container"> 

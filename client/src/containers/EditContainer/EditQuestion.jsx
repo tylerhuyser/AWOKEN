@@ -107,7 +107,7 @@ export default function EditQuestions(props) {
         />
 
       )
-    } else if (question.question_format === "boolean") {
+    } else if (question.question_format === "boolean" || question.question_format === "multiple-choice" || question.question_format === "select all that apply") {
       const options = question.options.map((option, index) => (
           <EditOption
       

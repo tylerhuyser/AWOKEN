@@ -1,28 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import EditQuestion from './EditQuestion';
+import Question from '../../components/Question/Question';
 
 import { getOneSurveyFormat } from '../../services/survey-constructors'
-import { putAnswer, getSurveyAnswers } from '../../services/answers'
+import { postSurvey } from '../../services/surveys';
+import { postAnswer } from '../../services/answers';
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat, editableSurveyID, setUserSurveys, setPendingSurvey } = props;
+  const { currentUser, surveyFormat, setUserSurveys, setPendingSurvey } = props;
   const [surveyData, setSurveyData] = useState([]);
-  const [originalAnswers, setOriginalAnswers] = useState([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [submitEditAnswers, setSubmitEditAnswers] = useState(false)
+  const [surveyID, setSurveyID] = useState(null)
+  const [submitAnswers, setSubmitAnswers] = useState(false)
   const history = useHistory();
+
+  console.log(surveyFormat)
+  
+  const survey = {
+    survey_format_id: surveyFormat?.id,
+  }
 
   const [surveyAnswers, setSurveyAnswers] = useState([])
 
+  // Survey Functions 
+
+  const postNewSurvey = async (surveyData) => {
+    const newSurvey = await postSurvey(surveyData)
+    setUserSurveys(prevState => [...prevState, newSurvey])
+    return newSurvey
+  }
+
   // Answer Functions
 
-  const handleSubmit = async (surveyAnswers) => {
-    console.log(surveyAnswers)
-    setSubmitEditAnswers(!submitEditAnswers)
+
+  const handleSubmit = async (survey, surveyAnswers) => {
+      console.log(survey)
+    setSubmitAnswers(!submitAnswers)
       console.log(surveyAnswers)
+    await handlePost(survey, surveyAnswers)
+  }
+
+  const handlePost = async (survey, surveyAnswers) => {
+      console.log(surveyAnswers)
+    const newSurvey = await postNewSurvey(survey)
+      console.log(newSurvey)
+    const newSurveyID = newSurvey.id
+      console.log(newSurveyID)
+    setSurveyID(newSurveyID)
   }
 
   // UseEffects Below:
@@ -31,6 +57,7 @@ export default function SurveyContainer(props) {
 
   useEffect(() => {
     if (surveyFormat !== null) {
+      console.log(surveyFormat)
       const getSurveyData = async () => {
         const rawSurveyData = await getOneSurveyFormat(surveyFormat.id);
         setSurveyData(rawSurveyData)
@@ -39,39 +66,26 @@ export default function SurveyContainer(props) {
     }
   }, [])
 
-  useEffect(() => {
-    if (editableSurveyID !== null) {
-      const getEditAnswers = async () => {
-        const rawData = await getSurveyAnswers(editableSurveyID);
-        const data = rawData.data
-        const rawAnswers = data.answers
-        console.log(rawAnswers)
-        setOriginalAnswers(rawAnswers)
-      }
-      getEditAnswers(editableSurveyID);
-    }
-  }, [])
-
   useEffect(() => { 
-    if (surveyAnswers.length !== 0) {
+    if (surveyID !== null) {
       Promise.all(surveyAnswers.map((pendingAnswer) => {
-        const answerID = pendingAnswer.id
+        pendingAnswer.survey_id = surveyID
         console.log(pendingAnswer)
-        console.log(answerID)
-        const updateAnswers = async (answerID, pendingAnswer) => {
-          const editedAnswer = await putAnswer(answerID, pendingAnswer);
-          return editedAnswer
+        const postAnswers = async (pendingAnswer) => {
+          const newAnswer = await postAnswer(pendingAnswer);
+          return newAnswer
         }
-        return updateAnswers(answerID, pendingAnswer)
+        return postAnswers(pendingAnswer)
       }))
-      history.push('/journals')
+      history.push('/home')
       setPendingSurvey(false)
     }
-  }, [submitEditAnswers])
+  }, [surveyID])
 
+  
 
   const surveyQuestions = surveyData.questions && surveyData.questions.map((question, index) => (
-    <EditQuestion
+    <Question
     
       // Data
       currentUser={currentUser}
@@ -84,12 +98,12 @@ export default function SurveyContainer(props) {
       handleSubmit={handleSubmit}
       currentQuestion={currentQuestion}
       setCurrentQuestion={setCurrentQuestion}
-      submitEditAnswers={submitEditAnswers}
+      submitAnswers={submitAnswers}
 
       // Data Forms
+      survey={survey}
       surveyAnswers={surveyAnswers}
       setSurveyAnswers={setSurveyAnswers}
-      originalAnswers={originalAnswers}
     
     />
   ))
@@ -105,7 +119,7 @@ export default function SurveyContainer(props) {
         
         :
 
-        <div className="edit-container">
+        <div className="demographics-questionnaire-container">
       
           {surveyQuestions}
 
