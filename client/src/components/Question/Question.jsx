@@ -131,33 +131,33 @@ export default function Questions(props) {
 
       { currentQuestion === index ?
 
-        <div className="question-container" key={index}>
+        <div className="question-container" key={`question-container-${index}`}>
 
-          <div className="questionnaire-header-container">
+          <div className="questionnaire-header-container" key={`question-container-header-${index}`}>
       
-            <div className="questionnaire-tabs-container">
+            <div className="questionnaire-tabs-container" key={`questionnaire-tabs-container-${index}`}>
        
               {questionnaireTabs}
 
             </div>
 
-            <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} />
+            <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} key={`chevron-icon-${index}`} />
         
           </div>
 
-          <p className="questionnaire-title">Complete Your Profile:</p>
+          <p className="questionnaire-title" key={`question-title-${index}`}>Complete Your Profile:</p>
 
-          <form className="question-form" id={`questionnaire-question-${props.question.id}`}>
+          <div className="question-form" id={`questionnaire-question-${props.question.id}`} key= {`question-question-${index}`}>
         
-            <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
+            <p className="question-copy" id={`question-${props.question.id}`} key={`question-copy-${index}`} >{props.question.question_copy}</p>
 
-            <div className="options-container">
+            <div className="options-container" key={`options-container-${index}`}>
               {optionData}
             </div>
         
             {questionButton}
 
-          </form>
+          </div>
 
         </div>
         
