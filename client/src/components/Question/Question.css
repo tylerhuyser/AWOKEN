@@ -37,6 +37,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
 }
 
 .questionnaire-tabs-container {
@@ -92,6 +96,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-grow: 2;
 
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -102,6 +107,7 @@
 .question-copy{
 
   width: 100%;
+  min-height: 5vh;
   font-size: 4vw;
   text-align: left;
   letter-spacing: 0.9px;
@@ -116,11 +122,15 @@
   flex-direction: column;
   align-items: flex-start;
   flex-grow: 1;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
 }
 
 .question-button {
   width: 40vw;
-  height: 5vh;
+  max-height: 5vh;
   padding: 0.5vh;
   margin: 20px;
 
@@ -136,6 +146,8 @@
   border: none;
 
   cursor: pointer;
+
+  flex-grow: 1;
 
 }
 
