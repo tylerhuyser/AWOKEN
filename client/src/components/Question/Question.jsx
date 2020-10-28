@@ -9,6 +9,7 @@ export default function Questions(props) {
   const { currentUser, question, index, totalQuestions, handleSubmit, survey, submitAnswers } = props
   const { currentQuestion, setCurrentQuestion } = props
   const { surveyAnswers, setSurveyAnswers } = props
+  const [selectAllArray, setSelectAllArray] = useState([])
   const question_format = props.question.question_format
   const history = useHistory()
 
@@ -26,9 +27,27 @@ export default function Questions(props) {
     }
   }, [submitAnswers])
 
-  const handleAnswerChange = async (e) => {
+  const handleAnswerChange = async (e, props) => {
     // const optionID = answerData.option_id
     let { name, value } = e.target;
+    
+    console.log(e)
+    console.log(props)
+    if (name === "free_response") {
+      setAnswerData(prevState => ({
+        ...prevState,
+        option_id: props,
+        free_response: value
+      }))
+    } 
+    else if (question_format === "boolean" || question_format === "multiple-choice") {
+      setAnswerData(prevState => ({
+        ...prevState,
+        option_id: props,
+        free_response: ""
+      }))
+    }
+
     // if ((question_format === "select all that apply") && (name === "option_id")) {
       
     //   if (optionID.includes(parseInt(value))) {
@@ -39,10 +58,11 @@ export default function Questions(props) {
     //   }
     //   value = optionID
     // }
-    setAnswerData(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
+
+    // setAnswerData(prevState => ({
+    //   ...prevState,
+    //   [name]: value
+    // }))
   }
 
   function changeQuestion(n) {
@@ -109,12 +129,24 @@ export default function Questions(props) {
       const options = question.options.map((option, index) => (
           <Option
       
-            question={question.question_copy}
+          // Question & Option Info
+            currentUser={currentUser}
+            question={question}
+            questionCopy={question.question_copy}
+            question_format={question_format}
             option={option}
             index={index}
 
+          // Answer Change Functionality
             handleAnswerChange={handleAnswerChange}
-            question_format={question_format}
+          
+          // Answer Data
+            submitAnswers={submitAnswers}
+            setSurveyAnswers={setSurveyAnswers}
+          
+          // Select-All-Answers
+            selectAllArray={selectAllArray}
+            setSelectAllArray={setSelectAllArray}
   
           />
         ))

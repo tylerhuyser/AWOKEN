@@ -1,6 +1,9 @@
 .fa-chevron-left {
 
   font-size: 30px;
+  width: 90vw;
+  position: relative;
+  right: 40vw;
 
   /* position: absolute;
   top: 25px;
@@ -37,6 +40,12 @@
 
 .register-form-header {
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
   color: #F39C12;
   font-size: 4vw;
   letter-spacing: 0.9px;

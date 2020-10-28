@@ -22,8 +22,11 @@ import { getAllCompanies, getOneEmployee } from "./services/admin-info";
 import { getAllSurveyFormats } from "./services/survey-constructors.js";
 
 function App() {
-  // User Data
+  // Auth
   const [currentUser, setCurrentUser] = useState(null);
+  const [error, setError] = useState("")
+
+// User Data
   const [userSurveys, setUserSurveys] = useState(null);
   const [pendingSurvey, setPendingSurvey] = useState(false);
   const [activeSurveyID, setActiveSurveyID] = useState(0);
@@ -106,16 +109,23 @@ function App() {
 
   const handleLogin = async (loginData) => {
     const employeeData = await loginEmployee(loginData);
-    setCurrentUser(employeeData);
-    history.push("/home");
+    if (employeeData.error) {
+      setError(employeeData.error)
+    } else {
+      setCurrentUser(employeeData);
+      history.push("/home");
+    }
   };
 
   const handleRegister = async (registerData) => {
     const employeeData = await registerEmployee(registerData);
-    setCurrentUser(employeeData);
-    setPendingSurvey(true);
-    // debugger
-    history.push("/complete-profile");
+    if (employeeData.error) {
+      setError(employeeData.error)
+    } else {
+      setCurrentUser(employeeData);
+      setPendingSurvey(true);
+      history.push("/complete-profile");
+    }
   };
 
   const handleLogout = () => {

@@ -29,11 +29,11 @@ export default function Register(props) {
   return (
     <div className="register-container">
 
-      <Link to="/login"><i className="fas fa-chevron-left" /></Link>
 
       <div className="register-form-container">
 
         <div className="regiser-form-header">
+            <Link to="/login"><i className="fas fa-chevron-left" /></Link>
             <img className="register-logo-orange" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
             <p className="register-form-subtitle">BEGIN YOUR JOURNEY</p>
         </div> 
@@ -45,7 +45,7 @@ export default function Register(props) {
         <p className="register-form-title">Register</p>
         {
           error &&
-          <p>{error}</p>
+          <p className="register-error-message">{error}</p>
         }
 
         <label className="register-form-label">
