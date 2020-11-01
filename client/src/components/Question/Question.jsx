@@ -47,22 +47,6 @@ export default function Questions(props) {
         free_response: ""
       }))
     }
-
-    // if ((question_format === "select all that apply") && (name === "option_id")) {
-      
-    //   if (optionID.includes(parseInt(value))) {
-    //     const valueIndex = optionID.indexOf(parseInt(value))
-    //     optionID.splice(valueIndex, 1)
-    //   } else {
-    //     optionID.push(parseInt(value))
-    //   }
-    //   value = optionID
-    // }
-
-    // setAnswerData(prevState => ({
-    //   ...prevState,
-    //   [name]: value
-    // }))
   }
 
   function changeQuestion(n) {

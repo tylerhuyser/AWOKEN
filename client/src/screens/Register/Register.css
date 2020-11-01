@@ -137,3 +137,9 @@
 
 
 }
+
+.invalid {
+  --webkit-box-shadow: 0 5px 5px -6px red;
+  --Moz-Box-Shadow: 0 5px 5px -6px red;
+  box-shadow: 0 5px 5px -6px red;
+}

@@ -35,8 +35,6 @@ export default function Option(props) {
 
     let { name, value } = e.target;
 
-    let selections = selectAllAnswerData.option_id
-
     if ((question_format === "select all that apply") && (name === "option_id")) {
       value = parseInt(value)
 
