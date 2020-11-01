@@ -13,6 +13,8 @@ export default function Questions(props) {
   const question_format = props.question.question_format
   const history = useHistory()
 
+  console.log(survey)
+
   const [answerData, setAnswerData] = useState({
     employee_id: currentUser.id,
     survey_id: [],
@@ -31,8 +33,6 @@ export default function Questions(props) {
     // const optionID = answerData.option_id
     let { name, value } = e.target;
     
-    console.log(e)
-    console.log(props)
     if (name === "free_response") {
       setAnswerData(prevState => ({
         ...prevState,
@@ -157,8 +157,12 @@ export default function Questions(props) {
 
             </div>
 
-            <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} key={`chevron-icon-${index}`} />
-        
+            {survey.survey_format_id === 1 && index === 0 ? <> </> :
+
+              <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} key={`chevron-icon-${index}`} />
+              
+            }
+
           </div>
 
           <p className="questionnaire-title" key={`question-title-${index}`}>Complete Your Profile:</p>

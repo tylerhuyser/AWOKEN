@@ -119,7 +119,7 @@ export default function SurveyContainer(props) {
         
         :
 
-        <div className="demographics-questionnaire-container">
+        <div className="questionnaire-container">
       
           {surveyQuestions}
 

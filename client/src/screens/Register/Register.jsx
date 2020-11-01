@@ -76,7 +76,7 @@ export default function Register(props) {
       return false;
     }
 
-    if (!email.includes("@") || !email.includes(".") || !email.includes("@.")) {
+    if (!email.includes("@") || !email.includes(".") || email.includes("@.")) {
       //CHANGE CLASSNAME TO INVALID
       setValidateLastName(false);
       setValidateEmail(true);
