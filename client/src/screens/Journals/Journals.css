@@ -92,3 +92,15 @@
 
   cursor: pointer;
 }
+
+.no-surveys-message {
+
+  width: 80vw;
+  color: #989898;
+  font-size: 4vw;
+  letter-spacing: 2px;
+
+  position: relative;
+  right: 10vw;
+  
+}

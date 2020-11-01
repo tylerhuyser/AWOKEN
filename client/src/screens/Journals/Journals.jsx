@@ -69,6 +69,9 @@ export default function Journals(props) {
       )
     }
   })
+
+  console.log(userSurveys)
+  console.log(journals)
   
   return (
     
@@ -76,16 +79,33 @@ export default function Journals(props) {
       
       {
         userSurveys ?
-          
-          <div className = "journals-container">
 
-            { journals }
+        <>
+          
+            {journals.length === 0 || journals[0] === undefined ?
+            
+              <div className="journals-container">
+
+                <p className="no-surveys-message">Sorry, but you have not completed any journals.</p>
       
-          </div>
+              </div>
+            
+              :
+          
+              <div className="journals-container">
+
+                {journals}
+      
+              </div>
+            
+            }
+            
+        </>
 
       :
   
         null
+        
       }
 
     </>
