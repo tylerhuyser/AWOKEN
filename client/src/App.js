@@ -93,9 +93,9 @@ function App() {
       const getEmployeeSurveys = async (userID) => {
         const employee = await getOneEmployee(userID);
         const employeeSurveys = employee.surveys;
-
+        console.log(employeeSurveys)
         setUserSurveys(employeeSurveys);
-        if (employeeSurveys === null) {
+        if (employeeSurveys === null || employeeSurveys.length === 0) {
           history.push("/complete-profile");
         }
       };

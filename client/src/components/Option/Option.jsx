@@ -108,6 +108,7 @@ export default function Option(props) {
           
           <label
             htmlFor={`${option.option_copy}`}
+            className="self-describe-label"
             value={option.id}>
             {option.option_copy}
           </label>

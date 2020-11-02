@@ -113,7 +113,7 @@ export default function EditOption(props) {
           </label>
           
           <textarea
-            className="self-describe-textarea"
+            className="edit-self-describe-textarea"
             id={`${option.option_copy}`} 
             name="free_response"
             rows={2}
