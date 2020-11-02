@@ -22,19 +22,18 @@ export default function Questions(props) {
   });
 
   useEffect(() => {
-    if (question_format !== "select all that apply") {
+    if (question_format !== "select all that apply" && (answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
       setSurveyAnswers(prevState => ([...prevState, answerData]));
     }
   }, [submitAnswers])
 
   const handleAnswerChange = async (e, props) => {
-    
+
     let { name, value } = e.target;
     
     if (name === "free_response") {
       setAnswerData(prevState => ({
         ...prevState,
-        option_id: props,
         free_response: value
       }))
     } 
@@ -103,7 +102,7 @@ export default function Questions(props) {
           rows={2}
           placeholder="Enter below..."
           onChange={handleAnswerChange}
-          value={answerData.free_response}
+          vale={answerData.free_response}
         />
 
       )

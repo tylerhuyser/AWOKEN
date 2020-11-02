@@ -64,7 +64,7 @@ export default function EditOption(props) {
     
     else if ((question_format === "select all that apply") && (name === "free_response")) {
         
-      if (selectAllArray.includes(parseInt(optionID)) && value == "") {
+      if (selectAllArray.includes(parseInt(optionID)) && value === "") {
           
         setSelectAllArray(prevState => {
             return (prevState.filter(e => e !== optionID))

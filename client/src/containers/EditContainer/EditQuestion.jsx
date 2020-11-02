@@ -15,11 +15,10 @@ export default function EditQuestions(props) {
 
   const originalAnswer = originalAnswers[index]
 
-
   const [answerData, setAnswerData] = useState({
     id: originalAnswer.id,
     employee_id: currentUser.id,
-    survey_id: [],
+    survey_id: originalAnswer.survey_id,
     question_id: question.id,
     option_id: originalAnswer.option_id,
     free_response: originalAnswer.free_response
@@ -64,7 +63,7 @@ export default function EditQuestions(props) {
     if (index === totalQuestions) {
 
       return (
-        <button className="question-button" onClick={(e) => {
+        <button className="edit-question-button" onClick={(e) => {
           e.preventDefault();
           handleSubmit(survey, surveyAnswers);
         }}>SUBMIT</button>
@@ -72,7 +71,7 @@ export default function EditQuestions(props) {
     } else {
 
       return (
-        <button className="question-button" onClick={() => changeQuestion(1)}>CONTINUE</button>
+        <button className="edit-question-button" onClick={() => changeQuestion(1)}>CONTINUE</button>
       )
     }
   }
@@ -98,15 +97,15 @@ export default function EditQuestions(props) {
       return (
 
         <textarea
-          className="free-response-textarea"
+          className="edit-free-response-textarea"
           id={`${question.question_copy}`}
-          key={index}
           name="free_response"
           rows={2}
-          placeholder={originalAnswer.free_response}
           onChange={handleAnswerChange}
           value={answerData.free_response}
-        />
+        >
+          {answerData.free_response}
+        </textarea>
 
       )
     } else if (question.question_format === "boolean" || question.question_format === "multiple-choice" || question.question_format === "select all that apply") {
@@ -144,7 +143,7 @@ export default function EditQuestions(props) {
 
       { currentQuestion === index ?
 
-        <div className="edit-question-container" key={index}>
+        <div className="edit-question-container" key={question.id}>
 
           <div className="questionnaire-header-container">
       
@@ -168,7 +167,7 @@ export default function EditQuestions(props) {
 
           <p className="questionnaire-title">Complete Your Profile:</p>
 
-          <form className="question-form" id={`questionnaire-question-${props.question.id}`}>
+          <div className="question-form" id={`questionnaire-question-${props.question.id}`}>
         
             <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
 
@@ -178,14 +177,15 @@ export default function EditQuestions(props) {
         
             {questionButton}
 
-          </form>
+          </div>
 
         </div>
         
         :
 
         null
-      }
+
+      }   
       
     </>
   )
