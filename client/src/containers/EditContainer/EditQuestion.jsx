@@ -6,9 +6,10 @@ import './EditQuestion.css'
 
 export default function EditQuestions(props) {
 
-  const { currentUser, question, index, totalQuestions, handleSubmit, submitAnswers, originalAnswers } = props
+  const { currentUser, question, index, totalQuestions, handleSubmit, submitAnswers, originalAnswers, exitSurvey } = props
   const { currentQuestion, setCurrentQuestion } = props
   const { surveyAnswers, setSurveyAnswers } = props
+  const [selectAllArray, setSelectAllArray] = useState([])
   const question_format = props.question.question_format
   const history = useHistory()
 
@@ -28,23 +29,24 @@ export default function EditQuestions(props) {
       setSurveyAnswers(prevState => ([...prevState, answerData]));
   }, [submitAnswers])
 
-  const handleAnswerChange = async (e) => {
-    // const optionID = answerData.option_id
+  const handleAnswerChange = async (e, props) => {
+    
     let { name, value } = e.target;
-    // if ((question_format === "select all that apply") && (name === "option_id")) {
-      
-    //   if (optionID.includes(parseInt(value))) {
-    //     const valueIndex = optionID.indexOf(parseInt(value))
-    //     optionID.splice(valueIndex, 1)
-    //   } else {
-    //     optionID.push(parseInt(value))
-    //   }
-    //   value = optionID
-    // }
-    setAnswerData(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
+    
+    if (name === "free_response") {
+      setAnswerData(prevState => ({
+        ...prevState,
+        option_id: props,
+        free_response: value
+      }))
+    } 
+    else if (question_format === "boolean" || question_format === "multiple-choice") {
+      setAnswerData(prevState => ({
+        ...prevState,
+        option_id: props,
+        free_response: ""
+      }))
+    }
   }
 
   function changeQuestion(n) {
@@ -111,12 +113,21 @@ export default function EditQuestions(props) {
       const options = question.options.map((option, index) => (
           <EditOption
       
+            key={option.id}
+            currentUser={currentUser}
             question={question.question_copy}
+            questionCopy={question.question_copy}
+            question_format={question_format}
             option={option}
             index={index}
 
             handleAnswerChange={handleAnswerChange}
-            question_format={question_format}
+
+            submitAnswers={submitAnswers}
+            setSurveyAnswers={setSurveyAnswers}
+          
+            selectAllArray={selectAllArray}
+            setSelectAllArray={setSelectAllArray}
   
           />
         ))
@@ -142,8 +153,16 @@ export default function EditQuestions(props) {
               {questionnaireTabs}
 
             </div>
+              
+              { index === 0 ?
 
-            <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} />
+                <i className="fas fa-chevron-left white" onClick={exitSurvey} key={`chevron-icon-${index}`} />
+                
+                :
+
+                <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} key={`chevron-icon-${index}`} />
+              
+              }
         
           </div>
 

@@ -108,14 +108,13 @@ export default function Option(props) {
           
           <label
             htmlFor={`${option.option_copy}`}
-            key={`label-${index}`} value={option.id}>
+            value={option.id}>
             {option.option_copy}
           </label>
           
           <textarea
             className="self-describe-textarea"
             id={`${option.option_copy}`} 
-            key={index}
             name="free_response"
             rows={2}
             onChange={(e) => routeHandleChange(e, optionID)}
@@ -131,17 +130,15 @@ export default function Option(props) {
             type="radio"
             className="radio-input"
             id={`${option.option_copy}`}
-            key={index}
             name="option_id"
             value={option.id}
             onChange={(e) => routeHandleChange(e, optionID)}
-            // checked={checked? true : false}
           />
             
           
           <label
             htmlFor={`${option.option_copy}`}
-            key={`label-${index}`}>
+            >
             {option.option_copy}
           </label>
         </div>
@@ -156,7 +153,6 @@ export default function Option(props) {
             type="checkbox"
             className="checkbox-input"
             id={`${option.option_copy}`}
-            key={index}
             name="option_id"
             value={option.id}
             onChange={(e) => routeHandleChange(e, optionID)}
@@ -164,8 +160,7 @@ export default function Option(props) {
           />
           
           <label
-            htmlFor={`${option.option_copy}`}
-            key={`label-${index}`}>
+            htmlFor={`${option.option_copy}`}>
             {option.option_copy}
           </label>
 
@@ -178,7 +173,7 @@ export default function Option(props) {
 
   return(
 
-    <div className="option-container" key={`${index}`}>
+    <div className="option-container" key={`${optionID}`}>
 
       {optionInput}
 

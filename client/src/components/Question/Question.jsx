@@ -6,14 +6,12 @@ import './Question.css'
 
 export default function Questions(props) {
 
-  const { currentUser, question, index, totalQuestions, handleSubmit, survey, submitAnswers } = props
+  const { currentUser, question, index, totalQuestions, handleSubmit, survey, submitAnswers, exitSurvey } = props
   const { currentQuestion, setCurrentQuestion } = props
   const { surveyAnswers, setSurveyAnswers } = props
   const [selectAllArray, setSelectAllArray] = useState([])
   const question_format = props.question.question_format
   const history = useHistory()
-
-  console.log(survey)
 
   const [answerData, setAnswerData] = useState({
     employee_id: currentUser.id,
@@ -24,13 +22,13 @@ export default function Questions(props) {
   });
 
   useEffect(() => {
-    if ((answerData.option_id.length !== 0) || (answerData.free_response !== "")) {
+    if (question_format !== "select all that apply") {
       setSurveyAnswers(prevState => ([...prevState, answerData]));
     }
   }, [submitAnswers])
 
   const handleAnswerChange = async (e, props) => {
-    // const optionID = answerData.option_id
+    
     let { name, value } = e.target;
     
     if (name === "free_response") {
@@ -83,9 +81,9 @@ export default function Questions(props) {
     let tabs = []
     for (let i = 0; i <= totalQuestions; i++) {
       if (i === index) {
-        tabs[i] = <span className="questionnaire-tab active" key={`${i}`}></span>
+        tabs[i] = <span className="questionnaire-tab active" key={`${question.id} ${i}`}></span>
       } else {
-        tabs[i] = <span className="questionnaire-tab inactive" key={`${i}`}></span>
+        tabs[i] = <span className="questionnaire-tab inactive" key={`${question.id} ${i}`}></span>
       }
     }
     return tabs
@@ -100,7 +98,7 @@ export default function Questions(props) {
         <textarea
           className="free-response-textarea"
           id={`${question.question_copy}`}
-          key={index}
+          key={`${question.id}`}
           name="free_response"
           rows={2}
           placeholder="Enter below..."
@@ -114,6 +112,7 @@ export default function Questions(props) {
           <Option
       
           // Question & Option Info
+            key={option.id}
             currentUser={currentUser}
             question={question}
             questionCopy={question.question_copy}
@@ -139,7 +138,6 @@ export default function Questions(props) {
       }
 
       const optionData = createOptions(question)
-
   
   return (
 
@@ -147,31 +145,42 @@ export default function Questions(props) {
 
       { currentQuestion === index ?
 
-        <div className="question-container" key={`question-container-${index}`}>
+        <div className="question-container" key={`${question.id}`}>
 
-          <div className="questionnaire-header-container" key={`question-container-header-${index}`}>
+          <div className="questionnaire-header-container">
       
-            <div className="questionnaire-tabs-container" key={`questionnaire-tabs-container-${index}`}>
+            <div className="questionnaire-tabs-container">
        
               {questionnaireTabs}
 
             </div>
 
             {survey.survey_format_id === 1 && index === 0 ? <> </> :
-
-              <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} key={`chevron-icon-${index}`} />
               
+              <>
+              
+              { index === 0 ?
+
+                <i className="fas fa-chevron-left white" onClick={exitSurvey} key={`chevron-icon-${index}`} />
+                
+                :
+
+                <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} key={`chevron-icon-${index}`} />
+              
+              }
+                
+              </>
             }
 
           </div>
 
-          <p className="questionnaire-title" key={`question-title-${index}`}>Complete Your Profile:</p>
+          <p className="questionnaire-title">Complete Your Profile:</p>
 
-          <div className="question-form" id={`questionnaire-question-${props.question.id}`} key= {`question-question-${index}`}>
+          <div className="question-form" id={`questionnaire-question-${props.question.id}`}>
         
-            <p className="question-copy" id={`question-${props.question.id}`} key={`question-copy-${index}`} >{props.question.question_copy}</p>
+            <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
 
-            <div className="options-container" key={`options-container-${index}`}>
+            <div className="options-container">
               {optionData}
             </div>
         

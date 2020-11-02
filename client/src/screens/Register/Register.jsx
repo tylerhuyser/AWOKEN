@@ -24,9 +24,6 @@ export default function Register(props) {
   const [validateCompanyName, setValidateCompanyName] = useState(false)
   const [validatePassword, setValidatePassword] = useState(false)
 
-  console.log(props.error)
-  console.log(props)
-
   const { username, first_name, last_name, email, date_of_birth, company_id, password } = formData;
   const { error, handleRegister, companyInfo } = props;
 

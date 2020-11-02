@@ -15,8 +15,6 @@ export default function SurveyContainer(props) {
   const [surveyID, setSurveyID] = useState(null)
   const [submitAnswers, setSubmitAnswers] = useState(false)
   const history = useHistory();
-
-  console.log(surveyFormat)
   
   const survey = {
     survey_format_id: surveyFormat?.id,
@@ -24,7 +22,7 @@ export default function SurveyContainer(props) {
 
   const [surveyAnswers, setSurveyAnswers] = useState([])
 
-  // Survey Functions 
+  // Submit Survey & Answers Functions
 
   const postNewSurvey = async (surveyData) => {
     const newSurvey = await postSurvey(surveyData)
@@ -32,23 +30,22 @@ export default function SurveyContainer(props) {
     return newSurvey
   }
 
-  // Answer Functions
-
-
   const handleSubmit = async (survey, surveyAnswers) => {
-      console.log(survey)
     setSubmitAnswers(!submitAnswers)
-      console.log(surveyAnswers)
     await handlePost(survey, surveyAnswers)
   }
 
   const handlePost = async (survey, surveyAnswers) => {
-      console.log(surveyAnswers)
     const newSurvey = await postNewSurvey(survey)
-      console.log(newSurvey)
     const newSurveyID = newSurvey.id
-      console.log(newSurveyID)
     setSurveyID(newSurveyID)
+  }
+
+  // Return Home Function
+
+  const exitSurvey = () => {
+    history.push('/home')
+    setPendingSurvey(false)
   }
 
   // UseEffects Below:
@@ -57,7 +54,6 @@ export default function SurveyContainer(props) {
 
   useEffect(() => {
     if (surveyFormat !== null) {
-      console.log(surveyFormat)
       const getSurveyData = async () => {
         const rawSurveyData = await getOneSurveyFormat(surveyFormat.id);
         setSurveyData(rawSurveyData)
@@ -70,7 +66,6 @@ export default function SurveyContainer(props) {
     if (surveyID !== null) {
       Promise.all(surveyAnswers.map((pendingAnswer) => {
         pendingAnswer.survey_id = surveyID
-        console.log(pendingAnswer)
         const postAnswers = async (pendingAnswer) => {
           const newAnswer = await postAnswer(pendingAnswer);
           return newAnswer
@@ -82,14 +77,13 @@ export default function SurveyContainer(props) {
     }
   }, [surveyID])
 
-  
 
   const surveyQuestions = surveyData.questions && surveyData.questions.map((question, index) => (
     <Question
     
       // Data
+      key={question.id}
       currentUser={currentUser}
-
       question={question}
       index={index}
       totalQuestions={surveyData.questions.length - 1}
@@ -99,6 +93,7 @@ export default function SurveyContainer(props) {
       currentQuestion={currentQuestion}
       setCurrentQuestion={setCurrentQuestion}
       submitAnswers={submitAnswers}
+      exitSurvey={exitSurvey}
 
       // Data Forms
       survey={survey}
@@ -119,7 +114,7 @@ export default function SurveyContainer(props) {
         
         :
 
-        <div className="questionnaire-container">
+        <div className="questionnaire-container" key={`${surveyFormat.id}`}>
       
           {surveyQuestions}
 

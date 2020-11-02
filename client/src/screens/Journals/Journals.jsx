@@ -20,7 +20,7 @@ export default function Journals(props) {
   }, [isDeleted])
 
 
-  const journals = userSurveys?.map((journal, index) => {
+  const journals = userSurveys?.filter((journal) => journal.survey_format_id === 13).map((journal, index) => {
 
     if ((journal.survey_format_id === 13) && (index % 2 === 0)) {
       return (
@@ -70,8 +70,6 @@ export default function Journals(props) {
     }
   })
 
-  console.log(userSurveys)
-  console.log(journals)
   
   return (
     

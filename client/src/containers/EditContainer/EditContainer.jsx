@@ -14,15 +14,24 @@ export default function SurveyContainer(props) {
   const [submitEditAnswers, setSubmitEditAnswers] = useState(false);
   const history = useHistory();
 
+  const survey = {
+    survey_format_id: surveyFormat?.id,
+  }
+
   const [surveyAnswers, setSurveyAnswers] = useState([]);
 
   // Answer Functions
 
   const handleSubmit = async (surveyAnswers) => {
-    console.log(surveyAnswers);
     setSubmitEditAnswers(!submitEditAnswers);
-    console.log(surveyAnswers);
   };
+
+    // Return Home Function
+
+    const exitSurvey = () => {
+      history.push('/home')
+      setPendingSurvey(false)
+    }
 
   // UseEffects Below:
 
@@ -46,7 +55,6 @@ export default function SurveyContainer(props) {
           const rawData = await getSurveyAnswers(activeSurveyID);
           const data = rawData.data;
           const rawAnswers = data.answers;
-          console.log(rawAnswers);
           setOriginalAnswers(rawAnswers);
         };
         getEditAnswers(activeSurveyID);
@@ -60,8 +68,6 @@ export default function SurveyContainer(props) {
       Promise.all(
         surveyAnswers.map((pendingAnswer) => {
           const answerID = pendingAnswer.id;
-          console.log(pendingAnswer);
-          console.log(answerID);
           const updateAnswers = async (answerID, pendingAnswer) => {
             const editedAnswer = await putAnswer(answerID, pendingAnswer);
             return editedAnswer;
@@ -81,6 +87,7 @@ export default function SurveyContainer(props) {
     surveyData.questions.map((question, index) => (
       <EditQuestion
         // Data
+        key={question.id}
         currentUser={currentUser}
         question={question}
         index={index}
@@ -90,7 +97,9 @@ export default function SurveyContainer(props) {
         currentQuestion={currentQuestion}
         setCurrentQuestion={setCurrentQuestion}
         submitEditAnswers={submitEditAnswers}
+        exitSurvey={exitSurvey}
         // Data Forms
+        survey={survey}
         surveyAnswers={surveyAnswers}
         setSurveyAnswers={setSurveyAnswers}
         originalAnswers={originalAnswers}
