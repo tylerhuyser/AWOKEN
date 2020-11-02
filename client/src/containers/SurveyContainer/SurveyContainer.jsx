@@ -63,7 +63,7 @@ export default function SurveyContainer(props) {
   }, [])
 
   useEffect(() => { 
-    if (surveyID !== null) {
+    if (surveyAnswers.length >= setSurveyData.questions.length) {
       Promise.all(surveyAnswers.map((pendingAnswer) => {
         pendingAnswer.survey_id = surveyID
         const postAnswers = async (pendingAnswer) => {
@@ -74,6 +74,9 @@ export default function SurveyContainer(props) {
       }))
       history.push('/home')
       setPendingSurvey(false)
+    }
+    else {
+      alert("Please complete all answers in order to continue!")
     }
   }, [surveyID])
 

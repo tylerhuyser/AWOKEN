@@ -64,7 +64,7 @@ export default function SurveyContainer(props) {
   // Submits Answers upon submitEditAnswersStateChange 
   
   useEffect(() => {
-    if (surveyAnswers.length !== 0) {
+    if (surveyAnswers.length === originalAnswers.length) {
       Promise.all(
         surveyAnswers.map((pendingAnswer) => {
           const answerID = pendingAnswer.id;
@@ -77,6 +77,9 @@ export default function SurveyContainer(props) {
       );
       history.push("/journals");
       setPendingSurvey(false);
+    }
+    else {
+      alert("Please complete all answers in order to continue!")
     }
   }, [submitEditAnswers]);
 

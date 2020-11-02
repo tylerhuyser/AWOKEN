@@ -63,11 +63,11 @@
 }
 
 .active {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .inactive {
-  opacity: 60%;
+  opacity: 0.6;
 }
 
 .white {
