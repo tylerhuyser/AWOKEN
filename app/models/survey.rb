@@ -9,7 +9,7 @@ class Survey < ApplicationRecord
   belongs_to :employee
   belongs_to :survey_format
   has_many :questions, through: :survey_formats
-  has_many :answers
+  has_many :answers, :dependent => :destroy
 
   validates :iteration, presence: true
 end
