@@ -30,15 +30,9 @@ export default function SurveyContainer(props) {
     return newSurvey
   }
 
-  const handleSubmit = async (survey, surveyAnswers) => {
+  const handleSubmit = async (survey) => {
+    setSurveyAnswers([])
     setSubmitAnswers(!submitAnswers)
-    await handlePost(survey, surveyAnswers)
-  }
-
-  const handlePost = async (survey, surveyAnswers) => {
-    const newSurvey = await postNewSurvey(survey)
-    const newSurveyID = newSurvey.id
-    setSurveyID(newSurveyID)
   }
 
   // Return Home Function
@@ -62,8 +56,23 @@ export default function SurveyContainer(props) {
     }
   }, [])
 
-  useEffect(() => { 
-    if (surveyAnswers.length >= setSurveyData.questions.length) {
+  useEffect(() => {
+    if (surveyAnswers.length !== 0 && surveyData.questions !== undefined) {
+      if (surveyAnswers.length >= surveyData.questions.length) {
+        const handlePost = async (survey, surveyAnswers) => {
+          const newSurvey = await postNewSurvey(survey)
+          const newSurveyID = newSurvey.id
+          setSurveyID(newSurveyID)
+        }
+        handlePost(survey, surveyAnswers)
+      } else {
+        alert("Please complete all answers in order to continue!")
+      }
+    }
+  }, [surveyAnswers])
+
+  useEffect(() => {
+    if (surveyID !== null) {
       Promise.all(surveyAnswers.map((pendingAnswer) => {
         pendingAnswer.survey_id = surveyID
         const postAnswers = async (pendingAnswer) => {
@@ -74,9 +83,6 @@ export default function SurveyContainer(props) {
       }))
       history.push('/home')
       setPendingSurvey(false)
-    }
-    else {
-      alert("Please complete all answers in order to continue!")
     }
   }, [surveyID])
 
