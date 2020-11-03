@@ -7,6 +7,8 @@ import { getOneSurveyFormat } from '../../services/survey-constructors'
 import { postSurvey } from '../../services/surveys';
 import { postAnswer } from '../../services/answers';
 
+import './SurveyContainer.css'
+
 export default function SurveyContainer(props) {
 
   const { currentUser, surveyFormat, setUserSurveys, setPendingSurvey } = props;
@@ -119,11 +121,11 @@ export default function SurveyContainer(props) {
       { surveyData === undefined ?
       
 
-        <div className="loader"></div>
+        <div className="loader slide-in-left-survey-container"></div>
         
         :
 
-        <div className="questionnaire-container" key={`${surveyFormat.id}`}>
+        <div className="questionnaire-container slide-in-left-survey-container slide-out-left-survey-container" key={`${surveyFormat.id}`}>
       
           {surveyQuestions}
 

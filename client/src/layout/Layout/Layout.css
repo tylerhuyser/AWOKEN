@@ -6,3 +6,18 @@ display: flex;
 flex-direction: column;
 
 }
+
+@media (hover: none) {
+  .fas, .far{
+    color: #F39C12;
+  }
+}
+
+@media (hover: hover) {
+.fas:hover, .far:hover  {
+
+  font-size: 40px;
+  color: #4F2958;
+    
+  }
+}
