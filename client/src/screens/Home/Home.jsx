@@ -16,7 +16,7 @@ export default function Home(props) {
   }
 
   return (
-    <div className="home-container fade-in-home">
+    <div className={"home-container fade-in-home"}>
       
       <div className="home-card">
 

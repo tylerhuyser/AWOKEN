@@ -25,7 +25,7 @@ export default function MainContainer(props) {
       <Switch>
 
         <Route exact path="/home">
-          <Home setPendingSurvey={setPendingSurvey} />
+          <Home setPendingSurvey={setPendingSurvey}/>
         </Route>
 
         <Route exact path="/journals">

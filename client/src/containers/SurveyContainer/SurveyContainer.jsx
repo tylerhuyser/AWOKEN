@@ -40,8 +40,8 @@ export default function SurveyContainer(props) {
   // Return Home Function
 
   const exitSurvey = () => {
-    history.push('/home')
     setPendingSurvey(false)
+    history.push('/home')
   }
 
   // UseEffects Below:
@@ -125,7 +125,7 @@ export default function SurveyContainer(props) {
         
         :
 
-        <div className="questionnaire-container slide-in-left-survey-container slide-out-left-survey-container" key={`${surveyFormat.id}`}>
+        <div className={"questionnaire-container slide-in-left-survey-container"} key={`${surveyFormat.id}`}>
       
           {surveyQuestions}
 

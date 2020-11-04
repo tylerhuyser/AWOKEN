@@ -29,6 +29,7 @@ function App() {
 // User Data
   const [userSurveys, setUserSurveys] = useState(null);
   const [pendingSurvey, setPendingSurvey] = useState(false);
+  const [editSurvey, setEditSurvey] = useState(false)
   const [activeSurveyID, setActiveSurveyID] = useState(0);
 
   // App Data
@@ -138,9 +139,15 @@ function App() {
 
   const handleEdit = (e) => {
     setActiveSurveyID(e);
-    setPendingSurvey(true);
-    history.push("/edit-journal");
+    // setPendingSurvey(true);
+    setEditSurvey(true)
   };
+
+  useEffect(() => {
+    if (editSurvey) {
+      history.push("/edit-journal")
+    }
+  }, [editSurvey])
 
   return (
     <div className="app-container">
@@ -159,7 +166,7 @@ function App() {
         </Switch>
       ) : (
         <>
-          {(pendingSurvey) || (userSurveys && userSurveys.length === 0) ? (
+          {(pendingSurvey) || (editSurvey) || (userSurveys && userSurveys.length === 0) ? (
             <Switch>
               <Route path="/complete-profile">
                 <SurveyContainer

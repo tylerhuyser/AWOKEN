@@ -29,8 +29,8 @@ export default function SurveyContainer(props) {
     // Return Home Function
 
     const exitSurvey = () => {
-      history.push('/home')
       setPendingSurvey(false)
+      history.push('/home')
     }
 
   // UseEffects Below:
@@ -64,22 +64,24 @@ export default function SurveyContainer(props) {
   // Submits Answers upon submitEditAnswersStateChange 
   
   useEffect(() => {
-    if (surveyAnswers.length === originalAnswers.length) {
-      Promise.all(
-        surveyAnswers.map((pendingAnswer) => {
-          const answerID = pendingAnswer.id;
-          const updateAnswers = async (answerID, pendingAnswer) => {
-            const editedAnswer = await putAnswer(answerID, pendingAnswer);
-            return editedAnswer;
-          };
-          return updateAnswers(answerID, pendingAnswer);
-        })
-      );
-      history.push("/journals");
-      setPendingSurvey(false);
-    }
-    else {
-      alert("Please complete all answers in order to continue!")
+    if (surveyAnswers.length !== 0 && surveyData.questions !== undefined) {
+      if (surveyAnswers.length === originalAnswers.length) {
+        Promise.all(
+          surveyAnswers.map((pendingAnswer) => {
+            const answerID = pendingAnswer.id;
+            const updateAnswers = async (answerID, pendingAnswer) => {
+              const editedAnswer = await putAnswer(answerID, pendingAnswer);
+              return editedAnswer;
+            };
+            return updateAnswers(answerID, pendingAnswer);
+          })
+        );
+        history.push("/journals");
+        setPendingSurvey(false);
+      }
+      else {
+        alert("Please complete all answers in order to continue!")
+      }
     }
   }, [submitEditAnswers]);
 
@@ -112,9 +114,9 @@ export default function SurveyContainer(props) {
   return (
     <>
       {surveyData === undefined ? (
-        <div className="loader"></div>
+        <div className="loader slide-in-left-survey-container"></div>
       ) : (
-        <div className="edit-container">{surveyQuestions}</div>
+        <div className="questionnaire-container slide-in-left-survey-container">{surveyQuestions}</div>
       )}
     </>
   );
