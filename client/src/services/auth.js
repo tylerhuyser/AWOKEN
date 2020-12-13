@@ -16,10 +16,15 @@ export const registerEmployee = async (registerData) => {
 
 export const verifyEmployee = async () => {
   const token = localStorage.getItem('authToken');
+  console.log(token)
   if (token) {
     api.defaults.headers.common.authorization = `Bearer ${token}`
-    const resp = await api.get('/auth/verify');
-    return resp.data
+    try {
+      const resp = await api.get('/auth/verify');
+      return resp.data
+    } catch (error) {
+      console.log(error)
+    }
   }
   return null
 }

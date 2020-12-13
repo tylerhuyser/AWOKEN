@@ -29,7 +29,7 @@ function App() {
 // User Data
   const [userSurveys, setUserSurveys] = useState(null);
   const [pendingSurvey, setPendingSurvey] = useState(false);
-  const [editSurvey, setEditSurvey] = useState(false)
+  const [editSurvey, setEditSurvey] = useState(false);
   const [activeSurveyID, setActiveSurveyID] = useState(0);
 
   // App Data
