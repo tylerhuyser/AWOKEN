@@ -205,7 +205,17 @@ A feature available only to company admins. Corporate administrators will be abl
 
 ## Wireframes
 
+<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
 
+<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+
+<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+
+<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+
+<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+
+<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
 
 
 
