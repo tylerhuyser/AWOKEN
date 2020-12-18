@@ -123,7 +123,7 @@ The participants scores are averaged to obtain a mean, in which higher numbers i
 
 ### Intervention
 
-<img src="https://i.imgur.com/SGTnuc8.gif" width="30%">
+<img src="https://i.imgur.com/ono3WHI.gif" width="30%">
 
 For the next twelve (12) weeks, participants are presented with a journal and questionnaire. The questionnaire asks the user to provide open-ended responses about their experiences with using the five prejudice self-regulation strategies.
 
