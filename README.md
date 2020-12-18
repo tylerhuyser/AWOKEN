@@ -12,6 +12,8 @@ A-Woke-N enables companies to offer digitally-equipped and data-driven diversity
 
 #### System Authentication & User Login
 
+<img src="https://i.imgur.com/SGTnuc8.gif" width="30%">
+
 The application deploys a token-based authentication system in order facilitate user login. 
 
 Unlike a session-based approach, users are not associated with login information. Instead, a unique token is used to carry client-host transactions.
@@ -120,6 +122,8 @@ After being introducted to the intervention strategies, participants are present
 The participants scores are averaged to obtain a mean, in which higher numbers indiciate higher likelihood, willingness, perceived difficulty, perceived effectiveness, and perceived opportunity in relation to each respective prejudice self-regulation strategy.
 
 ### Intervention
+
+<img src="https://i.imgur.com/SGTnuc8.gif" width="30%">
 
 For the next twelve (12) weeks, participants are presented with a journal and questionnaire. The questionnaire asks the user to provide open-ended responses about their experiences with using the five prejudice self-regulation strategies.
 
