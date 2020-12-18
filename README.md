@@ -151,6 +151,16 @@ Though complex, this architecture allows for many benefits:
 
 <img src="https://i.imgur.com/4gSrDDx.png" width="60%">
 
+*NOTE:* In order to determine this format for the Awoken relational database, I used the following references:
+
+* [Database Design for Survey](https://stackoverflow.com/questions/1764435/database-design-for-a-survey)
+
+* [Associating Answers to Users](https://dba.stackexchange.com/questions/16002/survey-database-design-associate-an-answer-to-a-user)
+
+* [Deciphering Database ER Diagrams for Questionnaires](https://stackoverflow.com/questions/37346994/deciphering-database-er-diagram-for-questionnaire)
+
+* [Relational Database Structure for Survey Apps](https://stackoverflow.com/questions/51684573/relational-database-schema-for-survey-app)
+
 ## Key Components
 
 Key Components Include:
