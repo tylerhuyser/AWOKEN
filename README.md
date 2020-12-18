@@ -133,10 +133,41 @@ A feature available only to company admins. Corporate administrators will be abl
 
 ## Database Structure
 
+Over the course of the Awoken diversity & inclusion program, users are served thirteen unique surveys--each of which measure a different dimension of bias. In order to measure the impact of the intervention in relation to these dimensions of bias, users are served some of these surveys multiple times.
+
+The surveys are composed of many types of questions, ranging from multiple-choice to select-all-that-apply to open-ended free-response. In fact, there are over two hundred (200) unique questions across all thirteen surveys.
+
+To recap: multiple survey formats, taken multiple times, composed of many forms of questions.
+
+Using the D.R.Y. ("Don't Repeat Yourself!") principle, I decided to populate each survey format, each survey format's respective questions, and each question's respective options in the back-end. 
+
+Each survey format has many questions. Each question has many options. And, each instance of a survey, has one and only one survey format.
+
+Though complex, this architecture allows for many benefits:
+
+* each survey is constructed by one component, reducing the quantity of code thirteen-fold
+* news surveys can easily be added, removed, or altered
+* survey data can more easily be analyzed for insights 
+
 <img src="https://i.imgur.com/4gSrDDx.png" width="60%">
 
 ## Key Components
 
+Key Components Include:
+
+* Login
+
+* Register
+
+* Survey Container
+
+* Edit Survey Container
+
+* Journals
+
+* Questions
+
+* Options
 
 ### Component Heirarchy
 
@@ -206,167 +237,33 @@ A feature available only to company admins. Corporate administrators will be abl
 ## Wireframes
 
 **Awoken Landing Page**
+
 <img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
 
 **Login**
+
 <img src="https://i.imgur.com/6DVJK1M.jpg" width="30%">
 
 **Complete Profile**
+
 <img src="https://i.imgur.com/cox1QFt.jpg" width="30%">
 
 **Home Screen**
+
 <img src="https://i.imgur.com/DwTeIEY.jpg" width="30%">
 
 **Calendar**
+
 <img src="https://i.imgur.com/ib0rJ66.jpg" width="30%">
 
 **Survey Instructions**
+
 <img src="https://i.imgur.com/Y2A3n6a.jpg" width="30%">
 
 **Example Journal**
+
 <img src="https://i.imgur.com/FcS4RZ7.jpg" width="30%">
 
 **Education Module**
+
 <img src="https://i.imgur.com/hZKReWf.jpg" width="30%">
-
-
-### Goals
-
-The goal of A-Woke-N is to create an app that houses an approachable intervention that addresses unconscious bias. 
-
-### Challenges
-
-Some anticipated challenges with this project include:
-
-* Developing a smooth experiences for employees (during the tests) and corporate administrators (while requesting cohort data).
-
-* During the IAT test, image loading time must not skew the results of the test.
-
-## MVP
-
-* Auth Log-In
-* React-with-Rails Framework
-* Complete IAT Test
-* Complete Journal Functionality
-* Complete CRUD
-
-#### Timeline
-
-| Component | Priority | Estimated Time | Actual Time |
-| --------- | -------- | -------------- | ----------- |
-| Rails Backend | High | 4 hours | TBD |
-| Header    | Low      | 1 hour | TBD |
-| Nav       | Low      | 1 hour | TBD |
-| Login | High | 6 hours | TBD |
-| Register | High | 6 hours | TBD |
-| Home | Medium | 3 hours | TBD |
-| Onboarding Assessment (IAT) | Low | 12 hours | TBD |
-| Journals | High | 4 hours | TBD |
-| CSS | Medium | 4 hours | TBD |
-| Media Queries | Medium | 4 hours | TBD |
-| Admin LogIn | Low | 4 hours | TBD |
-| Data Visualization | Low | 10 hours | TBD |
-| **Total** | | 59 hours | TBD |
-
-
-### Client
-
-[Wireframes (Slides 6-22) & (27-40)](https://drive.google.com/file/d/1ad_nyQBvMUd_JPjUpoJlcoNqj9KZ9px3/view?usp=sharing) <br>
-[Component Heirarchy](https://whimsical.com/V2ZJ8U3A6JNc4hyLrazgKX)
-
-#### Repo Structure
-
-```
-|__ app
-          |__ controllers
-                        |__ application_controller.rb
-                        |__ authentication_controller.rb
-                        |__ companys_controller.rb
-                        |__ admins_cbontroller.rb
-                        |__ employees_controller.rb
-                        |__ **demographics_responses_controller.rb**
-                        |__ sr_journals_controller.rb
-                        |__ sr_questionnaires_controller.rb
-                        |__ iat_scores_controller.rb
-                        |__ iat_questions_controller.rb
-                        |__ sr_questionnaire_questions.rb
-          |__ models
-                        |__ application_record.rb
-                        |__ company.rb
-                        |__ admin.rb
-                        |__ employee.rb
-                        |__ demographics_response.rb
-                        |__ sr_journal.rb
-                        |__ sr_questionnaire.rb
-                        |__ iat_questions.rb
-                        |__ iat_score.rb
-                        |__ sr_questionnaire.rb
-|__ config
-         |__ routes.rb
-|__ db
-         |__ migrate   
-         |__ seeds.rb
-|__ client
-         |__ src
-                        |__ index.js (Contains BrowserRouter from React-Router-Dom)
-                        |__ App.js (Contains User Authentication)
-                        |__ services
-                                     |__ api-config.js
-                                     |__ auth.js
-                                     |__ **TBD**
-                        |__ components
-                                     |__ 
-                        |__ layouts
-                                     |__ Layout.jsx
-                                     |__ Header.jsx
-                                     |__ Nav.jsx (footer)
-                        |__ screens
-                                     |__ Login.jsx
-                                     |__ Register.jsx
-                                     |__ Home.jsx
-                                     |__ Journals.jsx
-                                     |__ JournalCreate.jsx
-                                     |__ JournalEdit.jsx
-                                     |__ SR_Questionnaire.jsx
-                                     |__ IAT_Test.jsx
-                                     |__ Admin_Analytics.jsx
-                             
-```      
-
-
-### Server
-
-[Data Architecture] - TBD
-
-[Entity-Relationship-Diagram](https://drive.google.com/file/d/15UhOXcn6zN7cM_tvFxrDskiv1ET3TpuG/view?usp=sharing)
-
-[API Endpoint Doucmentation] - TBD
-
-### Dependencies
-
-* Rails
-* Create-React-App
-* React-Router
-* React-Router-Dom
-* Axios
-* Styled-Components
-* React-Chartsjs-2
-
-## Post-MVP
-
-* Onboarding-Assessment
-* Company Admin-View
-
-## Notes:
- 
-### APIs:
-
-#### Faces broken down by Ethnicity: 
-  Generated Photos: https://generated.photos/datasets
-  UTK Face: https://susanqq.github.io/UTKFace/
-  U Texas Face: http://live.ece.utexas.edu/research/texas3dfr/
-  
-#### Words broken down by postive or negative connotation:
- https://www.datamuse.com/api/
- https://www.wordsapi.com/
- https://dictionaryapi.com/products/api-collegiate-thesaurus#:~:text=The%20Collegiate%C2%AE%20Thesaurus%20API,choices%2C%20examples%2C%20and%20explanations.  https://words.bighugelabs.com/site/api
