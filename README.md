@@ -1,16 +1,76 @@
-# A-Woke-N
+# AWOKEN
 
 ## Overview
 
-**A-Woke-N** is an app that helps _awaken_ users to their unconscious biases. Using an Implicit Aptitude Test (IAT), the app measures a user's implicit biases (commonly referred to as unconscious bias). Following the test, the app administers an intervention that helps guide users to a more _a-woke-n_ mindset. 
+**AWOKEN** is a React-on-Rails app that helps *awken* users to bias. The app uses a variety of surveys in order to measure a user's biases (i.e. racism, sexism, etc.). The app also deploys an intervention that helps guide users to a more a*woke*n mindset.
+
+[Deployed app](https://brave-neumann-a7bc83.netlify.app/) can be accessed here.
 
 ### Features
 
-#### Company & User Auth Log-In
-
 A-Woke-N enables companies to offer digitally-equipped and data-driven diversity & inclusion interventions. Upon registration, users will become associated with their employers using a unique access token -- thereby allowing companies to optimie the program throughout its flight. 
 
-#### The Implicit Aptitude Test (IAT)
+#### System Authentication & User Login
+
+The application deploys a token-based authentication system in order facilitate user login. 
+
+Unlike a session-based approach, users are not associated with login information. Instead, a unique token is used to carry client-host transactions.
+
+**AWOKEN** uses a Ruby-on-Rails framework for its back-end. In order to facilitate login and session verification, the app deploys two methods that are stored in the authentication controller.
+
+```
+
+  def login
+    @employee = Employee.find_by(username: login_params[:username])
+    if @employee.authenticate(login_params[:password])
+      token = encode({id: @employee.id})
+      render json: {
+        employee: @employee.attributes.except('password_digest'),
+        token: token
+        }, status: :ok
+    else
+      render json: { errors: 'unauthorized' }, status: :unauthorized
+    end
+  end
+  
+  # GET /auth/verify
+  def verify
+    render json: @current_employee.attributes.except('password_digest'), status: :ok
+  end
+
+```
+
+### User Roles
+
+There are two types of users that access AWOKEN: admins and employees. The user is offered a different experience depending on their role. 
+
+Empoloyees are able to AWOKEN's bias-measuring tools, bias-reduction intervention, and educational models.
+
+Admins are able to access data visualization tools the display insights about a cohort of employees.
+
+In order to create two different roles, an 'admin' attribute is added to the 'user' model. The 'admin' attribute only accepts Boolean values. If the value is 'true', the user receives the 'admin' view. Conversely, if the valie is 'false' the user receives the employee version of the app.
+
+AWOKEN enables companies to offer digitally-equipeed and data-driven diversity & inclusion programs. Upon registration, users will become associated with their employers using a unique access token. 
+
+```
+
+  create_table "employees", force: :cascade do |t|
+    t.string "username"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.date "date_of_birth"
+    t.boolean "admin", default: false
+    t.bigint "company_id", null: false
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_employees_on_company_id"
+  end
+
+```
+
+### The Implicit Aptitude Test (IAT)
 
 In short, the Implicit Aptitude Test (IAT)  measures the strength of correlation between identities (i.e. African-Americans, LGBT+ people, etc.) and concepts (such as 'good' or 'bad') or stereotypes (such as intelligence or athletic prowess). 
 
@@ -39,7 +99,7 @@ While taking an IAT, users are asked to quickly sort words into categories that 
 
 Running in the background, is a timer that the test uses in order to record the user's reaction times for third and fifth sections of the test. These times are averaged, subtracted, and then the result is computed into a score informing a user of their bias. The user is presented this score.
 
-#### Intervention
+### Education Modules
 
 After completing the initial assessment, the user is presented with an intervention that educates users on five (5) prejudice self-reguation strategies:
 
@@ -59,7 +119,7 @@ After being introducted to the intervention strategies, participants are present
 
 The participants scores are averaged to obtain a mean, in which higher numbers indiciate higher likelihood, willingness, perceived difficulty, perceived effectiveness, and perceived opportunity in relation to each respective prejudice self-regulation strategy.
 
-#### Post-Intervention
+### Intervention
 
 For the next twelve (12) weeks, participants are presented with a journal and questionnaire. The questionnaire asks the user to provide open-ended responses about their experiences with using the five prejudice self-regulation strategies.
 
@@ -67,9 +127,25 @@ For each strategy, the participants were asked whether they had used the strateg
 
 After completing the journal, the user is once again presented with the intervention questionnaire, in which they rate their attitudes towards each strategy from 1 to 7.
 
-#### Cohort Data Visualization 
+### Cohort Data Visualization 
 
 A feature available only to company admins. Corporate administrators will be able to assess the impact of the intervention on cohorts of employees over time. 
+
+## Database Structure
+
+## Component Heirarchy
+
+## Wireframes
+
+
+
+
+
+
+
+
+
+
 
 ### Goals
 
