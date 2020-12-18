@@ -133,7 +133,75 @@ A feature available only to company admins. Corporate administrators will be abl
 
 ## Database Structure
 
-## Component Heirarchy
+<img src="https://i.imgur.com/4gSrDDx.png" width="60%">
+
+## Key Components
+
+
+### Component Heirarchy
+
+<img src="https://i.imgur.com/wZxi5M1.png" width="60%">
+
+### Repo Structure
+
+```
+
+|_db
+             |_migrate
+             |_schema.rb
+             |_seeds.rb
+|_app
+             |_controllers
+                          |_answers_controller.rb
+                          |_authentication_controller.rb
+                          |_application_controller.rb
+                          |_companies_controller.rb
+                          |_employees_controller.rb
+                          |_options_controller.rb
+                          |_questions_controller.rb
+                          |_surveys_formats_controller.rb
+                          |_surveys_controller.rb
+             |_models
+                          |_answer.rb
+                          |_application_record.rb
+                          |_company.rb
+                          |_employee.rb
+                          |_option.rb
+                          |_question.rb
+                          |_surveys_format.rb
+                          |_survey.rb
+|_config
+             |_routes
+|_client
+             |_src
+                  |_app.js
+                  |_components
+                              |_Question
+                              |_Option               
+                  |_containers
+                              |_MainContainer
+                              |_SurveyContainer
+                              |_EditContainer
+                              
+                  |_screens
+                              |_Home
+                              |_Journal
+                              |_Login
+                              |_Register
+                  |_services
+
+                              |_apiConfig.js
+                              |_authjs
+                              |_admin-info.js
+                              |_answers.js
+                              |_survey-constructors.js
+                              |_surveys.js
+                  |_layout
+                              |_Layout
+                              |_Header
+                              |_Nav
+
+```
 
 ## Wireframes
 
