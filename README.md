@@ -205,24 +205,29 @@ A feature available only to company admins. Corporate administrators will be abl
 
 ## Wireframes
 
+**Awoken Landing Page**
 <img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
 
-<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+**Login**
+<img src="https://i.imgur.com/6DVJK1M.jpg" width="30%">
 
-<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+**Complete Profile**
+<img src="https://i.imgur.com/cox1QFt.jpg" width="30%">
 
-<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+**Home Screen**
+<img src="https://i.imgur.com/DwTeIEY.jpg" width="30%">
 
-<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+**Calendar**
+<img src="https://i.imgur.com/ib0rJ66.jpg" width="30%">
 
-<img src="https://i.imgur.com/KVbKxzA.jpg" width="30%">
+**Survey Instructions**
+<img src="https://i.imgur.com/Y2A3n6a.jpg" width="30%">
 
+**Example Journal**
+<img src="https://i.imgur.com/FcS4RZ7.jpg" width="30%">
 
-
-
-
-
-
+**Education Module**
+<img src="https://i.imgur.com/hZKReWf.jpg" width="30%">
 
 
 ### Goals
