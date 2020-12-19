@@ -2,13 +2,13 @@
 
 ## Overview
 
-**AWOKEN** is a React-on-Rails app that helps *awken* users to bias. The app uses a variety of surveys in order to measure a user's biases (i.e. racism, sexism, etc.). The app also deploys an intervention that helps guide users to a more a*woke*n mindset.
+**AWOKEN** is a React-on-Rails app that helps *awaken* users to bias. The app uses a variety of surveys in order to measure a user's biases (i.e. racism, sexism, etc.). The app also deploys an intervention that helps guide users to a more a*woke*n mindset.
 
 [Deployed app](https://brave-neumann-a7bc83.netlify.app/) can be accessed here.
 
 ### Features
 
-A-Woke-N enables companies to offer digitally-equipped and data-driven diversity & inclusion interventions. Upon registration, users will become associated with their employers using a unique access token -- thereby allowing companies to optimie the program throughout its flight. 
+AWOKEN helps companies to offer digitally-equipped and data-driven diversity & inclusion interventions. Upon registration, users become associated with their employers using a unique access token.Companies are able to optimize their programs using insights gathered from their employee cohort.
 
 #### System Authentication & User Login
 
@@ -18,7 +18,7 @@ The application deploys a token-based authentication system in order facilitate 
 
 Unlike a session-based approach, users are not associated with login information. Instead, a unique token is used to carry client-host transactions.
 
-**AWOKEN** uses a Ruby-on-Rails framework for its back-end. In order to facilitate login and session verification, the app deploys two methods that are stored in the authentication controller.
+AWOKEN uses a Ruby-on-Rails framework for its back-end. In order to facilitate login and session verification, the app deploys two methods that are stored in the authentication controller.
 
 ```
 
@@ -46,13 +46,11 @@ Unlike a session-based approach, users are not associated with login information
 
 There are two types of users that access AWOKEN: admins and employees. The user is offered a different experience depending on their role. 
 
-Empoloyees are able to AWOKEN's bias-measuring tools, bias-reduction intervention, and educational models.
+Empoloyees are able to AWOKEN's bias-measuring tools, bias-reduction intervention, and educational modules.
 
-Admins are able to access data visualization tools the display insights about a cohort of employees.
+Admins are able to access data visualization tools that display insights about a cohort of employees.
 
 In order to create two different roles, an 'admin' attribute is added to the 'user' model. The 'admin' attribute only accepts Boolean values. If the value is 'true', the user receives the 'admin' view. Conversely, if the valie is 'false' the user receives the employee version of the app.
-
-AWOKEN enables companies to offer digitally-equipeed and data-driven diversity & inclusion programs. Upon registration, users will become associated with their employers using a unique access token. 
 
 ```
 
@@ -137,25 +135,25 @@ A feature available only to company admins. Corporate administrators will be abl
 
 ## Database Structure
 
-Over the course of the Awoken diversity & inclusion program, users are served thirteen unique surveys--each of which measure a different dimension of bias. In order to measure the impact of the intervention in relation to these dimensions of bias, users are served some of these surveys multiple times.
+Over the course of the Awoken diversity & inclusion program, users are served thirteen unique surveys--each of which measure a different dimension of bias. In order to measure the performance of the intervention in relation to these dimensions of bias, users are served some of these surveys multiple times.
 
-The surveys are composed of many types of questions, ranging from multiple-choice to select-all-that-apply to open-ended free-response. In fact, there are over two hundred (200) unique questions across all thirteen surveys.
+The surveys are composed of many types of questions, ranging from *multiple-choice* to *select-all-that-apply* to *open-ended free-response*. In fact, there are over two hundred (200) unique questions across all thirteen surveys.
 
 To recap: multiple survey formats, taken multiple times, composed of many forms of questions.
 
 Using the D.R.Y. ("Don't Repeat Yourself!") principle, I decided to populate each survey format, each survey format's respective questions, and each question's respective options in the back-end. 
 
-Each survey format has many questions. Each question has many options. And, each instance of a survey, has one and only one survey format.
+Each *survey format* has many *questions*. Each *question* has many *options*. And, each *instance of a survey*, has one and only one *survey format*.
 
 Though complex, this architecture allows for many benefits:
 
-* each survey is constructed by one component, reducing the quantity of code thirteen-fold
+* each survey, question, and option is constructed by one component, reducing the quantity of code thirteen-fold
 * news surveys can easily be added, removed, or altered
 * survey data can more easily be analyzed for insights 
 
 <img src="https://i.imgur.com/4gSrDDx.png" width="60%">
 
-*NOTE:* In order to determine this format for the Awoken relational database, I used the following references:
+**_NOTE:_** In order to determine this format for the Awoken relational database, I used the following references:
 
 * [Database Design for Survey](https://stackoverflow.com/questions/1764435/database-design-for-a-survey)
 
