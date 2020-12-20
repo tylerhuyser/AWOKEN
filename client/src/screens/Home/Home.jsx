@@ -32,15 +32,15 @@ export default function Home(props) {
 
       <p className="home-card-title">UPCOMING SCHEDULE</p>
           
-          <div className="home-card-content" id="events">
-            <div className="events-date">
-              <p className="events-copy" id="event-date">21</p>
-              <p className="events-copy" id="event-month">JUN</p>
+          <div className="home-card-content" id="event">
+            <div className="event-info" id="event-date">
+              <p className="event-copy" id="event-day">21</p>
+              <p className="event-copy" id="event-month">JUN</p>
             </div>
             
-            <div className="events-info">
-              <p className="events-copy" id="event-title">Lesson 1</p>
-              <p className="events-copy" id="event-subtitle">An Introduction to Self-Regulation Strategies for Bias</p>
+            <div className="event-info" id="event-name">
+              <p className="event-copy" id="event-title">Lesson 1</p>
+              <p className="event-copy" id="event-subtitle">An Introduction to Self-Regulation Strategies for Bias</p>
             </div>
         </div>
       </div>

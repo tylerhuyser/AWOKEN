@@ -2,12 +2,9 @@
 
   font-size: 30px;
   width: 90vw;
-  position: relative;
-  right: 40vw;
+  display: flex;
+  justify-content: flex-start;
 
-  /* position: absolute;
-  top: 25px;
-  left: 25px; */
   z-index: 2;
 }
 
@@ -216,3 +213,13 @@
   }
 }
 
+@media only screen and (min-width: 600px) {
+
+  .fa-chevron-left {
+
+    font-size: 30px;
+    width: 70%;
+  
+    z-index: 2;
+  }
+}

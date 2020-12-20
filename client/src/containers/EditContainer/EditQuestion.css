@@ -165,3 +165,39 @@
 .edit-free-response-textarea::placeholder {
   color: #4F2958;
 }
+
+@media only screen and (min-width: 600px) {
+
+  .question-copy{
+
+    width: 70%;
+    min-height: 5vh;
+    font-size: 4vw;
+    text-align: left;
+    letter-spacing: 0.9px;
+  
+  }
+
+  .options-container{
+    width: 70%;
+    margin: 20px;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+  
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+  }
+
+  .questionnaire-header-container {
+
+    max-width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  }

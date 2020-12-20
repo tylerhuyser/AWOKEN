@@ -2,6 +2,7 @@
 
   max-width: 100%;
   min-height: 100vh;
+  height: 100%;
   padding: 25px 0px 50px 50px;
   margin-top: 0px;
 
@@ -39,7 +40,7 @@
 .home-card-content {
 
   background: #F39C12;
-  min-height: 150px;
+  height: 150px;
 
   margin-bottom: 50px;
   padding: 10px 0px 25px 25px;
@@ -78,7 +79,7 @@
 
 }
 
-#events {
+#event {
 
 background: white;
 color: #F39C12;
@@ -87,20 +88,25 @@ flex-direction: row;
 
 }
 
-.events-date {
-
-width: 40%;
-text-align: center;
-
-display: flex;
-flex-direction: column;
-
+.event-info {
+  margin-top: 15px;
 }
 
 #event-date {
 
+width: 40%;
+
+display: flex;
+flex-direction: column;
+text-align: center;
+justify-content: center;
+
+}
+
+#event-day {
+
   font-size: 20vw;
-  margin: 0px;
+  margin-bottom: 0px;
   font-weight: 500;
 }
 
@@ -111,20 +117,22 @@ flex-direction: column;
   font-weight: 500;
 }
 
-.events-info {
+#event-name {
 
 width: 55%;
-margin: 0px 0px 0px 50px;
+margin-left: 50px;
 
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: space-between;
 
 }
 
 #event-title {
   font-size: 5vw;
   font-weight: bold;
+
+  margin: 0px;
 }
 
 .fade-in-home {
@@ -199,6 +207,18 @@ justify-content: center;
 .home-container {
   max-width: 100%;
   margin-top: 75px;
+}
+
+#event-day {
+  font-size: 7vw;
+  margin: 0px;
+  font-weight: bold;
+}
+
+#event-month {
+  font-size: 7vw;
+  margin: 0px;
+  font-weight: bold;
 }
 
 
