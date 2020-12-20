@@ -1,10 +1,18 @@
-.layout-container {
+.layout-container-mobile {
 max-width: 100vw;
 min-Height: 100vh;
 
 display: flex;
 flex-direction: column;
 
+}
+
+.layout-container-desktop {
+  display: none
+}
+
+.desktop-layout-floater {
+  display: none;
 }
 
 @media (hover: none) {
@@ -20,4 +28,39 @@ flex-direction: column;
   color: #4F2958;
     
   }
+}
+
+@media only screen and (min-width: 600px) {
+
+.layout-container-mobile {
+  display: none;
+}
+
+.layout-container-desktop {
+  max-width: 100vw;
+  min-Height: 100vh;
+  
+  display: flex;
+  flex-direction: row;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+
+  }
+
+  .desktop-layout-floater {
+    display: flex;
+
+    min-width: 30vw;
+    min-height: 100%;
+    padding-right: 50px;
+
+    background: #f2f2f2fc;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+  }
+
 }

@@ -12,22 +12,44 @@ export default function Layout(props) {
   const { currentUser, handleLogout } = props;
 
   return (
-    <div className="layout-container">
-      <Header
-        currentUser={currentUser}
-        handleLogout={handleLogout}
-        toggleDesktopMenu={toggleDesktopMenu}
-        setToggleDesktopMenu={setToggleDesktopMenu}
-      />
+    <>
+      <div className="layout-container-mobile">
+        <Header
+          currentUser={currentUser}
+          handleLogout={handleLogout}
+          toggleDesktopMenu={toggleDesktopMenu}
+          setToggleDesktopMenu={setToggleDesktopMenu}
+        />
 
-      {props.children}
+        {props.children}
 
-      <Footer />
+        <Nav
+          toggleDesktopMenu={toggleDesktopMenu}
+          setToggleDesktopMenu={setToggleDesktopMenu}
+        />
+      </div>
 
-      <Nav
-        toggleDesktopMenu={toggleDesktopMenu}
-        setToggleDesktopMenu={setToggleDesktopMenu}
-      />
+      <div className="layout-container-desktop">
+
+        <Header
+          currentUser={currentUser}
+          handleLogout={handleLogout}
+          toggleDesktopMenu={toggleDesktopMenu}
+          setToggleDesktopMenu={setToggleDesktopMenu}
+        />
+
+        <div className="desktop-layout-floater"></div>
+
+        {props.children}
+
+        <Footer />
+
+        <Nav
+          toggleDesktopMenu={toggleDesktopMenu}
+          setToggleDesktopMenu={setToggleDesktopMenu}
+        />
     </div>
+
+    </>
   )
 }
