@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './Header.css'
 
 export default function Header(props) {
 
-  const [toggleDesktopMenu, setToggleDesktopMenu] = useState(false)
+  const { toggleDesktopMenu, setToggleDesktopMenu } = props
   
   const { currentUser, handleLogout } = props;
 
@@ -34,7 +34,7 @@ export default function Header(props) {
         
       <div className="current-user-header-container">
         <i className="fas fa-bell"></i>
-        <div className="current-user-name">{currentUser.first_name} {currentUser.last_name}</div>
+        <div className="current-user-name" onClick={handleLogout}>{currentUser.first_name} {currentUser.last_name}</div>
       </div>
         
     </div>
