@@ -17,22 +17,22 @@ export default function Nav(props) {
       </div>
 
       <div className={toggleDesktopMenu ? "nav-container-desktop scale-in-hor-left" : "nav-container-hidden"} >
-        <Link to="/home">
+        <Link className="nav-link" to="/home">
           <i className="fas fa-home"></i>
           Home
         </Link>
 
-        <Link>
+        <Link className="nav-link">
           <i className="fas fa-calendar-alt"></i>
           Calender
         </Link>
 
-        <Link to="/journals">
+        <Link className="nav-link" to="/journals">
           <i className="fas fa-book"></i>
           Journals
         </Link>
 
-        <Link>
+        <Link className="nav-link">
           <i className="fas fa-layer-group"></i>
           Lessons
         </Link>

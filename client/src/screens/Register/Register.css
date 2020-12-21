@@ -6,6 +6,9 @@
   justify-content: flex-start;
 
   z-index: 2;
+
+  text-decoration-line: none;
+  text-decoration: none;
 }
 
 .register-form-container {
@@ -217,9 +220,23 @@
 
   .fa-chevron-left {
 
-    font-size: 30px;
     width: 70%;
-  
+    font-size: 30px;
     z-index: 2;
+
+    text-decoration-line: none;
+    text-decoration: none;
+  }
+
+  .register-back-button-container {
+    width: 75vw;
+  }
+
+  #register-back-button {
+    width: 100%;
+  }
+
+  .register-button {
+    font-size: 3vw;
   }
 }

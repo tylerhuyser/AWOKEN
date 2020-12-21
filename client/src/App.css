@@ -11,3 +11,7 @@ body {
 
 }
 
+link, a {
+  text-decoration-line: none;
+  text-decoration: none;
+}

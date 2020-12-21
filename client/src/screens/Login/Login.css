@@ -6,13 +6,9 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 50px;
-
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;
 
 }
 
@@ -155,5 +151,29 @@
 }
 
 @media only screen and (min-width: 600px) {
+
+  .login-form-container {
+    min-height: 100vh;
+    padding: 100px 0px;
+  }
+
+  .login-form {
+    font-size: 3vw;
+  }
+
+  .login-logo-orange {
+    width: 20%;
+  }
+
+  .login-form-title {
+
+    width: 100%;
+    font-size: 4vw;
+  
+  }
+
+  .sign-in-button, .register-button {
+    font-size: 3vw;
+  }
 
 }

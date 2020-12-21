@@ -117,8 +117,8 @@ export default function Register(props) {
 
       <div className="register-form-container">
 
-        <div className="regiser-form-header">
-            <Link to="/login"><i className="fas fa-chevron-left" /></Link>
+        <div className="register-form-header">
+            <Link className="register-back-button-container" to="/login"><i className="fas fa-chevron-left" id="register-back-button" /></Link>
             <img className="register-logo-orange" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
             <p className="register-form-subtitle">BEGIN YOUR JOURNEY</p>
         </div> 

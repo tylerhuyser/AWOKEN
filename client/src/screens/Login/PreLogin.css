@@ -10,18 +10,26 @@
   justify-content: flex-end;
   align-items: center;
 
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+
 }
 
 .preLogin-content {
 
   max-width: 100vw;
-  height: 66vh;
+  height: 66%;
   padding: 50px 0px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
 
 }
 
@@ -60,6 +68,10 @@
   color: white;
   font-size: 5vw;
   letter-spacing: 0.9px;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
   
 }
 
@@ -152,5 +164,24 @@
 }
 
 @media only screen and (min-width: 600px) {
+
+  .preLogin-content {
+    height: 80%;
+    
+  }
+
+  .preLogin-logo-white {
+    width: 20%;
+  }
+
+  .preLogin-App-Name {
+    margin: 50px;
+  }
+
+
+  .preLogin-get-started-button {
+    height: 7vh;
+    font-size: 3vw;
+  }
 
 }

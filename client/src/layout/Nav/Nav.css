@@ -170,7 +170,7 @@ color: #F39C12;
     overflow: hidden;
   }
 
-  a {
+  .nav-link {
     display: flex;
     justify-content: flex-start;
     align-items: center;
