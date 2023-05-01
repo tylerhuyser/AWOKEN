@@ -10,7 +10,7 @@ import "./MainContainer.css"
 export default function MainContainer(props) {
 
   const [ isDeleted, setIsDeleted ] = useState(false)
-  const { currentUser, setPendingSurvey, handleEdit } = props
+  const { currentUser, setPendingSurvey } = props
   const { userSurveys, setUserSurveys } = props
  
   const deleteJournal = async (id) => {
@@ -29,7 +29,7 @@ export default function MainContainer(props) {
         </Route>
 
         <Route exact path="/journals">
-          <Journals currentUser={currentUser} userSurveys={userSurveys} setUserSurveys={setUserSurveys} isDeleted={isDeleted} setIsDeleted={setIsDeleted} deleteJournal={deleteJournal} handleEdit={handleEdit} />
+          <Journals currentUser={currentUser} userSurveys={userSurveys} setUserSurveys={setUserSurveys} isDeleted={isDeleted} setIsDeleted={setIsDeleted} deleteJournal={deleteJournal} />
         </Route>
 
       </Switch>

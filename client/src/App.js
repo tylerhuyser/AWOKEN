@@ -135,14 +135,6 @@ function App() {
     history.push("/login");
   };
 
-  // Journal Edit Function
-
-  const handleEdit = (e) => {
-    setActiveSurveyID(e);
-    // setPendingSurvey(true);
-    setEditSurvey(true)
-  };
-
   useEffect(() => {
     if (editSurvey) {
       history.push("/edit-journal")
@@ -206,7 +198,6 @@ function App() {
                 setPendingSurvey={setPendingSurvey}
                 userSurveys={userSurveys}
                 setUserSurveys={setUserSurveys}
-                handleEdit={handleEdit}
               />
             </Layout>
           )}

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { getOneEmployee } from '../../services/admin-info';
 
+import  { handleEdit } from "../../functions/handleEdit"
+
 import './Journals.css'
 
 export default function Journals(props) {
 
-  const { currentUser, deleteJournal, handleEdit } = props;
+  const { currentUser, deleteJournal } = props;
   const { userSurveys, setUserSurveys } = props
   const { isDeleted } = props
 
