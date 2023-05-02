@@ -198,6 +198,8 @@ function App() {
                 setPendingSurvey={setPendingSurvey}
                 userSurveys={userSurveys}
                 setUserSurveys={setUserSurveys}
+                setActiveSurveyID={setActiveSurveyID}
+                setEditSurvey={setEditSurvey}
               />
             </Layout>
           )}

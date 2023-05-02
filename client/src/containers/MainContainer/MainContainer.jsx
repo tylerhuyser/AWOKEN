@@ -12,6 +12,7 @@ export default function MainContainer(props) {
   const [ isDeleted, setIsDeleted ] = useState(false)
   const { currentUser, setPendingSurvey } = props
   const { userSurveys, setUserSurveys } = props
+  const { setActiveSurveyID, setEditSurvey } = props
  
   const deleteJournal = async (id) => {
     await destroySurvey(id)
@@ -29,7 +30,13 @@ export default function MainContainer(props) {
         </Route>
 
         <Route exact path="/journals">
-          <Journals currentUser={currentUser} userSurveys={userSurveys} setUserSurveys={setUserSurveys} isDeleted={isDeleted} setIsDeleted={setIsDeleted} deleteJournal={deleteJournal} />
+          <Journals
+            currentUser={currentUser}
+            userSurveys={userSurveys} setUserSurveys={setUserSurveys}
+            isDeleted={isDeleted} setIsDeleted={setIsDeleted}
+            deleteJournal={deleteJournal}
+            setActiveSurveyID={setActiveSurveyID}
+            setEditSurvey={setEditSurvey} />
         </Route>
 
       </Switch>

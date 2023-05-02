@@ -1,4 +1,4 @@
-export default function handleEdit (e, setActiveSurveyID, setEditSurvey) {
-  setActiveSurveyID(e);
+export default function handleEdit (activeSurveyID, setActiveSurveyID, setEditSurvey) {
+  setActiveSurveyID(activeSurveyID);
   setEditSurvey(true)
 };
