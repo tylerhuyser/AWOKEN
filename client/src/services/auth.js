@@ -2,14 +2,11 @@ import api from './api-config';
 
 export const loginEmployee = async (loginData) => {
   try {
-    console.log('INSIDE LOGINEMPLOYEE Function')
     const resp = await api.post('/auth/login', { authentication: loginData })
-    console.log(resp)
     localStorage.setItem('authToken', resp.data.token);
     api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`
     return resp.data.employee
   } catch (err) {
-    console.log(err.response.data)
     return err.response.data
   }
 }
@@ -21,7 +18,6 @@ export const registerEmployee = async (registerData) => {
     api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`
     return resp.data.employee
   } catch (err) {
-    console.log(err)
     return err.response.data
   }
 }
