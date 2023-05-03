@@ -4,7 +4,7 @@ class AuthenticationController < ApplicationController
   # POST /auth/login
   def login
     @employee = Employee.find_by(username: login_params[:username])
-    if @employee.authenticate(login_params[:password]) #authenticate method provided by Bcrypt and 'has_secure_password'
+    if @employee && @employee.authenticate(login_params[:password]) #authenticate method provided by Bcrypt and 'has_secure_password'
       token = encode({id: @employee.id})
       render json: {
         employee: @employee.attributes.except('password_digest'),
