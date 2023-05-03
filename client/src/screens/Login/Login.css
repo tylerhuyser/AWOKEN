@@ -86,6 +86,10 @@
 
 }
 
+.invalid {
+  border: 2px solid red;
+}
+
 .sign-in-button {
 
   width: 40vw;

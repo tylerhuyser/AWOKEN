@@ -108,9 +108,12 @@ function App() {
   // Login Functions
 
   const handleLogin = async (loginData) => {
+    console.log('login initiated')
     const employeeData = await loginEmployee(loginData);
-    if (employeeData.error) {
-      setError(employeeData.error)
+    console.log(employeeData)
+    if (employeeData.errors) {
+      console.log(employeeData.errors)
+      setError(employeeData.errors)
     } else {
       setCurrentUser(employeeData);
       history.push("/home");
@@ -147,13 +150,16 @@ function App() {
       {!currentUser ? (
         <Switch>
           <Route path="/login">
-            <Login handleLogin={handleLogin} />
+            <Login
+              handleLogin={handleLogin}
+              error={error} />
           </Route>
 
           <Route path="/register">
             <Register
               handleRegister={handleRegister}
               companyInfo={companyInfo}
+              error={error}
             />
           </Route>
         </Switch>

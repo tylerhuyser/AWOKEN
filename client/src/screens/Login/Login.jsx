@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import PreLogin from "./PreLogin.jsx"
 import './Login.css'
+import { useEffect } from 'react';
 
 
 export default function Login(props) {
@@ -12,6 +13,7 @@ export default function Login(props) {
     password: ""
   })
   const [beginLogin, setBeginLogin] = useState(false);
+  
   const { username, password } = formData;
   const { error, handleLogin } = props;
 
@@ -22,6 +24,12 @@ export default function Login(props) {
       [name]: value
     }))
   }
+
+  useEffect(() => {
+    if (error === "unauthorized") {
+      alert("Invalid login credentials. Please check your username and/or password!")
+    }
+  }, [error])
 
   return (
     <div className="login-container">
@@ -41,14 +49,11 @@ export default function Login(props) {
       }}>
             
         <p className="login-form-title">LOGIN</p>
-        {
-          error &&
-          <p className="login-error">{error}</p>
-        }
+
         <label className="login-form-label">
               Username:
           <input
-            className="login-form-input"
+            className={ error === "unauthorized" ? "login-form-input invalid" : "login-form-input"}
             type="text"
             value={username}
             name="username"
@@ -58,7 +63,7 @@ export default function Login(props) {
         <label className="login-form-label">
               Password:
           <input
-            className="login-form-input"
+            className={ error === "unauthorized" ? "login-form-input invalid" : "login-form-input"}
             type="password"
             value={password}
             name="password"
