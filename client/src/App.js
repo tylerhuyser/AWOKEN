@@ -108,11 +108,8 @@ function App() {
   // Login Functions
 
   const handleLogin = async (loginData) => {
-    console.log('login initiated')
     const employeeData = await loginEmployee(loginData);
-    console.log(employeeData)
     if (employeeData.errors) {
-      console.log(employeeData.errors)
       setError(employeeData.errors)
     } else {
       setCurrentUser(employeeData);
@@ -159,7 +156,6 @@ function App() {
             <Register
               handleRegister={handleRegister}
               companyInfo={companyInfo}
-              error={error}
             />
           </Route>
         </Switch>

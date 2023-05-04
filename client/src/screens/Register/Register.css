@@ -114,6 +114,10 @@
 
 }
 
+.invalid {
+  border: 2px solid red;
+}
+
 
 .register-button {
 

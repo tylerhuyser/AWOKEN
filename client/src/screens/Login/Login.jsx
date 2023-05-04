@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import PreLogin from "./PreLogin.jsx"
+
+import handleInputChange from '../../functions/handleInputChange.js';
+
 import './Login.css'
-import { useEffect } from 'react';
 
 
 export default function Login(props) {
@@ -13,17 +15,9 @@ export default function Login(props) {
     password: ""
   })
   const [beginLogin, setBeginLogin] = useState(false);
-  
+
   const { username, password } = formData;
   const { error, handleLogin } = props;
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
 
   useEffect(() => {
     if (error === "unauthorized") {
@@ -57,7 +51,7 @@ export default function Login(props) {
             type="text"
             value={username}
             name="username"
-            onChange={handleChange}
+            onChange={(e) => handleInputChange(e, setFormData)}
           />
         </label>
         <label className="login-form-label">
@@ -67,7 +61,7 @@ export default function Login(props) {
             type="password"
             value={password}
             name="password"
-            onChange={handleChange}
+            onChange={(e) => handleInputChange(e, setFormData)}
           />
         </label>
           <button className="sign-in-button">SIGN IN</button>
