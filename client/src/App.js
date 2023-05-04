@@ -202,7 +202,7 @@ function App() {
           />
         </Route>
 
-        <Layout currentUser={currentUser} handleLogout={handleLogout}>
+        <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
           <MainContainer
             currentUser={currentUser}
             srQuestionnaire={srQuestionnaire}

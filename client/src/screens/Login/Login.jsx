@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory} from 'react-router-dom';
 
 import handleLogin from '../../functions/handleLogin.js';
-
 import handleInputChange from '../../functions/handleInputChange.js';
 
 import './Login.css'

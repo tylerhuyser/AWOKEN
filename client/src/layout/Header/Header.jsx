@@ -1,4 +1,6 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
+import handleLogout from '../../functions/handleLogout';
 
 import './Header.css'
 
@@ -6,7 +8,8 @@ export default function Header(props) {
 
   const { toggleDesktopMenu, setToggleDesktopMenu } = props
   
-  const { currentUser, handleLogout } = props;
+  const { currentUser, setCurrentUser } = props;
+  const history = useHistory();
 
   const changeDesktopMenuVisibility = (e) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ export default function Header(props) {
     <div className="header-container-mobile slide-in-top-header mobile"> 
       <i className="fas fa-bars"></i>
       <img alt="wims-logo" src="https://i.imgur.com/ioUfIYI.png" width="60vw" />
-      <i className="far fa-user-circle" onClick={handleLogout}></i>
+      <i className="far fa-user-circle" onClick={() => handleLogout(history, setCurrentUser)}></i>
     </div>
 
     <div className="header-container-desktop slide-in-top-header desktop">

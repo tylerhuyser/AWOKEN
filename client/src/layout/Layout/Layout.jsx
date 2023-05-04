@@ -9,14 +9,14 @@ export default function Layout(props) {
   
   const [toggleDesktopMenu, setToggleDesktopMenu] = useState(false)
   
-  const { currentUser, handleLogout } = props;
+  const { currentUser, setCurrentUser } = props;
 
   return (
     <>
       <div className="layout-container-mobile">
         <Header
           currentUser={currentUser}
-          handleLogout={handleLogout}
+          setCurrentUser={setCurrentUser}
           toggleDesktopMenu={toggleDesktopMenu}
           setToggleDesktopMenu={setToggleDesktopMenu}
         />
@@ -33,7 +33,7 @@ export default function Layout(props) {
 
         <Header
           currentUser={currentUser}
-          handleLogout={handleLogout}
+          setCurrentUser={setCurrentUser}
           toggleDesktopMenu={toggleDesktopMenu}
           setToggleDesktopMenu={setToggleDesktopMenu}
         />
