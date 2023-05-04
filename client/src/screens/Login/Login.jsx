@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory} from 'react-router-dom';
 
-import PreLogin from "./PreLogin.jsx"
+import handleLogin from '../../functions/handleLogin.js';
 
 import handleInputChange from '../../functions/handleInputChange.js';
 
@@ -14,9 +14,10 @@ export default function Login(props) {
     username: "",
     password: ""
   })
+  const [error, setError] = useState("")
+  const history = useHistory();
 
-  const { username, password } = formData;
-  const { error, handleLogin } = props;
+  const {setCurrentUser} = props
 
   useEffect(() => {
     if (error === "unauthorized") {
@@ -36,7 +37,7 @@ export default function Login(props) {
         
       <form className="login-form" onSubmit={(e) => {
         e.preventDefault();
-        handleLogin(formData);
+        handleLogin(formData, history, setCurrentUser, setError);
       }}>
             
         <p className="login-form-title">LOGIN</p>
@@ -46,7 +47,7 @@ export default function Login(props) {
           <input
             className={ error === "unauthorized" ? "login-form-input invalid" : "login-form-input"}
             type="text"
-            value={username}
+            value={formData.username}
             name="username"
             onChange={(e) => handleInputChange(e, setFormData)}
           />
@@ -56,7 +57,7 @@ export default function Login(props) {
           <input
             className={ error === "unauthorized" ? "login-form-input invalid" : "login-form-input"}
             type="password"
-            value={password}
+            value={formData.password}
             name="password"
             onChange={(e) => handleInputChange(e, setFormData)}
           />

@@ -1,16 +1,12 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import handleNavigation from '../../functions/handleNavigation';
 
 import './LandingPage.css'
 
 export default function LandingPage() {
   
   const history = useHistory();
-  
-  function handleGetStarted() {
-    history.push('/login')
-  }
-
 
   return (
     <div className="landing-page-container">
@@ -24,7 +20,7 @@ export default function LandingPage() {
 
         <div className="landing-page-actions-container fade-in-pre-login-buttons">
           <p className="landing-page-tagline">Embrace New Perspectives</p>
-          <button className="landing-page-login-button" onClick={handleGetStarted}>GET STARTED</button>
+          <button className="landing-page-login-button" onClick={() => handleNavigation(history, '/login')}>GET STARTED</button>
         </div>
       </div>
 

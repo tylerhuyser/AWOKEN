@@ -25,7 +25,6 @@ import { getAllSurveyFormats } from "./services/survey-constructors.js";
 function App() {
   // Auth
   const [currentUser, setCurrentUser] = useState(null);
-  const [error, setError] = useState("")
 
 // User Data
   const [userSurveys, setUserSurveys] = useState(null);
@@ -133,27 +132,11 @@ function App() {
 
   // Functions
 
-  // Login Functions
-
-  const handleLogin = async (loginData) => {
-    const employeeData = await loginEmployee(loginData);
-    if (employeeData.errors) {
-      setError(employeeData.errors)
-    } else {
-      setCurrentUser(employeeData);
-      history.push("/home");
-    }
-  };
-
   const handleRegister = async (registerData) => {
     const employeeData = await registerEmployee(registerData);
-    if (employeeData.error) {
-      setError(employeeData.error)
-    } else {
       setCurrentUser(employeeData);
       setPendingSurvey(true);
       history.push("/complete-profile");
-    }
   };
 
   const handleLogout = () => {
@@ -180,8 +163,8 @@ function App() {
 
         <Route path="/login">
           <Login
-            handleLogin={handleLogin}
-            error={error} />
+            setCurrentUser={setCurrentUser}
+          />
         </Route>
         
         <Route path="/register">
