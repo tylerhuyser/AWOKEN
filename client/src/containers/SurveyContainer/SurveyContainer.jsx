@@ -11,7 +11,7 @@ import './SurveyContainer.css'
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat, setUserSurveys, setPendingSurvey } = props;
+  const { currentUser, surveyFormat, setCompletedSurveys, setPendingSurvey } = props;
   const [surveyData, setSurveyData] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [surveyID, setSurveyID] = useState(null)
@@ -28,7 +28,7 @@ export default function SurveyContainer(props) {
 
   const postNewSurvey = async (surveyData) => {
     const newSurvey = await postSurvey(surveyData)
-    setUserSurveys(prevState => [...prevState, newSurvey])
+    setCompletedSurveys(prevState => [...prevState, newSurvey])
     return newSurvey
   }
 

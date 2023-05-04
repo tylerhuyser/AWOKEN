@@ -8,7 +8,7 @@ import './Journals.css'
 export default function Journals(props) {
 
   const { currentUser, deleteJournal } = props;
-  const { userSurveys, setUserSurveys } = props
+  const { completedSurveys, setCompletedSurveys } = props
   const { isDeleted } = props
   const { setActiveSurveyID, setEditSurvey } = props
 
@@ -17,13 +17,13 @@ export default function Journals(props) {
       const getEmployeeSurveys = async (userID) => {
         const employee = await getOneEmployee(userID);
         const employeeSurveys = employee.surveys
-        setUserSurveys(employeeSurveys);
+        setCompletedSurveys(employeeSurveys);
       }
       getEmployeeSurveys(userID)
   }, [isDeleted])
 
 
-  const journals = userSurveys?.filter((journal) => journal.survey_format_id === 13).map((journal, index) => {
+  const journals = completedSurveys?.filter((journal) => journal.survey_format_id === 13).map((journal, index) => {
 
     if ((journal.survey_format_id === 13) && (index % 2 === 0)) {
       return (
@@ -79,7 +79,7 @@ export default function Journals(props) {
     <>
       
       {
-        userSurveys ?
+        completedSurveys ?
 
         <>
           

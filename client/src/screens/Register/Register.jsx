@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import handleInputChange from '../../functions/handleInputChange.js';
 import validateRegister from '../../functions/validateRegister'
-import handleRegister from '../../functions/handleRegister.js';
+import handleRegister from '../../functions/auth/handleRegister.js';
 
 import './Register.css'
 

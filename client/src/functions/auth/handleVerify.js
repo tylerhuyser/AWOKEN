@@ -1,7 +1,7 @@
 import {
   verifyEmployee,
-} from "../services/auth"
-import handleNavigation from './handleNavigation';
+} from "../../services/auth"
+import handleNavigation from '../handleNavigation';
 
 export default async function handleVerify (history, setCurrentUser) {
 

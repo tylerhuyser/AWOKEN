@@ -1,7 +1,7 @@
 import {
   removeToken,
-} from "../services/auth"
-import handleNavigation from './handleNavigation';
+} from "../../services/auth"
+import handleNavigation from '../handleNavigation';
 
 export default function handleLogout (history, setCurrentUser) {
   setCurrentUser(null);

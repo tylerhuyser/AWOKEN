@@ -13,7 +13,9 @@ import SurveyContainer from "./containers/SurveyContainer/SurveyContainer";
 import EditContainer from "./containers/EditContainer/EditContainer";
 
 // Functions
-import handleVerify from "./functions/handleVerify";
+import handleVerify from "./functions/auth/handleVerify";
+import gatherCompanies from "./functions/gatherCompanies";
+import gatherSurveyFormats from './functions/gatherSurveyFormats'
 import { getAllCompanies, getOneEmployee } from "./services/admin-info";
 import { getAllSurveyFormats } from "./services/survey-constructors.js";
 
@@ -22,7 +24,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
 // User Data
-  const [userSurveys, setUserSurveys] = useState(null);
+  const [completedSurveys, setCompletedSurveys] = useState(null);
 
   // App Data
   const [companyInfo, setCompanyInfo] = useState([]);
@@ -60,56 +62,24 @@ function App() {
 
   // Register - Generates Company List (Dropdown)
   useEffect(() => {
-
     console.log('App.js - UseEffect #2 - Generate Company List')
-
-    const generateCompanyList = async () => {
-      const companyInfo = await getAllCompanies();
-      setCompanyInfo(companyInfo);
-    };
-
-    generateCompanyList();
-
+    gatherCompanies(setCompanyInfo)
   }, []);
 
   // Survey Foramts - Gathers All Survey_Format IDs
   useEffect(() => {
-
     if (currentUser !== null) {
-
       console.log('App.js - UseEffect #3 - Get All Survey Data')
-
-      const getAllSurveyFormatData = async () => {
-        const surveyFormatData = await getAllSurveyFormats();
-        setSurveyFormats(surveyFormatData);
-      };
-
-      getAllSurveyFormatData();
-
+      gatherSurveyFormats(setSurveyFormats)
     }
-
   }, [currentUser]);
 
   // Demographics Redirect - Redirects to Complete Profile
   useEffect(() => {
 
     if (currentUser !== null) {
-
       console.log('App.js - UseEffect #4 - Gathers Current User (Employee) Surveys')
-
-      const userID = currentUser.id;
-
-      const getEmployeeSurveys = async (userID) => {
-        const employee = await getOneEmployee(userID);
-        const employeeSurveys = employee.surveys;
-        setUserSurveys(employeeSurveys);
-        if (employeeSurveys === null || employeeSurveys.length === 0) {
-          history.push("/complete-profile");
-        }
-      };
-
-      getEmployeeSurveys(userID);
-
+      gatherCompletedSurveys(currentUser.id, history, setCompletedSurveys)
     }
   }, [currentUser]);
 
@@ -150,7 +120,7 @@ function App() {
           <SurveyContainer
             currentUser={currentUser}
             surveyFormat={demographicsSurvey}
-            setUserSurveys={setUserSurveys}
+            setCompletedSurveys={setCompletedSurveys}
             setPendingSurvey={setPendingSurvey}
           />
         </Route>
@@ -159,7 +129,7 @@ function App() {
           <SurveyContainer
             currentUser={currentUser}
             surveyFormat={srJournal}
-            setUserSurveys={setUserSurveys}
+            setCompletedSurveys={setCompletedSurveys}
             setPendingSurvey={setPendingSurvey}
           />
         </Route>
@@ -168,7 +138,7 @@ function App() {
           <EditContainer
             currentUser={currentUser}
             surveyFormat={srJournal}
-            setUserSurveys={setUserSurveys}
+            setCompletedSurveys={setCompletedSurveys}
             setPendingSurvey={setPendingSurvey}
             activeSurveyID={activeSurveyID}
           />
@@ -180,8 +150,8 @@ function App() {
             srQuestionnaire={srQuestionnaire}
             srJournal={srJournal}
             setPendingSurvey={setPendingSurvey}
-            userSurveys={userSurveys}
-            setUserSurveys={setUserSurveys}
+            completedSurveys={completedSurveys}
+            setCompletedSurveys={setCompletedSurveys}
             setActiveSurveyID={setActiveSurveyID}
             setEditSurvey={setEditSurvey}
           />
@@ -209,13 +179,13 @@ function App() {
         </Switch>
       ) : (
         <>
-          {(pendingSurvey) || (editSurvey) || (userSurveys && userSurveys.length === 0) ? (
+          {(pendingSurvey) || (editSurvey) || (completedSurveys && completedSurveys.length === 0) ? (
             <Switch>
               <Route path="/complete-profile">
                 <SurveyContainer
                   currentUser={currentUser}
                   surveyFormat={demographicsSurvey}
-                  setUserSurveys={setUserSurveys}
+                  setCompletedSurveys={setCompletedSurveys}
                   setPendingSurvey={setPendingSurvey}
                 />
               </Route>
@@ -224,7 +194,7 @@ function App() {
                 <SurveyContainer
                   currentUser={currentUser}
                   surveyFormat={srJournal}
-                  setUserSurveys={setUserSurveys}
+                  setCompletedSurveys={setCompletedSurveys}
                   setPendingSurvey={setPendingSurvey}
                 />
               </Route>
@@ -233,7 +203,7 @@ function App() {
                 <EditContainer
                   currentUser={currentUser}
                   surveyFormat={srJournal}
-                  setUserSurveys={setUserSurveys}
+                  setCompletedSurveys={setCompletedSurveys}
                   setPendingSurvey={setPendingSurvey}
                   activeSurveyID={activeSurveyID}
                 />
@@ -246,8 +216,8 @@ function App() {
                 srQuestionnaire={srQuestionnaire}
                 srJournal={srJournal}
                 setPendingSurvey={setPendingSurvey}
-                userSurveys={userSurveys}
-                setUserSurveys={setUserSurveys}
+                completedSurveys={completedSurveys}
+                setCompletedSurveys={setCompletedSurveys}
                 setActiveSurveyID={setActiveSurveyID}
                 setEditSurvey={setEditSurvey}
               />

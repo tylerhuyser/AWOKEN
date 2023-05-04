@@ -1,6 +1,6 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import handleLogout from '../../functions/handleLogout';
+import handleLogout from '../../functions/auth/handleLogout';
 
 import './Header.css'
 

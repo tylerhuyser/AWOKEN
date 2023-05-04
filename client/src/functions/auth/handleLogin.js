@@ -1,8 +1,8 @@
 import {
   loginEmployee,
-} from "../services/auth";
+} from "../../services/auth";
 
-import handleNavigation from './handleNavigation';
+import handleNavigation from '../handleNavigation';
 
 export default async function handleLogin(loginData, history, setCurrentUser, setError) {
   
