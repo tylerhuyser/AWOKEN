@@ -16,8 +16,7 @@ import EditContainer from "./containers/EditContainer/EditContainer";
 import handleVerify from "./functions/auth/handleVerify";
 import gatherCompanies from "./functions/gatherCompanies";
 import gatherSurveyFormats from './functions/gatherSurveyFormats'
-import { getAllCompanies, getOneEmployee } from "./services/admin-info";
-import { getAllSurveyFormats } from "./services/survey-constructors.js";
+import gatherCompletedSurveys from "./functions/gatherCompletedSurveys"
 
 function App() {
   // Auth
@@ -84,13 +83,10 @@ function App() {
   }, [currentUser]);
 
   useEffect(() => {
-
     console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
-
     if (editSurvey) {
       history.push("/edit-journal")
     }
-
   }, [editSurvey])
 
   return (
@@ -100,62 +96,62 @@ function App() {
 
       <Route exact path="/">
           <LandingPage />
-        </Route>
+      </Route>
 
-        <Route path="/login">
-          <Login
+      <Route path="/login">
+        <Login
             setCurrentUser={setCurrentUser}
-          />
-        </Route>
+        />
+      </Route>
         
-        <Route path="/register">
-          <Register
-            companyInfo={companyInfo}
-            setCurrentUser={setCurrentUser}
-            setPendingSurvey={setPendingSurvey}
-          />
-        </Route>
+      <Route path="/register">
+        <Register
+          companyInfo={companyInfo}
+          setCurrentUser={setCurrentUser}
+          setPendingSurvey={setPendingSurvey}
+        />
+      </Route>
         
-        <Route path="/complete-profile">
-          <SurveyContainer
-            currentUser={currentUser}
-            surveyFormat={demographicsSurvey}
-            setCompletedSurveys={setCompletedSurveys}
-            setPendingSurvey={setPendingSurvey}
-          />
+      <Route path="/complete-profile">
+        <SurveyContainer
+          currentUser={currentUser}
+          surveyFormat={demographicsSurvey}
+          setCompletedSurveys={setCompletedSurveys}
+          setPendingSurvey={setPendingSurvey}
+        />
         </Route>
 
-        <Route path="/new-journal">
-          <SurveyContainer
-            currentUser={currentUser}
-            surveyFormat={srJournal}
-            setCompletedSurveys={setCompletedSurveys}
-            setPendingSurvey={setPendingSurvey}
-          />
-        </Route>
+      <Route path="/new-journal">
+        <SurveyContainer
+          currentUser={currentUser}
+          surveyFormat={srJournal}
+          setCompletedSurveys={setCompletedSurveys}
+          setPendingSurvey={setPendingSurvey}
+        />
+      </Route>
 
-        <Route path="/edit-journal">
-          <EditContainer
-            currentUser={currentUser}
-            surveyFormat={srJournal}
-            setCompletedSurveys={setCompletedSurveys}
-            setPendingSurvey={setPendingSurvey}
-            activeSurveyID={activeSurveyID}
-          />
-        </Route>
+      <Route path="/edit-journal">
+        <EditContainer
+          currentUser={currentUser}
+          surveyFormat={srJournal}
+          setCompletedSurveys={setCompletedSurveys}
+          setPendingSurvey={setPendingSurvey}
+          activeSurveyID={activeSurveyID}
+        />
+      </Route>
 
-        <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
-          <MainContainer
-            currentUser={currentUser}
-            srQuestionnaire={srQuestionnaire}
-            srJournal={srJournal}
-            setPendingSurvey={setPendingSurvey}
-            completedSurveys={completedSurveys}
-            setCompletedSurveys={setCompletedSurveys}
-            setActiveSurveyID={setActiveSurveyID}
-            setEditSurvey={setEditSurvey}
-          />
-        </Layout>
+      <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
+        <MainContainer
+          currentUser={currentUser}
+          srQuestionnaire={srQuestionnaire}
+          srJournal={srJournal}
+          setPendingSurvey={setPendingSurvey}
+          completedSurveys={completedSurveys}
+          setCompletedSurveys={setCompletedSurveys}
+          setActiveSurveyID={setActiveSurveyID}
+          setEditSurvey={setEditSurvey}
+        />
+      </Layout>
         
       </Switch>
 

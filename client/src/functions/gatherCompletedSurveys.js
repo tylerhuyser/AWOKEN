@@ -1,4 +1,4 @@
-import {getOneEmployee } from ".//services/admin-info";
+import { getOneEmployee } from "../services/admin-info";
 import handleNavigation from './handleNavigation';
 
 export default async function getEmployeeSurveys (userID, history, setCompletedSurveys) {
