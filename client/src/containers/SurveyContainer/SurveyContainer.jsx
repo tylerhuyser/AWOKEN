@@ -49,14 +49,15 @@ export default function SurveyContainer(props) {
   // Grabs Survey-specific data including questions & options
 
   useEffect(() => {
-    if (surveyFormat !== null) {
+    console.log('SurveyContainer.js - UseEffect #1 - Gathering Survey Data')
+    if (currentUser && surveyFormat) {
       const getSurveyData = async () => {
         const rawSurveyData = await getOneSurveyFormat(surveyFormat.id);
         setSurveyData(rawSurveyData)
       }
       getSurveyData(surveyFormat.id);
     }
-  }, [])
+  }, [currentUser, surveyFormat])
 
   useEffect(() => {
     if (surveyAnswers.length !== 0 && surveyData.questions !== undefined) {
@@ -114,11 +115,13 @@ export default function SurveyContainer(props) {
     />
   ))
 
+  console.log(surveyData)
+
   return (
 
     <>
       
-      { surveyData === undefined ?
+      { surveyData === undefined || !surveyFormat || surveyFormat.length === 0 || !surveyFormat.id  || !currentUser || currentUser === null || currentUser.length === 0 ?
       
 
         <div className="loader slide-in-left-survey-container"></div>

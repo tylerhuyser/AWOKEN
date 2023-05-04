@@ -59,8 +59,17 @@ function App() {
   // Login - Verifies User
   useEffect(() => {
     const handleVerify = async () => {
+      
+      console.log('App.js - UseEffect #1 - Verify')
+
       const userData = await verifyEmployee();
+
+      console.log('App.js - UseEffect #1 - Response post-Verify')
+      console.log(`UserData:`)
+      console.log(userData)
+
       setCurrentUser(userData);
+
       if (userData === null) {
         history.push("/login");
       }
@@ -70,25 +79,41 @@ function App() {
 
   // Register - Generates Company List (Dropdown)
   useEffect(() => {
+
+    console.log('App.js - UseEffect #2 - Generate Company List')
+
     const generateCompanyList = async () => {
       const companyInfo = await getAllCompanies();
       setCompanyInfo(companyInfo);
     };
+
     generateCompanyList();
   }, []);
 
   // Survey Foramts - Gathers All Survey_Format IDs
   useEffect(() => {
-    const getAllSurveyFormatData = async () => {
-      const surveyFormatData = await getAllSurveyFormats();
-      setSurveyFormats(surveyFormatData);
-    };
-    getAllSurveyFormatData();
-  }, []);
+
+    if (currentUser !== null) {
+
+      console.log('App.js - UseEffect #3 - Get All Survey Data')
+
+      const getAllSurveyFormatData = async () => {
+        const surveyFormatData = await getAllSurveyFormats();
+        setSurveyFormats(surveyFormatData);
+      };
+
+      getAllSurveyFormatData();
+    }
+
+  }, [currentUser]);
 
   // Demographics Redirect - Redirects to Complete Profile
   useEffect(() => {
+
     if (currentUser !== null) {
+
+      console.log('App.js - UseEffect #4 - Gathers Current User (Employee) Surveys')
+
       const userID = currentUser.id;
 
       const getEmployeeSurveys = async (userID) => {
@@ -99,7 +124,9 @@ function App() {
           history.push("/complete-profile");
         }
       };
+
       getEmployeeSurveys(userID);
+
     }
   }, [currentUser]);
 
@@ -143,13 +170,74 @@ function App() {
 
   return (
     <div className="app-container">
+
+      <Switch>
+
+        <Route path="/login">
+          <Login
+            handleLogin={handleLogin}
+            error={error} />
+        </Route>
+        
+        <Route path="/register">
+          <Register
+            handleRegister={handleRegister}
+            companyInfo={companyInfo}
+          />
+        </Route>
+        
+        <Route path="/complete-profile">
+          <SurveyContainer
+            currentUser={currentUser}
+            surveyFormat={demographicsSurvey}
+            setUserSurveys={setUserSurveys}
+            setPendingSurvey={setPendingSurvey}
+          />
+        </Route>
+
+        <Route path="/new-journal">
+          <SurveyContainer
+            currentUser={currentUser}
+            surveyFormat={srJournal}
+            setUserSurveys={setUserSurveys}
+            setPendingSurvey={setPendingSurvey}
+          />
+        </Route>
+
+        <Route path="/edit-journal">
+          <EditContainer
+            currentUser={currentUser}
+            surveyFormat={srJournal}
+            setUserSurveys={setUserSurveys}
+            setPendingSurvey={setPendingSurvey}
+            activeSurveyID={activeSurveyID}
+          />
+        </Route>
+
+        <Layout currentUser={currentUser} handleLogout={handleLogout}>
+          <MainContainer
+            currentUser={currentUser}
+            srQuestionnaire={srQuestionnaire}
+            srJournal={srJournal}
+            setPendingSurvey={setPendingSurvey}
+            userSurveys={userSurveys}
+            setUserSurveys={setUserSurveys}
+            setActiveSurveyID={setActiveSurveyID}
+            setEditSurvey={setEditSurvey}
+          />
+        </Layout>
+        
+      </Switch>
+
+
       
-      {!currentUser ? (
+      {/* {!currentUser ? (
         <Switch>
           <Route path="/login">
             <Login
               handleLogin={handleLogin}
-              error={error} />
+              error=
+              {error} />
           </Route>
 
           <Route path="/register">
@@ -206,7 +294,9 @@ function App() {
             </Layout>
           )}
         </>
-      )}
+      )} */}
+
+
     </div>
   );
 }
