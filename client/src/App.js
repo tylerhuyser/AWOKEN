@@ -13,10 +13,7 @@ import SurveyContainer from "./containers/SurveyContainer/SurveyContainer";
 import EditContainer from "./containers/EditContainer/EditContainer";
 
 // Functions
-import {
-  registerEmployee,
-  verifyEmployee,
-} from "./services/auth";
+import handleVerify from "./functions/handleVerify";
 import { getAllCompanies, getOneEmployee } from "./services/admin-info";
 import { getAllSurveyFormats } from "./services/survey-constructors.js";
 
@@ -26,13 +23,15 @@ function App() {
 
 // User Data
   const [userSurveys, setUserSurveys] = useState(null);
-  const [pendingSurvey, setPendingSurvey] = useState(false);
-  const [editSurvey, setEditSurvey] = useState(false);
-  const [activeSurveyID, setActiveSurveyID] = useState(0);
 
   // App Data
   const [companyInfo, setCompanyInfo] = useState([]);
   const [surveyFormats, setSurveyFormats] = useState([]);
+
+  // Switches
+  const [pendingSurvey, setPendingSurvey] = useState(false);
+  const [editSurvey, setEditSurvey] = useState(false);
+  const [activeSurveyID, setActiveSurveyID] = useState(0);
 
   // Location
   const history = useHistory();
@@ -54,25 +53,9 @@ function App() {
 
 // UseEffects
 
-  // Login - Verifies User
   useEffect(() => {
-    const handleVerify = async () => {
-
-      console.log('App.js - UseEffect #1 - Verify')
-
-      const userData = await verifyEmployee();
-
-      console.log('App.js - UseEffect #1 - Response post-Verify')
-      console.log(`UserData:`)
-      console.log(userData)
-
-      setCurrentUser(userData);
-
-      if (userData === null) {
-        history.push("/");
-      }
-    };
-    handleVerify();
+    console.log('App.js - UseEffect #1 - Verify')
+    handleVerify(history, setCurrentUser);
   }, []);
 
   // Register - Generates Company List (Dropdown)
@@ -86,6 +69,7 @@ function App() {
     };
 
     generateCompanyList();
+
   }, []);
 
   // Survey Foramts - Gathers All Survey_Format IDs
@@ -101,6 +85,7 @@ function App() {
       };
 
       getAllSurveyFormatData();
+
     }
 
   }, [currentUser]);
@@ -128,19 +113,14 @@ function App() {
     }
   }, [currentUser]);
 
-  // Functions
-
-  const handleRegister = async (registerData) => {
-    const employeeData = await registerEmployee(registerData);
-      setCurrentUser(employeeData);
-      setPendingSurvey(true);
-      history.push("/complete-profile");
-  };
-
   useEffect(() => {
+
+    console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
+
     if (editSurvey) {
       history.push("/edit-journal")
     }
+
   }, [editSurvey])
 
   return (
