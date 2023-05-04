@@ -5,6 +5,7 @@ import "./App.css";
 
 // Components
 import Layout from "./layout/Layout/Layout.jsx";
+import LandingPage from "./screens/LandingPage/LandingPage"
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 import MainContainer from "./containers/MainContainer/MainContainer";
@@ -59,7 +60,7 @@ function App() {
   // Login - Verifies User
   useEffect(() => {
     const handleVerify = async () => {
-      
+
       console.log('App.js - UseEffect #1 - Verify')
 
       const userData = await verifyEmployee();
@@ -71,7 +72,7 @@ function App() {
       setCurrentUser(userData);
 
       if (userData === null) {
-        history.push("/login");
+        history.push("/");
       }
     };
     handleVerify();
@@ -172,6 +173,10 @@ function App() {
     <div className="app-container">
 
       <Switch>
+
+      <Route exact path="/">
+          <LandingPage />
+        </Route>
 
         <Route path="/login">
           <Login

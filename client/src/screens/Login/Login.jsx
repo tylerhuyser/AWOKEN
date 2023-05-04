@@ -14,7 +14,6 @@ export default function Login(props) {
     username: "",
     password: ""
   })
-  const [beginLogin, setBeginLogin] = useState(false);
 
   const { username, password } = formData;
   const { error, handleLogin } = props;
@@ -27,8 +26,6 @@ export default function Login(props) {
 
   return (
     <div className="login-container">
-
-      { beginLogin ?
  
       <div className="login-form-container">
           
@@ -78,12 +75,6 @@ export default function Login(props) {
          </div>
           
       </div>
-
-        :
-        
-        <PreLogin setBeginLogin={setBeginLogin} />
-    
-      }
 
     </div>
   )
