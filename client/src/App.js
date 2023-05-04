@@ -14,9 +14,7 @@ import EditContainer from "./containers/EditContainer/EditContainer";
 
 // Functions
 import {
-  loginEmployee,
   registerEmployee,
-  removeToken,
   verifyEmployee,
 } from "./services/auth";
 import { getAllCompanies, getOneEmployee } from "./services/admin-info";
@@ -139,13 +137,6 @@ function App() {
       history.push("/complete-profile");
   };
 
-  const handleLogout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem("authToken");
-    removeToken();
-    history.push("/login");
-  };
-
   useEffect(() => {
     if (editSurvey) {
       history.push("/edit-journal")
@@ -169,8 +160,9 @@ function App() {
         
         <Route path="/register">
           <Register
-            handleRegister={handleRegister}
             companyInfo={companyInfo}
+            setCurrentUser={setCurrentUser}
+            setPendingSurvey={setPendingSurvey}
           />
         </Route>
         

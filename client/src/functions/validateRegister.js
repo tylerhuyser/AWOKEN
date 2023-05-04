@@ -1,4 +1,4 @@
-export default function validateRegister(e, handleRegister, formData) {
+export default function validateRegister(e, handleRegister, formData, history, setCurrentUser, setPendingSurvey) {
       
   e.preventDefault()
   
@@ -66,6 +66,6 @@ export default function validateRegister(e, handleRegister, formData) {
   }
     
   if (formData.username && formData.first_name && formData.last_name && formData.email.includes("@") && formData.email.includes(".") && !formData.email.includes("@.") && formData.date_of_birth.length === 10 && formData.company_id && formData.password.length >= 6) {
-    handleRegister(formData)
+    handleRegister(formData, history, setCurrentUser, setPendingSurvey)
   }
 }

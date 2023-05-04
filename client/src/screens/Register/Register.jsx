@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import handleInputChange from '../../functions/handleInputChange.js';
 import validateRegister from '../../functions/validateRegister'
+import handleRegister from '../../functions/handleRegister.js';
 
 import './Register.css'
 
@@ -17,8 +18,9 @@ export default function Register(props) {
     company_id: "",
     password: ""
   })
+  const history = useHistory();
 
-  const { companyInfo, handleRegister } = props;
+  const { companyInfo, setCurrentUser, setPendingSurvey } = props;
 
   return (
     <div className="register-container">
@@ -33,7 +35,7 @@ export default function Register(props) {
         </div> 
 
       <form className="register-form" onSubmit={(e)=>{
-        validateRegister(e, handleRegister, formData)
+        validateRegister(e, handleRegister, formData, history, setCurrentUser, setPendingSurvey)
       }}>
         <p className="register-form-title">Register</p>
 

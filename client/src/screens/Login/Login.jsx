@@ -16,7 +16,7 @@ export default function Login(props) {
   const [error, setError] = useState("")
   const history = useHistory();
 
-  const {setCurrentUser} = props
+  const  {setCurrentUser } = props
 
   useEffect(() => {
     if (error === "unauthorized") {
