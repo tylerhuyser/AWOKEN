@@ -17,18 +17,6 @@ export default function LandingPageCarousel() {
     }
   ]
 
-//   let carousel = slides.map((slide, index) => {
-//     if (index === counter) {
-//       <p className='landing-page-carousel-copy active'>
-//         <span className="landing-page-carousel-quote">Diversity is being invited to the party. Inclusion is being asked to dance.</span><br /><span className='landing-page-carousel-author'>- Verna Myer</span>
-//       </p>
-//     } else if (index) {
-      
-//     }
-//  ))
-  
-  
-
   useEffect(() => {
     setTimeout(() => {
       if (carouselCount === (carouselSlidesData.length - 1)) {
@@ -36,7 +24,7 @@ export default function LandingPageCarousel() {
       } else {
         setCarouselCount(carouselCount + 1)
       }
-    }, [4000])
+    }, [5000])
   }, [carouselCount])
 
   let carouselSlides = carouselSlidesData.map((slide, index) => (
@@ -48,14 +36,6 @@ export default function LandingPageCarousel() {
   return (
 
     <div className='landing-page-carousel-container'>
-
-      {/* <p className='landing-page-carousel-copy active'>
-        <span className="landing-page-carousel-quote">Diversity is being invited to the party. Inclusion is being asked to dance.</span><br /><span className='landing-page-carousel-author'>- Verna Myer</span>
-      </p>
-
-      <p className='landing-page-carousel-copy inactive'>
-        <span className="landing-page-carousel-quote">The problem with stereotypes is not that they are untrue but that they are incomplete. They make one story the only story.</span><br /><span className='landing-page-carousel-author'>- Chimamanda Ngozi Adichie</span>
-      </p> */}
 
       {carouselSlides}
       

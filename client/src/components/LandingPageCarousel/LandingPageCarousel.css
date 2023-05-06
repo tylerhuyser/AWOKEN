@@ -61,7 +61,7 @@
   }
 
   .active {
-    animation: fade 2s;
+    animation: fade ease-in-out 0.75s;
   }
 
   .inactive {
