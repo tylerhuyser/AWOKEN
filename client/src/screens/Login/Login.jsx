@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory} from 'react-router-dom';
 
-import handleLogin from '../../functions/auth/git handleLogin.js';
+import handleLogin from '../../functions/auth/handleLogin.js';
 import handleInputChange from '../../functions/handleInputChange.js';
 
 import './Login.css'
@@ -29,9 +29,9 @@ export default function Login(props) {
  
       <div className="login-form-container">
           
-        <div className="login-form-header">
-          <img className="login-logo-orange" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
-          <p className="login-header-subtitle">EMBRACE NEW PERSPECTIVES</p>
+        <div className="login-container-header">
+          <img className="login-container-logo" alt="login-logo" src="https://i.imgur.com/ioUfIYI.png" />
+          <p className="login-container-title">EMBRACE NEW PERSPECTIVES</p>
         </div> 
         
       <form className="login-form" onSubmit={(e) => {
@@ -39,7 +39,7 @@ export default function Login(props) {
         handleLogin(formData, history, setCurrentUser, setError);
       }}>
             
-        <p className="login-form-title">LOGIN</p>
+        {/* <p className="login-form-title">LOGIN</p> */}
 
         <label className="login-form-label">
               Username:

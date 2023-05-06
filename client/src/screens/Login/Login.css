@@ -21,7 +21,7 @@
 
 }
 
-.login-form-header {
+.login-container-header {
 
   color: #F39C12;
   font-size: 4vw;
@@ -29,20 +29,20 @@
   
 }
 
-.login-logo-orange {
+.login-container-logo {
 
   width: 20vw;
   margin: 10px 0px;
 
 }
 
-.login-header-subtitle {
+.login-container-title {
 
   margin: 10px 0px; 
 
 }
 
-.login-form{
+.login-form {
 
   display: flex;
   flex-direction: column;
@@ -65,8 +65,9 @@
 }
 
 .login-form-label {
-  margin: 5px 0px;
   width: 75vw;
+  margin: 5px 0px;
+  padding: 0px 2px;
   
   display: flex;
   flex-direction: column;
@@ -78,6 +79,9 @@
 
   width: 100%;
   border: none;
+  padding: 10px 2px;
+
+  font-size: 4vw;
 
   margin: 10px 0px 15px 0px;
   --webkit-box-shadow: 0 5px 5px -6px lightgray;
@@ -179,5 +183,29 @@
   .sign-in-button, .register-button {
     font-size: 3vw;
   }
+
+}
+
+@media only screen and (min-width: 375px) {
+
+}
+
+@media only screen and (min-width: 481px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+}
+
+@media only screen and (min-width: 1600px) {
 
 }

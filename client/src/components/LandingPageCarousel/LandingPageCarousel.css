@@ -1,0 +1,71 @@
+@keyframes fade {
+  0% { opacity: 0; }
+  25% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+  75% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.landing-page-carousel-container {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .landing-page-carousel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 50vw;
+    height: 100vh;
+    padding: 50px;
+
+    outline: 1px solid #F39C12;
+    outline-offset: -25px;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('/AWOKEN_landing_page_logo.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    font-size: calc(5vw/2);
+    color: white;
+    letter-spacing: 10px;
+    font-weight: 100;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+  }
+
+  .landing-page-carousel-container:hover {
+    outline: 1px solid white;
+  }
+
+  .landing-page-carousel-quote::before {
+    content: open-quote;
+    color: white;
+  }
+
+  .landing-page-carousel-quote::after {
+    content: close-quote;
+    color: white;
+  }
+
+  .landing-page-carousel-author {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .active {
+    animation: fade 2s;
+  }
+
+  .inactive {
+    display: none;
+  }
+
+}

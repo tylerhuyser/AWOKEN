@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import LandingPageCarousel from '../../components/LandingPageCarousel/LandingPageCarousel';
 import handleNavigation from '../../functions/handleNavigation';
 
 import './LandingPage.css'
@@ -23,6 +24,8 @@ export default function LandingPage() {
           <button className="landing-page-login-button" onClick={() => handleNavigation(history, '/login')}>GET STARTED</button>
         </div>
       </div>
+
+      <LandingPageCarousel />
 
     </div>
   )
