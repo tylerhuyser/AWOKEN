@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import LandingPageCarousel from '../../components/LandingPageCarousel/LandingPageCarousel';
+import Carousel from '../../components/Carousel/Carousel';
 import handleNavigation from '../../functions/handleNavigation';
+import quotes from "../../content/landing-page-quotes.json"
 
 import './LandingPage.css'
 
@@ -25,7 +26,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <LandingPageCarousel />
+      <Carousel carouselType={"landing page"} data={quotes} />
 
     </div>
   )
