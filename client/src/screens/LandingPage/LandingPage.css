@@ -178,29 +178,6 @@
   }
 }
 
-/* @media only screen and (min-width: 600px) {
-
-  .landing-page-content {
-    height: 80%;
-    
-  }
-
-  .landing-page-logo-white {
-    width: 20%;
-  }
-
-  .landing-page-app-name {
-    margin: 50px;
-  }
-
-
-  .landing-page-login-button {
-    height: 7vh;
-    font-size: 3vw;
-  }
-
-} */
-
 @media only screen and (min-width: 375px) {
 
 }

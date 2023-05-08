@@ -63,7 +63,7 @@ export default function Login(props) {
         </label>
           <button className="sign-in-button">SIGN IN</button>
             
-          <p className="password-recovery-copy">Forgot your password?</p>
+          {/* <p className="password-recovery-copy">Forgot your password?</p> */}
       </form>
 
 
@@ -71,7 +71,7 @@ export default function Login(props) {
           
           <p className="register-prompt-copy">Don't have an account?</p>
       
-          <Link to='/register'><button className="register-button">SIGN UP</button></Link>
+          <Link to='/register'><button className="register-navigation-button">SIGN UP</button></Link>
          </div>
           
       </div>
