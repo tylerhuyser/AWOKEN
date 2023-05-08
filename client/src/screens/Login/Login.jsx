@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory} from 'react-router-dom';
 
+import Carousel from "../../components/Carousel/Carousel"
+import videos from "../../content/login-carousel-videos.json"
+
 import handleLogin from '../../functions/auth/handleLogin.js';
 import handleInputChange from '../../functions/handleInputChange.js';
 
@@ -26,6 +29,8 @@ export default function Login(props) {
 
   return (
     <div className="login-container">
+
+      <Carousel carouselType="login" data={videos} />
  
       <div className="login-form-container">
           
@@ -38,8 +43,6 @@ export default function Login(props) {
         e.preventDefault();
         handleLogin(formData, history, setCurrentUser, setError);
       }}>
-            
-        {/* <p className="login-form-title">LOGIN</p> */}
 
         <label className="login-form-label">
               Username:

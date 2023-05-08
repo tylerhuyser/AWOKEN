@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import Carousel from "../../components/Carousel/Carousel"
+import images from "../../content/register-carousel-images.json"
+
 import handleInputChange from '../../functions/handleInputChange.js';
 import validateRegister from '../../functions/validateRegister'
 import handleRegister from '../../functions/auth/handleRegister.js';
@@ -25,19 +28,19 @@ export default function Register(props) {
   return (
     <div className="register-container">
 
+      <Carousel carouselType="register" data={images} />
 
       <div className="register-form-container">
 
-        <div className="register-form-header">
-            <Link className="register-back-button-container" to="/login"><i className="fas fa-chevron-left" id="register-back-button" /></Link>
-            <img className="register-logo-orange" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
-            <p className="register-form-subtitle">BEGIN YOUR JOURNEY</p>
+        <div className="register-container-header">
+            <Link className="register-back-button-container" to="/login"><i className="fas fa-times" id="register-back-button" /></Link>
+            <img className="register-container-logo" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
+            <p className="register-container-title">BEGIN YOUR JOURNEY</p>
         </div> 
 
       <form className="register-form" onSubmit={(e)=>{
         validateRegister(e, handleRegister, formData, history, setCurrentUser, setPendingSurvey)
       }}>
-        <p className="register-form-title">Register</p>
 
         <label className="register-form-label">
           Username:
@@ -51,7 +54,7 @@ export default function Register(props) {
           />
         </label>
 
-        <label className="login-form-label">
+        <label className="register-form-label">
             First Name:
           <input
             className="register-form-input"
@@ -63,7 +66,7 @@ export default function Register(props) {
           />
         </label>
 
-        <label className="login-form-label">
+        <label className="register-form-label">
             Last Name:
           <input
             className="register-form-input"
@@ -75,7 +78,7 @@ export default function Register(props) {
           />
         </label>
 
-        <label className="login-form-label">
+        <label className="register-form-label">
           Email:
           <input
             className="register-form-input"
@@ -87,7 +90,7 @@ export default function Register(props) {
           />
         </label>
 
-        <label className="login-form-label">
+        <label className="register-form-label">
           Date of Birth (MM/DD/YYYY):
           <input
               className="register-form-input"
@@ -100,7 +103,7 @@ export default function Register(props) {
           />
         </label>
 
-        <label className="login-form-label">
+        <label className="register-form-label">
           Company Name:
             
             <select
@@ -118,7 +121,7 @@ export default function Register(props) {
           </select>
         </label>
 
-        <label className="login-form-label">
+        <label className="register-form-label">
             Password:
           <input
             className="register-form-input"

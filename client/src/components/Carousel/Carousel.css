@@ -6,13 +6,18 @@
   100% { opacity: 1; }
 }
 
-.landing-page-carousel-container {
+@keyframes slide-in-left {
+  0% {transform: translateX (0%)}
+  100% {transform: translateX (-100%)}
+}
+
+.landing-page-carousel-container, .login-page-carousel-container, .register-page-carousel-container {
   display: none;
 }
 
 @media only screen and (min-width: 1024px) {
 
-  .landing-page-carousel-container {
+  .landing-page-carousel-container, .login-page-carousel-container, .register-page-carousel-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,14 +27,7 @@
     height: 100vh;
     padding: 50px;
 
-    outline: 1px solid #F39C12;
     outline-offset: -25px;
-
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('/AWOKEN_landing_page_logo.jpeg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 
     font-size: calc(5vw/2);
     color: white;
@@ -41,8 +39,39 @@
     box-sizing: border-box;
   }
 
+  .landing-page-carousel-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('/images/AWOKEN_landing_page_logo.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    outline: 1px solid #F39C12;
+  }
+
   .landing-page-carousel-container:hover {
     outline: 1px solid white;
+  }
+
+  .login-page-carousel-container, .register-page-carousel-container {
+    padding: 0px;
+    background-color: #F39C12;
+
+    outline: 1px solid white;
+
+    animation: slide-in-left ease-in-out 0.75s;
+  }
+
+  .login-page-carousel-container:hover, .register-page-carousel-container:hover {
+    outline: 1px solid #F39C12;
+  }
+
+  .active {
+    animation: fade ease-in-out 0.75s;
+  }
+
+  .inactive {
+    display: none;
   }
 
   .landing-page-carousel-quote::before {
@@ -60,12 +89,16 @@
     margin-top: 10px;
   }
 
-  .active {
-    animation: fade ease-in-out 0.75s;
+  .login-page-carousel-video, .register-page-carousel-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
-  .inactive {
-    display: none;
+  .vp-preview, .vp-video, #player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
 }

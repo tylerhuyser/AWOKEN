@@ -1,14 +1,35 @@
-.fa-chevron-left {
+.register-container {
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  padding: 25px 10px;
 
-  font-size: 30px;
-  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  /* animation: slide-in-left ease-in-out 0.75s; */
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+}
+
+.register-container-header {
+  width: calc(100vw - 100px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-back-button-container {
+  width: calc(100vw - 100px);
+
   display: flex;
   justify-content: flex-start;
-
-  z-index: 2;
-
-  text-decoration-line: none;
-  text-decoration: none;
 }
 
 .register-form-container {
@@ -29,14 +50,14 @@
 
 }
 
-.register-form {
+/* .register-form {
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
-}
+} */
 
 .register-form-header {
 
@@ -52,14 +73,14 @@
   
 }
 
-.register-logo-orange {
+.register-container-logo {
 
   width: 20vw;
   margin: 10px 0px;
 
 }
 
-.register-form-subtitle {
+.register-container-title {
 
   color: #F39C12;
   font-size: 4vw;
@@ -67,13 +88,13 @@
   
 }
 
-.register-form-title {
+.register-container-title {
 
   margin: 10px 0px; 
 
 }
 
-.register-form{
+.register-form {
 
   display: flex;
   flex-direction: column;
@@ -220,9 +241,60 @@
   }
 }
 
-@media only screen and (min-width: 600px) {
 
-  .fa-chevron-left {
+@media only screen and (min-width: 375px) {
+
+}
+
+@media only screen and (min-width: 481px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .register-container {
+    height: 100vh;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    padding: 0px;
+  }
+
+  .register-form-container {
+    width: 50vw;
+    height: calc(100vh - 100px);
+    height: calc(100vh);
+    padding: 50px;
+
+    overflow-y: scroll;
+  }
+
+  .register-container-logo {
+    width: calc(15vw / 2);
+  }
+
+  .register-container-title, .register-form-label, .register-form-input {
+    font-size: 2vw;
+  }
+
+  .register-form-label, .register-form-input {
+    font-size: 1vw;
+  }
+
+  .register-form-label, .register-form-input {
+
+    width: calc(50vw - 100px);
+  }
+
+  .register-container-header {
+    width: calc(50vw - 100px);
+  }
+
+  /* .fa-chevron-left {
 
     width: 70%;
     font-size: 30px;
@@ -230,17 +302,28 @@
 
     text-decoration-line: none;
     text-decoration: none;
-  }
+  } */
 
   .register-back-button-container {
-    width: 75vw;
-  }
-
-  #register-back-button {
     width: 100%;
   }
 
   .register-button {
-    font-size: 3vw;
+    width: 15vw;
+    height: 7.5vh;
+    padding: 0.5vh;
+
+    font-size: 2vw;
+    font-weight: 400;
+    letter-spacing: 2px;
   }
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+}
+
+@media only screen and (min-width: 1600px) {
+
 }
