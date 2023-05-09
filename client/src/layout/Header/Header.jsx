@@ -1,5 +1,5 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import handleLogout from '../../functions/auth/handleLogout';
 
 import './Header.css'
@@ -7,8 +7,8 @@ import './Header.css'
 export default function Header(props) {
 
   const { toggleDesktopMenu, setToggleDesktopMenu } = props
-  
   const { currentUser, setCurrentUser } = props;
+
   const history = useHistory();
 
   const changeDesktopMenuVisibility = (e) => {
