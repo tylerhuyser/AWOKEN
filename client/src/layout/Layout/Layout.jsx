@@ -25,7 +25,6 @@ export default function Layout(props) {
 
         <Nav
           toggleDesktopMenu={toggleDesktopMenu}
-          setToggleDesktopMenu={setToggleDesktopMenu}
         />
       </div>
 
