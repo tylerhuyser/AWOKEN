@@ -40,7 +40,7 @@
   }
 
   .landing-page-carousel-container {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('/images/AWOKEN_landing_page_logo.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('/images/carousel-images/landing-page/landing-page-carousel-background-image.jpeg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -49,7 +49,7 @@
     outline: 1px solid #F39C12;
   }
 
-  .landing-page-carousel-container:hover {
+  .landing-page-carousel-container:hover, .login-page-carousel-container:hover, .register-page-carousel-container:hover {
     outline: 1px solid white;
   }
 
@@ -57,14 +57,11 @@
     padding: 0px;
     background-color: #F39C12;
 
-    outline: 1px solid white;
+    outline: 1px solid #F39C12;
 
     animation: slide-in-left ease-in-out 0.75s;
   }
 
-  .login-page-carousel-container:hover, .register-page-carousel-container:hover {
-    outline: 1px solid #F39C12;
-  }
 
   .active {
     animation: fade ease-in-out 0.75s;
@@ -89,15 +86,9 @@
     margin-top: 10px;
   }
 
-  .login-page-carousel-video, .register-page-carousel-image {
+  .login-page-carousel-gif, .register-page-carousel-image {
     height: 100%;
     width: 100%;
-    object-fit: cover;
-  }
-
-  .vp-preview, .vp-video, #player {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
   }
 

@@ -203,7 +203,7 @@
 
   .landing-page-content {
     width: 50vw;
-    height: calc(100vh - 100px);
+    height: calc(100vh);
     padding: 50px;
   }
 

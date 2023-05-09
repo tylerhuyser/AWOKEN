@@ -16,7 +16,7 @@ export default function LandingPage() {
       <div className="landing-page-content">
 
         <div className="logo-content">
-          <img className="landing-page-logo-white fade-in-prelogin-logo" alt="preLogin-logo-white" src="https://i.imgur.com/6RLVBgP.png" />
+          <img className="landing-page-logo-white fade-in-prelogin-logo" alt="preLogin-logo-white" src="/images/logos/AWOKEN-logo-white.png" />
           <p className="landing-page-app-name fade-in-prelogin-logo">A<span className="woke-italics">WOKE</span>N</p>
         </div>
 

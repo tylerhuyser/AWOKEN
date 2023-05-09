@@ -9,13 +9,23 @@ export default function Carousel(props) {
 
 
   useEffect(() => {
-    setTimeout(() => {
-      if (carouselCount === (data.length - 1)) {
-        setCarouselCount(0)
-      } else {
-        setCarouselCount(carouselCount + 1)
-      }
-    }, [5000])
+    if (carouselType === "login") {
+      setTimeout(() => {
+        if (carouselCount === (data.length - 1)) {
+          setCarouselCount(0)
+        } else {
+          setCarouselCount(carouselCount + 1)
+        }
+      }, [25000])
+    } else {
+      setTimeout(() => {
+        if (carouselCount === (data.length - 1)) {
+          setCarouselCount(0)
+        } else {
+          setCarouselCount(carouselCount + 1)
+        }
+      }, [5000])
+    }
   }, [carouselCount])
 
   if (carouselType === "landing page") {
@@ -36,23 +46,14 @@ export default function Carousel(props) {
 
   if (carouselType === "login") {
 
-    let carouselSlides = data.map((video, index) => (
-      <iframe className={index === carouselCount ? 'login-page-carousel-video active' : 'login-page-carousel-video inactive'} src={video.path} alt={video.name} height="100vh" width="100vw" />
+    let carouselSlides = data.map((gif, index) => (
+      <img className={index === carouselCount ? 'login-page-carousel-gif' : 'login-page-carousel-gif inactive'} src={gif.path} alt={gif.name} />
       ))
 
     return (
       <div className='login-page-carousel-container'>
 
         {carouselSlides}
-
-        <>
-        
-          {/* <div styles="padding: 100% 0 0 0; position:relative;">
-          <iframe src="https://player.vimeo.com/video/417757879?h=da34f27fe3&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen styles="position:absolute;top:0;left:0;width:50vw;height:100vh;objectFit:cover" title="After immigrating, where do you feel at home?"></iframe>
-        </div>
-        <script src="https://player.vimeo.com/api/player.js"></script> */}
-          
-        </>
       
     </div>
     )

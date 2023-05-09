@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory} from 'react-router-dom';
 
 import Carousel from "../../components/Carousel/Carousel"
-import videos from "../../content/login-carousel-videos.json"
+import gifs from "../../content/login-carousel-gifs.json"
 
 import handleLogin from '../../functions/auth/handleLogin.js';
 import handleInputChange from '../../functions/handleInputChange.js';
@@ -30,12 +30,12 @@ export default function Login(props) {
   return (
     <div className="login-container">
 
-      <Carousel carouselType="login" data={videos} />
+      <Carousel carouselType="login" data={gifs} />
  
       <div className="login-form-container">
           
         <div className="login-container-header">
-          <img className="login-container-logo" alt="login-logo" src="https://i.imgur.com/ioUfIYI.png" />
+          <img className="login-container-logo" alt="login-logo" src="/images/logos/AWOKEN-logo-orange.png" />
           <p className="login-container-title">EMBRACE NEW PERSPECTIVES</p>
         </div> 
         

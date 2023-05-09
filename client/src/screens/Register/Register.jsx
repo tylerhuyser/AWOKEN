@@ -34,7 +34,7 @@ export default function Register(props) {
 
         <div className="register-container-header">
             <Link className="register-back-button-container" to="/login"><i className="fas fa-times" id="register-back-button" /></Link>
-            <img className="register-container-logo" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
+            <img className="register-container-logo" alt="login-wims-logo" src="/images/logos/AWOKEN-logo-orange.png" />
             <p className="register-container-title">BEGIN YOUR JOURNEY</p>
         </div> 
 
