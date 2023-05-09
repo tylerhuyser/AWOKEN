@@ -25,7 +25,7 @@
 
   max-width: 100vw;
   height: 100vh;
-  max-height: 100vh;
+  /* max-height: 100vh; */
 
   display: flex;
   flex-direction: column;
@@ -33,23 +33,23 @@
   align-items: center;
   padding: 50px;
 
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
 }
 
-.login-form {
+.login-form-header-container {
+
+  width: calc(100vw - 100px);
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-
-}
-
-.login-container-header {
 
   color: #F39C12;
   font-size: 4vw;
   letter-spacing: 0.9px;
-  
 }
 
 .login-container-logo {
@@ -80,13 +80,6 @@
   margin: 25px 0px;
 }
 
-.login-form-title {
-
-  width: 100%;
-  font-size: 5vw;
-
-}
-
 .login-form-label {
   width: 75vw;
   margin: 5px 0px;
@@ -94,19 +87,19 @@
   
   display: flex;
   flex-direction: column;
-  text-align: left;
-
 }
 
 .login-form-input{
 
   width: 100%;
   border: none;
+  margin: 10px 0px 15px 0px;
   padding: 10px 2px;
 
   font-size: 4vw;
+  color: darkgray;
+  background: transparent;
 
-  margin: 10px 0px 15px 0px;
   --webkit-box-shadow: 0 5px 5px -6px lightgray;
   --Moz-Box-Shadow: 0 5px 5px -6px lightgray;
   box-shadow: 0 5px 5px -6px lightgray;
@@ -115,6 +108,12 @@
 
 .invalid {
   border: 2px solid red;
+  --webkit-box-shadow: 0 5px 5px -6px red;
+  --Moz-Box-Shadow: 0 5px 5px -6px red;
+  box-shadow: 0 5px 5px -6px red;
+
+  -webkit-animation: shake-horizontal 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: shake-horizontal 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 .sign-in-button {
@@ -139,7 +138,7 @@
 
 }
 
-.register-prompt-container {
+.register-navigation-container {
 
   color: #F39C12;
   font-size: 4vw;
@@ -153,7 +152,7 @@
 
 }
 
-.register-prompt-copy {
+.register-navigation-copy {
   margin: 0px;
 }
 
@@ -180,33 +179,62 @@
 
 }
 
-/* @media only screen and (min-width: 600px) {
-
-  .login-form-container {
-    min-height: 100vh;
-    padding: 100px 0px;
+@-webkit-keyframes invalid {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
-
-  .login-form {
-    font-size: 3vw;
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
   }
-
-  .login-logo-orange {
-    width: 20%;
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
   }
-
-  .login-form-title {
-
-    width: 100%;
-    font-size: 4vw;
-  
+  80% {
+    -webkit-transform: translateX(8px);
+            transform: translateX(8px);
   }
-
-  .sign-in-button, .register-button {
-    font-size: 3vw;
+  90% {
+    -webkit-transform: translateX(-8px);
+            transform: translateX(-8px);
   }
-
-} */
+}
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+  }
+  80% {
+    -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+  }
+  90% {
+    -webkit-transform: translateX(-8px);
+            transform: translateX(-8px);
+  }
+}
 
 @media only screen and (min-width: 375px) {
 
@@ -223,33 +251,36 @@
 @media only screen and (min-width: 1024px) {
 
   .login-container {
+    height: 100vh;
+    padding: 0px;
+
     flex-direction: row;
     justify-content: flex-start;
-
-    padding: 0px;
   }
 
   .login-form-container {
-    width: calc(50vw - 100px);
-    height: calc(100vh - 100px);
+    width: 50vw;
+    height: calc(100vh);
     padding: 50px;
+
+    overflow-y: scroll;
+  }
+
+  .login-form-header-container {
+    width: calc(50vw - 100px);
   }
 
   .login-container-logo {
     width: calc(15vw / 2);
   }
 
-  .login-container-title, .password-recovery-copy, .register-prompt-copy {
+  .login-container-title, .password-recovery-copy, .register-navigation-copy {
     font-size: 2vw;
   }
 
   .login-form-label, .login-form-input {
-    font-size: 1vw;
-  }
-
-  .login-form-label, .login-form-input {
-
     width: calc(50vw - 100px);
+    font-size: 1vw;
   }
 
   .sign-in-button, .register-navigation-button {

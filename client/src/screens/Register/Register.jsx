@@ -4,9 +4,9 @@ import { Link, useHistory } from 'react-router-dom';
 import Carousel from "../../components/Carousel/Carousel"
 import images from "../../content/register-carousel-images.json"
 
-import handleInputChange from '../../functions/handleInputChange.js';
-import validateRegister from '../../functions/validateRegister'
 import handleRegister from '../../functions/auth/handleRegister.js';
+import validateRegister from '../../functions/validateRegister'
+import handleInputChange from '../../functions/handleInputChange.js';
 
 import './Register.css'
 
@@ -32,9 +32,9 @@ export default function Register(props) {
 
       <div className="register-form-container">
 
-        <div className="register-container-header">
+        <div className="register-form-header-container">
             <Link className="register-back-button-container" to="/login"><i className="fas fa-times" id="register-back-button" /></Link>
-            <img className="register-container-logo" alt="login-wims-logo" src="/images/logos/AWOKEN-logo-orange.png" />
+            <img className="register-container-logo" alt="register-AWOKEN-logo" src="/images/logos/AWOKEN-logo-orange.png" />
             <p className="register-container-title">BEGIN YOUR JOURNEY</p>
         </div> 
 

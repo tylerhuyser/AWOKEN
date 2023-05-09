@@ -19,7 +19,7 @@ export default function Login(props) {
   const [error, setError] = useState("")
   const history = useHistory();
 
-  const  {setCurrentUser } = props
+  const  { setCurrentUser } = props
 
   useEffect(() => {
     if (error === "unauthorized") {
@@ -34,8 +34,8 @@ export default function Login(props) {
  
       <div className="login-form-container">
           
-        <div className="login-container-header">
-          <img className="login-container-logo" alt="login-logo" src="/images/logos/AWOKEN-logo-orange.png" />
+        <div className="login-form-header-container">
+          <img className="login-container-logo" alt="login-AWOKEN-logo" src="/images/logos/AWOKEN-logo-orange.png" />
           <p className="login-container-title">EMBRACE NEW PERSPECTIVES</p>
         </div> 
         
@@ -70,9 +70,9 @@ export default function Login(props) {
       </form>
 
 
-        <div className="register-prompt-container">
+        <div className="register-navigation-container">
           
-          <p className="register-prompt-copy">Don't have an account?</p>
+          <p className="register-navigation-copy">Don't have an account?</p>
       
           <Link to='/register'><button className="register-navigation-button">SIGN UP</button></Link>
          </div>
