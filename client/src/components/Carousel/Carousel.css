@@ -29,7 +29,7 @@
 
     outline-offset: -25px;
 
-    font-size: calc(5vw/2);
+    font-size: calc(5vw / 2);
     color: white;
     letter-spacing: 10px;
     font-weight: 100;
@@ -61,7 +61,6 @@
 
     animation: slide-in-left ease-in-out 0.75s;
   }
-
 
   .active {
     animation: fade ease-in-out 0.75s;
