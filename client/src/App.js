@@ -12,6 +12,9 @@ import MainContainer from "./containers/MainContainer/MainContainer";
 import SurveyContainer from "./containers/SurveyContainer/SurveyContainer";
 import EditContainer from "./containers/EditContainer/EditContainer";
 
+import Home from "./screens/Home/Home"
+import Journals from "./screens/Journals/Journals"
+
 // Functions
 import handleVerify from "./functions/auth/handleVerify";
 import gatherCompanies from "./functions/gatherCompanies";
@@ -32,6 +35,7 @@ function App() {
   // Switches
   const [pendingSurvey, setPendingSurvey] = useState(false);
   const [editSurvey, setEditSurvey] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false)
   const [activeSurveyID, setActiveSurveyID] = useState(0);
 
   // Location
@@ -39,17 +43,17 @@ function App() {
 
   // Survey_Formats:
   const demographicsSurvey = surveyFormats[0];
-  const IMS = surveyFormats[1];
-  const EMS = surveyFormats[2];
-  const MP = surveyFormats[3];
-  const IAT = surveyFormats[4];
-  const shouldsWoulds = surveyFormats[5];
-  const modernRacism2000 = surveyFormats[6];
-  const subtleBlatant = surveyFormats[7];
-  const organizationalInclusivityAudit = surveyFormats[8];
-  const concern = surveyFormats[9];
-  const priming = surveyFormats[10];
-  const srQuestionnaire = surveyFormats[11];
+  // const IMS = surveyFormats[1];
+  // const EMS = surveyFormats[2];
+  // const MP = surveyFormats[3];
+  // const IAT = surveyFormats[4];
+  // const shouldsWoulds = surveyFormats[5];
+  // const modernRacism2000 = surveyFormats[6];
+  // const subtleBlatant = surveyFormats[7];
+  // const organizationalInclusivityAudit = surveyFormats[8];
+  // const concern = surveyFormats[9];
+  // const priming = surveyFormats[10];
+  // const srQuestionnaire = surveyFormats[11];
   const srJournal = surveyFormats[12];
 
 // UseEffects
@@ -94,65 +98,70 @@ function App() {
 
       <Switch>
 
-      <Route exact path="/">
-          <LandingPage />
-      </Route>
-
-      <Route path="/login">
-        <Login
-            setCurrentUser={setCurrentUser}
-        />
-      </Route>
-        
-      <Route path="/register">
-        <Register
-          companyInfo={companyInfo}
-          setCurrentUser={setCurrentUser}
-          setPendingSurvey={setPendingSurvey}
-        />
-      </Route>
-        
-      <Route path="/complete-profile">
-        <SurveyContainer
-          currentUser={currentUser}
-          surveyFormat={demographicsSurvey}
-          setCompletedSurveys={setCompletedSurveys}
-          setPendingSurvey={setPendingSurvey}
-        />
+        <Route exact path="/">
+            <LandingPage />
         </Route>
 
-      <Route path="/new-journal">
-        <SurveyContainer
-          currentUser={currentUser}
-          surveyFormat={srJournal}
-          setCompletedSurveys={setCompletedSurveys}
-          setPendingSurvey={setPendingSurvey}
-        />
-      </Route>
+        <Route path="/login">
+          <Login
+              setCurrentUser={setCurrentUser}
+          />
+        </Route>
+          
+        <Route path="/register">
+          <Register
+            companyInfo={companyInfo}
+            setCurrentUser={setCurrentUser}
+            setPendingSurvey={setPendingSurvey}
+          />
+        </Route>
+          
+        <Route path="/complete-profile">
+          <SurveyContainer
+            currentUser={currentUser}
+            surveyFormat={demographicsSurvey}
+            setCompletedSurveys={setCompletedSurveys}
+            setPendingSurvey={setPendingSurvey}
+          />
+          </Route>
 
-      <Route path="/edit-journal">
-        <EditContainer
-          currentUser={currentUser}
-          surveyFormat={srJournal}
-          setCompletedSurveys={setCompletedSurveys}
-          setPendingSurvey={setPendingSurvey}
-          activeSurveyID={activeSurveyID}
-        />
-      </Route>
+        <Route path="/new-journal">
+          <SurveyContainer
+            currentUser={currentUser}
+            surveyFormat={srJournal}
+            setCompletedSurveys={setCompletedSurveys}
+            setPendingSurvey={setPendingSurvey}
+          />
+        </Route>
 
-      <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
-        <MainContainer
-          currentUser={currentUser}
-          srQuestionnaire={srQuestionnaire}
-          srJournal={srJournal}
-          setPendingSurvey={setPendingSurvey}
-          completedSurveys={completedSurveys}
-          setCompletedSurveys={setCompletedSurveys}
-          setActiveSurveyID={setActiveSurveyID}
-          setEditSurvey={setEditSurvey}
-        />
-      </Layout>
-        
+        <Route path="/edit-journal">
+          <EditContainer
+            currentUser={currentUser}
+            surveyFormat={srJournal}
+            setCompletedSurveys={setCompletedSurveys}
+            setPendingSurvey={setPendingSurvey}
+            activeSurveyID={activeSurveyID}
+          />
+        </Route>
+
+          
+        <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
+
+          <Route exact path="/home">
+              <Home setPendingSurvey={setPendingSurvey} />
+          </Route>
+
+          <Route exact path="/journals">
+            <Journals
+              currentUser={currentUser}
+              completedSurveys={completedSurveys} setCompletedSurveys={setCompletedSurveys}
+              isDeleted={isDeleted} setIsDeleted={setIsDeleted}
+              setActiveSurveyID={setActiveSurveyID}
+              setEditSurvey={setEditSurvey} />
+          </Route>
+          
+        </Layout> 
+          
       </Switch>
 
 

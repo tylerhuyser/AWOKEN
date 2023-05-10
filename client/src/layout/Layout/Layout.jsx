@@ -11,27 +11,42 @@ export default function Layout(props) {
   
   const { currentUser, setCurrentUser } = props;
 
+  console.log(currentUser)
+
   return (
 
-    <div className="layout-container">
+    <>
+      
+      {currentUser ? 
+        
+        <div className="layout-container">
 
-      <Header
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
-        toggleDesktopMenu={toggleDesktopMenu}
-        setToggleDesktopMenu={setToggleDesktopMenu}
-      />
+          <Header
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            toggleDesktopMenu={toggleDesktopMenu}
+            setToggleDesktopMenu={setToggleDesktopMenu}
+          />
+    
+          <div className='body-container'>
+            {props.children}
+          </div>
+    
+          <Footer />
+    
+          <Nav
+            toggleDesktopMenu={toggleDesktopMenu}
+          />
+    
+        </div>
+      
+        :
 
-      <div className='body-container'>
-        {props.children}
-      </div>
+        <>LOADING...</>
 
-      <Footer />
+      }
+    
+    </>
 
-      <Nav
-        toggleDesktopMenu={toggleDesktopMenu}
-      />
-
-    </div>
   )
 }
