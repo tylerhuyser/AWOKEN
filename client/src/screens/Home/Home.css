@@ -201,12 +201,22 @@
 }
 
 @media only screen and (min-width: 481px) {
+
+  .home-container {
+    min-height: 100vh;
+  } 
+
   .home-card-content {
     height: 200px;
   }
 
   #event-subtitle {
     line-height: 30px;
+  }
+
+  #notification-begin-journal-button {
+    width: 25vw;
+    height: 5vh;
   }
 }
 
@@ -248,7 +258,7 @@
 
   #notification-begin-journal-button {
     width: 25vw;
-    height: 10vh;
+    height: 7.5vh;
   }
 
   #event-subtitle {

@@ -32,7 +32,7 @@ export default function Header(props) {
       <div className="header-current-user-container">
         <i className="header-icon mobile far fa-user-circle" onClick={() => handleLogout(history, setCurrentUser)}></i>
         <i className="header-icon desktop fas fa-bell"></i>
-        <div className="current-user-name desktop" onClick={handleLogout}>{currentUser.first_name} {currentUser.last_name}</div>
+        <div className="current-user-name desktop" onClick={() => handleLogout(history, setCurrentUser)}>{currentUser.first_name} {currentUser.last_name}</div>
       </div>
         
     </div>

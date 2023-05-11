@@ -22,7 +22,7 @@ box-sizing: border-box;
   background: #f2f2f2fc
 }
 
-@media (hover: none) {
+/* @media (hover: none) {
   .fas, .far{
     color: #F39C12;
   }
@@ -35,7 +35,7 @@ box-sizing: border-box;
   color: #4F2958;
     
   }
-}
+} */
 
 @media only screen and (min-width: 375px) {
 
