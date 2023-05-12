@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '../Header/Header.jsx'
 import Nav from '../Nav/Nav.jsx'
 import Footer from '../Footer/Footer.jsx'
+import Loader from '../Loader/Loader.jsx'
 
 import './Layout.css'
 
@@ -42,7 +43,7 @@ export default function Layout(props) {
       
         :
 
-        <>LOADING...</>
+        <Loader />
 
       }
     

@@ -19,7 +19,7 @@ box-sizing: border-box;
   justify-content: center;
   align-items: center;
 
-  background: #f2f2f2fc
+  background: #f2f2f2fc;
 }
 
 /* @media (hover: none) {
@@ -57,6 +57,7 @@ box-sizing: border-box;
 
   .body-container {
     align-items: flex-end;
+
   }
   
     /* .desktop-layout-floater {

@@ -147,7 +147,7 @@
 
   .navigation-link-icon {
 
-    min-width: 10vw;
+    min-width: none;
 
     font-size: 40px;
     color: #F39C12;

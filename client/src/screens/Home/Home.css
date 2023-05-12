@@ -273,6 +273,13 @@
   .home-container {
     min-height: 100vh;
     margin-top: 125px;
+
+    background-image: linear-gradient(to right,  rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-white.png');
+    /* background-size: cover; */
+    background-size: contain;
+    background-repeat: repeat;
+    background-position: center center;
+    background-attachment: fixed;
   }
 
   .home-card {
