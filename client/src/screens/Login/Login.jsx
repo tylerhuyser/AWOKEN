@@ -5,7 +5,7 @@ import Carousel from "../../components/Carousel/Carousel"
 import gifs from "../../content/login-carousel-gifs.json"
 
 import handleLogin from '../../functions/auth/handleLogin.js';
-import handleInputChange from '../../functions/handleInputChange.js';
+import handleInputChange from '../../functions/handle-change-functions/handleInputChange.js';
 
 import './Login.css'
 

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { getOneEmployee } from '../../services/admin-info';
 
-import handleEdit from "../../functions/handleEdit"
-import handleDelete from "../../functions/handleDelete"
+import handleEdit from "../../functions/switch-handler-functions/handleEdit"
+import handleDelete from "../../functions/CRUD/DELETE/handleDelete.js"
 
 import './Journals.css'
 

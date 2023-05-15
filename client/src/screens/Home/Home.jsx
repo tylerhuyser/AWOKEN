@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 
-import beginJournal from "../../functions/beginJournal"
+import beginJournal from "../../functions/switch-handler-functions/beginJournal.js"
 
 import './Home.css'
 

@@ -6,7 +6,7 @@ import images from "../../content/register-carousel-images.json"
 
 import handleRegister from '../../functions/auth/handleRegister.js';
 import validateRegister from '../../functions/validateRegister'
-import handleInputChange from '../../functions/handleInputChange.js';
+import handleInputChange from '../../functions/handle-change-functions/handleInputChange.js';
 
 import './Register.css'
 

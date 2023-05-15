@@ -17,9 +17,9 @@ import Journals from "./screens/Journals/Journals"
 
 // Functions
 import handleVerify from "./functions/auth/handleVerify";
-import gatherCompanies from "./functions/gatherCompanies";
-import gatherSurveyFormats from './functions/gatherSurveyFormats'
-import gatherCompletedSurveys from "./functions/gatherCompletedSurveys"
+import gatherCompanies from "./functions/CRUD/GET/gatherCompanies";
+import gatherSurveyFormats from './functions/CRUD/GET/gatherSurveyFormats'
+import gatherCompletedSurveys from "./functions/CRUD/GET/gatherCompletedSurveys"
 
 function App() {
   // Auth

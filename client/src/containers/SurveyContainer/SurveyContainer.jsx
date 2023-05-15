@@ -11,7 +11,9 @@ import './SurveyContainer.css'
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat, setCompletedSurveys, setPendingSurvey } = props;
+  const { currentUser, surveyFormat } = props;
+  const { setCompletedSurveys, setPendingSurvey } = props;
+
   const [surveyData, setSurveyData] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [surveyID, setSurveyID] = useState(null)
@@ -37,13 +39,6 @@ export default function SurveyContainer(props) {
     setSubmitAnswers(!submitAnswers)
   }
 
-  // Return Home Function
-
-  const exitSurvey = () => {
-    setPendingSurvey(false)
-    history.push('/home')
-  }
-
   // UseEffects Below:
 
   // Grabs Survey-specific data including questions & options
@@ -53,6 +48,7 @@ export default function SurveyContainer(props) {
     if (currentUser && surveyFormat) {
       const getSurveyData = async () => {
         const rawSurveyData = await getOneSurveyFormat(surveyFormat.id);
+        console.log(rawSurveyData)
         setSurveyData(rawSurveyData)
       }
       getSurveyData(surveyFormat.id);
@@ -105,13 +101,13 @@ export default function SurveyContainer(props) {
       currentQuestion={currentQuestion}
       setCurrentQuestion={setCurrentQuestion}
       submitAnswers={submitAnswers}
-      exitSurvey={exitSurvey}
 
       // Data Forms
       survey={survey}
       surveyAnswers={surveyAnswers}
       setSurveyAnswers={setSurveyAnswers}
     
+      setPendingSurvey={setPendingSurvey}
     />
   ))
 

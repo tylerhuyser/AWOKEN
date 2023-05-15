@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import Option from '../Option/Option.jsx'
 import { useHistory } from 'react-router-dom'
+
+import Option from '../Option/Option.jsx'
+import exitSurvey from '../../functions/switch-handler-functions/exitSurvey.js';
+
+import routeAnswerChange from '../../functions/routeAnswerChange.js';
+import handleAnswerChange from "../../functions/handle-change-functions/handleAnswerChange.js"
+import changeQuestion from "../../functions/changeQuestion.js"
+
+import createSurveyProgressMarkers from "../../functions/createSurveyProgressMarkers"
 
 import './Question.css'
 
 export default function Questions(props) {
 
-  const { currentUser, question, index, totalQuestions, handleSubmit, survey, submitAnswers, exitSurvey } = props
+  const { currentUser, question, index, totalQuestions, handleSubmit, survey, submitAnswers, setPendingSurvey } = props
   const { currentQuestion, setCurrentQuestion } = props
   const { surveyAnswers, setSurveyAnswers } = props
   const [selectAllArray, setSelectAllArray] = useState([])
-  const question_format = props.question.question_format
   const history = useHistory()
 
   const [answerData, setAnswerData] = useState({
@@ -22,40 +29,10 @@ export default function Questions(props) {
   });
 
   useEffect(() => {
-    if (question_format !== "select all that apply" && (answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
+    if (question.question_format !== "select all that apply" && (answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
       setSurveyAnswers(prevState => ([...prevState, answerData]));
     }
   }, [submitAnswers])
-
-  const handleAnswerChange = async (e, props) => {
-
-    let { name, value } = e.target;
-    
-    if (name === "free_response") {
-      setAnswerData(prevState => ({
-        ...prevState,
-        free_response: value
-      }))
-    } 
-    else if (question_format === "boolean" || question_format === "multiple-choice") {
-      setAnswerData(prevState => ({
-        ...prevState,
-        option_id: props,
-        free_response: ""
-      }))
-    }
-  }
-
-  function changeQuestion(n) {
-    
-    if ((n === (-1)) && (currentQuestion === 0)) {
-      history.push('/')
-    } else if ((n === (-1)) && (currentQuestion !== 0)) {
-      setCurrentQuestion(currentQuestion - 1)
-    } else if ((n === 1) && (currentQuestion !== totalQuestions)) {
-      setCurrentQuestion(currentQuestion + 1)
-    }
-  }
 
   function createQuestionButton(survey, surveyAnswers) {
     if (index === totalQuestions) {
@@ -69,26 +46,14 @@ export default function Questions(props) {
     } else {
 
       return (
-        <button className="question-button" onClick={() => changeQuestion(1)}>CONTINUE</button>
+        <button className="question-button" onClick={() => changeQuestion(1, totalQuestions, currentQuestion, setCurrentQuestion, history)}>CONTINUE</button>
       )
     }
   }
 
   const questionButton = createQuestionButton(survey, surveyAnswers)
 
-  function createQuestionnaireTabs() {
-    let tabs = []
-    for (let i = 0; i <= totalQuestions; i++) {
-      if (i === index) {
-        tabs[i] = <span className="questionnaire-tab active" key={`${question.id} ${i}`}></span>
-      } else {
-        tabs[i] = <span className="questionnaire-tab inactive" key={`${question.id} ${i}`}></span>
-      }
-    }
-    return tabs
-  }
-
-  const questionnaireTabs = createQuestionnaireTabs()
+  const questionnaireTabs = createSurveyProgressMarkers(index, question, totalQuestions)
   
   function createOptions(question) {
     if (question.question_format === "free-response") {
@@ -101,7 +66,7 @@ export default function Questions(props) {
           name="free_response"
           rows={2}
           placeholder="Enter below..."
-          onChange={handleAnswerChange}
+          onChange={(e) => routeAnswerChange(e, answerData.option_id, question.question_format, setAnswerData)}
           vale={answerData.free_response}
         />
 
@@ -115,7 +80,6 @@ export default function Questions(props) {
             currentUser={currentUser}
             question={question}
             questionCopy={question.question_copy}
-            question_format={question_format}
             option={option}
             index={index}
 
@@ -124,6 +88,7 @@ export default function Questions(props) {
           
           // Answer Data
             submitAnswers={submitAnswers}
+            setAnswerData={setAnswerData}
             setSurveyAnswers={setSurveyAnswers}
           
           // Select-All-Answers
@@ -160,11 +125,11 @@ export default function Questions(props) {
               
               { index === 0 ?
 
-                <i className="fas fa-chevron-left white" onClick={exitSurvey} key={`chevron-icon-${index}`} />
+                <i className="fas fa-chevron-left white" onClick={() => exitSurvey(history, setPendingSurvey)} key={`chevron-icon-${index}`} />
                 
                 :
 
-                <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} key={`chevron-icon-${index}`} />
+                <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1, totalQuestions, currentQuestion, setCurrentQuestion, history)} key={`chevron-icon-${index}`} />
               
               }
                 

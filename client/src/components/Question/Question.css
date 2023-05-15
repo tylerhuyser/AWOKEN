@@ -52,7 +52,7 @@
   justify-content: space-evenly;
 }
 
-.questionnaire-tab {
+.questionnaire-tab, .survey-progress-marker {
 
   background: white;
 
