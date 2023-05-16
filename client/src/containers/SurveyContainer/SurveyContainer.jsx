@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import Question from '../../components/Question/Question';
+import Loader from '../../layout/Loader/Loader'
 
 import { getOneSurveyFormat } from '../../services/survey-constructors'
 import { postSurvey } from '../../services/surveys';
@@ -32,11 +33,6 @@ export default function SurveyContainer(props) {
     const newSurvey = await postSurvey(surveyData)
     setCompletedSurveys(prevState => [...prevState, newSurvey])
     return newSurvey
-  }
-
-  const handleSubmit = async (survey) => {
-    setSurveyAnswers([])
-    setSubmitAnswers(!submitAnswers)
   }
 
   // UseEffects Below:
@@ -97,17 +93,19 @@ export default function SurveyContainer(props) {
       totalQuestions={surveyData.questions.length - 1}
 
       // Functions
-      handleSubmit={handleSubmit}
       currentQuestion={currentQuestion}
       setCurrentQuestion={setCurrentQuestion}
+
+      // Switches
       submitAnswers={submitAnswers}
+      setSubmitAnswers={setSubmitAnswers}
+      setPendingSurvey={setPendingSurvey}
 
       // Data Forms
       survey={survey}
       surveyAnswers={surveyAnswers}
       setSurveyAnswers={setSurveyAnswers}
     
-      setPendingSurvey={setPendingSurvey}
     />
   ))
 
@@ -120,7 +118,7 @@ export default function SurveyContainer(props) {
       { surveyData === undefined || !surveyFormat || surveyFormat.length === 0 || !surveyFormat.id  || !currentUser || currentUser === null || currentUser.length === 0 ?
       
 
-        <div className="loader slide-in-left-survey-container"></div>
+        <Loader />
         
         :
 
