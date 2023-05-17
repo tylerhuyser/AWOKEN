@@ -18,7 +18,7 @@ export default function createInputOption(question, option, answerData, setAnswe
     inputProps.className = "radio-input"
   }
   
-  if (answerData.option_id === option.id || (question.question_format === "select all that apply" && answerData.option_id.includes(option.id))) {
+  if (answerData.option_id === option.id || (question.question_format === "select all that apply" && selectAllArray.includes(option.id))) {
     inputProps.checked = true
   }
     

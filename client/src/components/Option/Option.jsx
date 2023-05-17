@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
 import routeOptionCreate from '../../functions/routeOptionCreate.js';
-// import routeAnswerChange from '../../functions/routeAnswerChange.js';
 
 import './Option.css'
 

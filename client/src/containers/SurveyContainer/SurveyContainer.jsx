@@ -4,9 +4,10 @@ import { useHistory } from 'react-router-dom'
 import Question from '../../components/Question/Question';
 import Loader from '../../layout/Loader/Loader'
 
+import handlePostNewSurvey from '../../functions/CRUD/POST/handlePostNewSurvey';
+import handlePostAnswers from '../../functions/CRUD/POST/handlePostAnswers';
+
 import { getOneSurveyFormat } from '../../services/survey-constructors'
-import { postSurvey } from '../../services/surveys';
-import { postAnswer } from '../../services/answers';
 
 import './SurveyContainer.css'
 
@@ -27,18 +28,6 @@ export default function SurveyContainer(props) {
 
   const [surveyAnswers, setSurveyAnswers] = useState([])
 
-  // Submit Survey & Answers Functions
-
-  const postNewSurvey = async (surveyData) => {
-    const newSurvey = await postSurvey(surveyData)
-    setCompletedSurveys(prevState => [...prevState, newSurvey])
-    return newSurvey
-  }
-
-  // UseEffects Below:
-
-  // Grabs Survey-specific data including questions & options
-
   useEffect(() => {
     console.log('SurveyContainer.js - UseEffect #1 - Gathering Survey Data')
     if (currentUser && surveyFormat) {
@@ -51,38 +40,26 @@ export default function SurveyContainer(props) {
     }
   }, [currentUser, surveyFormat])
 
+
   useEffect(() => {
-    if (surveyAnswers.length !== 0 && surveyData.questions !== undefined) {
-      if (surveyAnswers.length >= surveyData.questions.length) {
-        const handlePost = async (survey, surveyAnswers) => {
-          const newSurvey = await postNewSurvey(survey)
-          const newSurveyID = newSurvey.id
-          setSurveyID(newSurveyID)
-        }
-        handlePost(survey, surveyAnswers)
-      } else {
-        alert("Please complete all answers in order to continue!")
-      }
+    if (surveyAnswers.length === 0 || !surveyData.questions) {
+      return
+    }
+    if (surveyAnswers.length >= surveyData.questions.length) {
+      handlePostNewSurvey(survey, setCompletedSurveys, setSurveyID) 
+    } else {
+      alert("Please complete all answers in order to continue!")
     }
   }, [surveyAnswers])
 
   useEffect(() => {
     if (surveyID !== null) {
-      Promise.all(surveyAnswers.map((pendingAnswer) => {
-        pendingAnswer.survey_id = surveyID
-        const postAnswers = async (pendingAnswer) => {
-          const newAnswer = await postAnswer(pendingAnswer);
-          return newAnswer
-        }
-        return postAnswers(pendingAnswer)
-      }))
-      history.push('/home')
-      setPendingSurvey(false)
+      handlePostAnswers(surveyID, surveyAnswers, setPendingSurvey, history)
     }
   }, [surveyID])
 
 
-  const surveyQuestions = surveyData.questions && surveyData.questions.map((question, index) => (
+  const surveyQuestionsJSX = surveyData.questions && surveyData.questions.map((question, index) => (
     <Question
     
       // Data
@@ -124,7 +101,7 @@ export default function SurveyContainer(props) {
 
         <div className={"questionnaire-container slide-in-left-survey-container"} key={`${surveyFormat.id}`}>
       
-          {surveyQuestions}
+          {surveyQuestionsJSX}
 
         </div>
 

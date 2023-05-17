@@ -1,18 +1,18 @@
-export default async function handleSelectAllAnswerChange (e, optionID, selectAllArray, setSelectAllAnswerData, setSelectAllArray) {
+export default async function handleSelectAllAnswerChange (e, optionID, selectAllArray, setSelectAllArray, setSelectAllAnswerData) {
 
   let { name, value } = e.target;
 
-  if (name === "option_id" && selectAllArray.includes(parseInt(optionID))) {
+  if (name === "option_id" && selectAllArray.includes(parseInt(value))) {
     setSelectAllArray(prevState => {
-      return (prevState.filter(e => e !== value))
+      return (prevState.filter(e => e !== parseInt(value)))
     })
     setSelectAllAnswerData(prevState => ({
       ...prevState,
       option_id: []
     }))
-  } if (name === "option_id" && !selectAllArray.includes(parseInt(optionID))) { 
+  } if (name === "option_id" && !selectAllArray.includes(parseInt(value))) { 
     setSelectAllArray(prevState => {
-      return [...prevState, value]
+      return [...prevState, parseInt(value)]
     })
     setSelectAllAnswerData(prevState => ({
       ...prevState,
@@ -20,7 +20,7 @@ export default async function handleSelectAllAnswerChange (e, optionID, selectAl
     }))
   } if (name === "free_response" && selectAllArray.includes(parseInt(optionID)) && value === "") {
     setSelectAllArray(prevState => {
-      return (prevState.filter(e => e !== optionID))
+      return (prevState.filter(e => e !== parseInt(optionID)))
     })
     setSelectAllAnswerData(prevState => ({
         ...prevState,

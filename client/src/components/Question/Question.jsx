@@ -2,15 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 
 import Option from '../Option/Option.jsx'
-import exitSurvey from '../../functions/switch-handler-functions/exitSurvey.js';
-
-import routeAnswerChange from '../../functions/routeAnswerChange.js';
-import handleAnswerChange from "../../functions/handle-change-functions/handleAnswerChange.js"
-import changeQuestion from "../../functions/changeQuestion.js"
-
-import routeOptionCreate from '../../functions/routeOptionCreate.js';
 import createSurveyProgressMarkers from "../../functions/JSX-creators/createSurveyProgressMarkers"
 import createQuestionButton from '../../functions/JSX-creators/createQuestionButton';
+
+import changeQuestion from "../../functions/changeQuestion.js"
+import exitSurvey from '../../functions/switch-handler-functions/exitSurvey.js';
 
 import './Question.css'
 
@@ -121,7 +117,7 @@ export default function Questions(props) {
         :
 
         <></>
-        
+
       }
       
     </>
