@@ -6,8 +6,8 @@ import './Option.css'
 
 export default function Option(props) {
   
-  const { currentUser, question, option, submitAnswers } = props
-  const { setSurveyAnswers } = props
+  const { currentUser, question, option, completeSurveySwitch } = props
+  const { setCompletedSurveyAnswers } = props
   const { answerData, setAnswerData } = props
   const { selectAllArray, setSelectAllArray } = props
 
@@ -21,9 +21,9 @@ export default function Option(props) {
 
   useEffect(() => {
     if ((selectAllAnswerData.option_id.length !== 0) || (selectAllAnswerData.free_response !== "")) {
-      setSurveyAnswers(prevState => ([...prevState, selectAllAnswerData]));
+      setCompletedSurveyAnswers(prevState => ([...prevState, selectAllAnswerData]));
     }
-  }, [submitAnswers])
+  }, [completeSurveySwitch])
 
   const optionJSX = routeOptionCreate(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)
 

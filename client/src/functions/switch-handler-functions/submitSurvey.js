@@ -1,4 +1,4 @@
-export default async function submitSurvey(submitAnswers, setSubmitAnswers, setSurveyAnswers) {
-    setSurveyAnswers([])
-    setSubmitAnswers(!submitAnswers)
+export default async function submitSurvey(completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers) {
+    setCompletedSurveyAnswers([])
+    setCompleteSurveySwitch(!completeSurveySwitch)
 }

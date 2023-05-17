@@ -13,9 +13,9 @@ import './Question.css'
 export default function Questions(props) {
 
   const { currentUser, question, index, totalQuestions, survey, setPendingSurvey } = props
-  const { currentQuestion, setCurrentQuestion } = props
-  const { surveyAnswers, setSurveyAnswers } = props
-  const { submitAnswers, setSubmitAnswers } = props
+  const { questionCounter, setQuestionCounter } = props
+  const { setCompletedSurveyAnswers } = props
+  const { completeSurveySwitch, setCompleteSurveySwitch } = props
   const [selectAllArray, setSelectAllArray] = useState([])
   const history = useHistory()
 
@@ -29,9 +29,9 @@ export default function Questions(props) {
 
   useEffect(() => {
     if (question.question_format !== "select all that apply" && (answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
-      setSurveyAnswers(prevState => ([...prevState, answerData]));
+      setCompletedSurveyAnswers(prevState => ([...prevState, answerData]));
     }
-  }, [submitAnswers])
+  }, [completeSurveySwitch])
 
   const surveyProgressMarkersJSX = createSurveyProgressMarkers(index, question, totalQuestions)
 
@@ -46,12 +46,12 @@ export default function Questions(props) {
       index={index}
     
     // Switches
-      submitAnswers={submitAnswers}
+      completeSurveySwitch={completeSurveySwitch}
     
     // Answers
       answerData={answerData}
       setAnswerData={setAnswerData}
-      setSurveyAnswers={setSurveyAnswers}
+      setCompletedSurveyAnswers={setCompletedSurveyAnswers}
     
     // Select-All
       selectAllArray={selectAllArray}
@@ -60,14 +60,14 @@ export default function Questions(props) {
     />
   ))
 
-  const questionButtonJSX = createQuestionButton(index, totalQuestions, currentQuestion, setCurrentQuestion, submitAnswers, setSubmitAnswers, setSurveyAnswers, history)
+  const questionButtonJSX = createQuestionButton(index, totalQuestions, questionCounter, setQuestionCounter, completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers, history)
 
   
   return (
 
     <>
 
-      { currentQuestion === index ?
+      { questionCounter === index ?
 
         <div className="question-container" key={`${question.id}`}>
 
@@ -89,7 +89,7 @@ export default function Questions(props) {
                 
                 :
 
-                <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1, totalQuestions, currentQuestion, setCurrentQuestion, history)} key={`chevron-icon-${index}`} />
+                <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1, totalQuestions, questionCounter, setQuestionCounter, history)} key={`chevron-icon-${index}`} />
               
               }
                 

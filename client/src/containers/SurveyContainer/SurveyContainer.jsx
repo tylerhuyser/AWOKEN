@@ -4,10 +4,9 @@ import { useHistory } from 'react-router-dom'
 import Question from '../../components/Question/Question';
 import Loader from '../../layout/Loader/Loader'
 
+import gatherSurveyTemplate from '../../functions/CRUD/GET/gatherSurveyTemplate';
 import handlePostNewSurvey from '../../functions/CRUD/POST/handlePostNewSurvey';
 import handlePostAnswers from '../../functions/CRUD/POST/handlePostAnswers';
-
-import { getOneSurveyFormat } from '../../services/survey-constructors'
 
 import './SurveyContainer.css'
 
@@ -16,50 +15,57 @@ export default function SurveyContainer(props) {
   const { currentUser, surveyFormat } = props;
   const { setCompletedSurveys, setPendingSurvey } = props;
 
-  const [surveyData, setSurveyData] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [surveyID, setSurveyID] = useState(null)
-  const [submitAnswers, setSubmitAnswers] = useState(false)
-  const history = useHistory();
+  // BELOW: Executes on Component Mount - GETs the Survey Template to generate Questions and Options fro User to make selections
+  const [surveyTemplate, setSurveyTemplate] = useState([]);
+
+  // BELOW: Counter for current Question rendered to the DOM and displayed to User
+  const [questionCounter, setQuestionCounter] = useState(0)
+
+  // BELOW: Switch to initiate POSTing of Completed Survey & Answers
+  const [completeSurveySwitch, setCompleteSurveySwitch] = useState(false)
+
+  // BELOW: Immediately after COMPLETESURVEYSWITCH changes, Answers are gathered in the below array, before POST Survey and POST Answer Executes
+  const [completedSurveyAnswers, setCompletedSurveyAnswers] = useState([])
   
+  // BELOW: Delivers the survey_format_id in Object format for POSTing the NEW Survey
   const survey = {
     survey_format_id: surveyFormat?.id,
   }
 
-  const [surveyAnswers, setSurveyAnswers] = useState([])
+  // BELOW: After NEW Survey POSTed, the below ID is used to POST corresponding Answers
+  const [surveyID, setSurveyID] = useState(null)
+
+  const history = useHistory();
 
   useEffect(() => {
     console.log('SurveyContainer.js - UseEffect #1 - Gathering Survey Data')
     if (currentUser && surveyFormat) {
-      const getSurveyData = async () => {
-        const rawSurveyData = await getOneSurveyFormat(surveyFormat.id);
-        console.log(rawSurveyData)
-        setSurveyData(rawSurveyData)
-      }
-      getSurveyData(surveyFormat.id);
+      gatherSurveyTemplate(surveyFormat, setSurveyTemplate)
     }
   }, [currentUser, surveyFormat])
 
 
   useEffect(() => {
-    if (surveyAnswers.length === 0 || !surveyData.questions) {
+    if (completedSurveyAnswers.length === 0 || !surveyTemplate.questions) {
       return
     }
-    if (surveyAnswers.length >= surveyData.questions.length) {
+    if (completedSurveyAnswers.length >= surveyTemplate.questions.length) {
+      console.log('SurveyContainer.js - UseEffect #2 - Posting Survey Instance')
       handlePostNewSurvey(survey, setCompletedSurveys, setSurveyID) 
     } else {
       alert("Please complete all answers in order to continue!")
     }
-  }, [surveyAnswers])
+  }, [completedSurveyAnswers])
 
   useEffect(() => {
     if (surveyID !== null) {
-      handlePostAnswers(surveyID, surveyAnswers, setPendingSurvey, history)
+      console.log('SurveyContainer.js - UseEffect #3 - Posting Answers')
+      handlePostAnswers(surveyID, completedSurveyAnswers, setPendingSurvey, history)
     }
   }, [surveyID])
 
 
-  const surveyQuestionsJSX = surveyData.questions && surveyData.questions.map((question, index) => (
+  const surveyQuestionsJSX = surveyTemplate.questions && surveyTemplate.questions.map((question, index) => (
     <Question
     
       // Data
@@ -67,32 +73,31 @@ export default function SurveyContainer(props) {
       currentUser={currentUser}
       question={question}
       index={index}
-      totalQuestions={surveyData.questions.length - 1}
+      totalQuestions={surveyTemplate.questions.length - 1}
 
       // Functions
-      currentQuestion={currentQuestion}
-      setCurrentQuestion={setCurrentQuestion}
+      questionCounter={questionCounter}
+      setQuestionCounter={setQuestionCounter}
 
       // Switches
-      submitAnswers={submitAnswers}
-      setSubmitAnswers={setSubmitAnswers}
+      completeSurveySwitch={completeSurveySwitch}
+      setCompleteSurveySwitch={setCompleteSurveySwitch}
       setPendingSurvey={setPendingSurvey}
 
       // Data Forms
       survey={survey}
-      surveyAnswers={surveyAnswers}
-      setSurveyAnswers={setSurveyAnswers}
+      setCompletedSurveyAnswers={setCompletedSurveyAnswers}
     
     />
   ))
 
-  console.log(surveyData)
+  console.log(surveyTemplate)
 
   return (
 
     <>
       
-      { surveyData === undefined || !surveyFormat || surveyFormat.length === 0 || !surveyFormat.id  || !currentUser || currentUser === null || currentUser.length === 0 ?
+      { surveyTemplate === undefined || !surveyFormat || surveyFormat.length === 0 || !surveyFormat.id  || !currentUser || currentUser === null || currentUser.length === 0 ?
       
 
         <Loader />

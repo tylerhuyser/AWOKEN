@@ -1,14 +1,14 @@
 import React from 'react'
 import changeQuestion from "../../functions/changeQuestion"
-import submitSurvey from '../switch-handler-functions/submitSurvey';
+import submitSurvey from '../switch-handler-functions/submitSurvey'
 
-export default function createQuestionButton(index, totalQuestions, currentQuestion, setCurrentQuestion, submitAnswers, setSubmitAnswers, setSurveyAnswers, history) {
+export default function createQuestionButton(index, totalQuestions, currentQuestion, setCurrentQuestion, completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers, history) {
   if (index === totalQuestions) {
 
     return (
       <button className="question-button" onClick={(e) => {
         e.preventDefault();
-        submitSurvey(submitAnswers, setSubmitAnswers, setSurveyAnswers);
+        submitSurvey(completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers);
       }}>SUBMIT</button>
     )
   } else {
