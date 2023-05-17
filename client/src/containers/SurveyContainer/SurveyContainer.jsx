@@ -97,14 +97,14 @@ export default function SurveyContainer(props) {
 
     <>
       
-      { surveyTemplate === undefined || !surveyFormat || surveyFormat.length === 0 || !surveyFormat.id  || !currentUser || currentUser === null || currentUser.length === 0 ?
+      { surveyTemplate && surveyTemplate.length <= 0 ?
       
 
         <Loader />
         
         :
 
-        <div className={"questionnaire-container slide-in-left-survey-container"} key={`${surveyFormat.id}`}>
+        <div className={"survey-container slide-in-left-survey-container"} key={`${surveyFormat.id}`}>
       
           {surveyQuestionsJSX}
 

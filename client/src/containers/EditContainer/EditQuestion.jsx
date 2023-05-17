@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import EditOption from './EditOption'
 import { useHistory } from 'react-router-dom'
 
-import './EditQuestion.css'
+// import './EditQuestion.css'
 
 export default function EditQuestions(props) {
 

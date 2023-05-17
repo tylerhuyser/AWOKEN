@@ -6,7 +6,7 @@ export default function createQuestionButton(index, totalQuestions, currentQuest
   if (index === totalQuestions) {
 
     return (
-      <button className="question-button" onClick={(e) => {
+      <button className="question-button" id="submit-survey-button" onClick={(e) => {
         e.preventDefault();
         submitSurvey(completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers);
       }}>SUBMIT</button>
@@ -14,7 +14,7 @@ export default function createQuestionButton(index, totalQuestions, currentQuest
   } else {
 
     return (
-      <button className="question-button" onClick={() => changeQuestion(1, totalQuestions, currentQuestion, setCurrentQuestion, history)}>CONTINUE</button>
+      <button className="question-button" id="next-question-button" onClick={() => changeQuestion(1, totalQuestions, currentQuestion, setCurrentQuestion, history)}>CONTINUE</button>
     )
   }
 }

@@ -33,7 +33,7 @@ export default function Questions(props) {
     }
   }, [completeSurveySwitch])
 
-  const surveyProgressMarkersJSX = createSurveyProgressMarkers(index, question, totalQuestions)
+  const surveyProgressMarkersJSX = createSurveyProgressMarkers(index, totalQuestions)
 
   const optionsJSX = question.options.map(option => (
     <Option
@@ -71,36 +71,36 @@ export default function Questions(props) {
 
         <div className="question-container" key={`${question.id}`}>
 
-          <div className="questionnaire-header-container">
-      
-            <div className="questionnaire-tabs-container">
-       
-              {surveyProgressMarkersJSX}
+          <div className="survey-header-container">
 
-            </div>
-
-            {survey.survey_format_id === 1 && index === 0 ? <> </> :
+          {survey.survey_format_id === 1 && index === 0 ? <> </> :
               
               <>
               
               { index === 0 ?
 
-                <i className="fas fa-chevron-left white" onClick={() => exitSurvey(history, setPendingSurvey)} key={`chevron-icon-${index}`} />
+                <i className="fas fa-chevron-left survey-navigation-button" id="exit-survey-button" onClick={() => exitSurvey(history, setPendingSurvey)} key={`chevron-icon-${index}`} />
                 
                 :
 
-                <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1, totalQuestions, questionCounter, setQuestionCounter, history)} key={`chevron-icon-${index}`} />
+                <i className="fas fa-chevron-left survey-navigation-button" id="previous-question-button" onClick={() => changeQuestion(-1, totalQuestions, questionCounter, setQuestionCounter, history)} key={`chevron-icon-${index}`} />
               
               }
                 
               </>
             }
+      
+            <div className="survey-progress-markers-container">
+       
+              {surveyProgressMarkersJSX}
+
+            </div>
 
           </div>
 
-          <p className="questionnaire-title">Complete Your Profile:</p>
+          <p className="survey-title">Complete Your Profile:</p>
 
-          <div className="question-form" id={`questionnaire-question-${props.question.id}`}>
+          {/* <div className="question-form" id={`questionnaire-question-${props.question.id}`}> */}
         
             <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
 
@@ -110,7 +110,7 @@ export default function Questions(props) {
         
             {questionButtonJSX}
 
-          </div>
+          {/* </div> */}
 
         </div>
         

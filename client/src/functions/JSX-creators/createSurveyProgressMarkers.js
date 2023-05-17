@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function createSurveyProgressMarkers(index, question, totalQuestions) {
+export default function createSurveyProgressMarkers(index, totalQuestions) {
   let surveyProgressMarkers = []
   for (let i = 0; i <= totalQuestions; i++) {
     if (i === index) {
