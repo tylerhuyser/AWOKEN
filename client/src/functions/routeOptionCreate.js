@@ -7,8 +7,8 @@ export default function routeOptionCreate(question, option, answerData, setAnswe
     return createFreeResponseOption(question, answerData, setAnswerData)
   }
   if (option.option_copy === "Prefer to Self-Describe:") {
-    return  createSelfDescribeOption(question, option, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)
+    return  createSelfDescribeOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)
   } else {
-    return createInputOption(question, option, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)
+    return createInputOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)
   }
 }

@@ -8,7 +8,6 @@ import Layout from "./layout/Layout/Layout.jsx";
 import LandingPage from "./screens/LandingPage/LandingPage"
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
-import MainContainer from "./containers/MainContainer/MainContainer";
 import SurveyContainer from "./containers/SurveyContainer/SurveyContainer";
 import EditContainer from "./containers/EditContainer/EditContainer";
 

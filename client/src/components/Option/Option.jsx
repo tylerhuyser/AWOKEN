@@ -27,7 +27,6 @@ export default function Option(props) {
   }, [submitAnswers])
 
   const optionJSX = routeOptionCreate(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)
-  console.log(optionJSX)
 
   return(
 

@@ -1,4 +1,4 @@
-const handleSelectAllAnswerChange = async (e, optionID, selectAllArray, setSelectAllAnswerData, setSelectAllArray) => {
+export default async function handleSelectAllAnswerChange (e, optionID, selectAllArray, setSelectAllAnswerData, setSelectAllArray) {
 
   let { name, value } = e.target;
 

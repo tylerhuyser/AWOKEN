@@ -1,7 +1,7 @@
 import React from 'react'
 import routeAnswerChange from '../routeAnswerChange'
 
-export default function createInputOption(question, option, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData) {
+export default function createInputOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData) {
   
   let inputProps = {
     type: 'checkbox',
@@ -9,7 +9,8 @@ export default function createInputOption(question, option, setAnswerData, selec
     id:`${option.option_copy}`,
     name: "option_id",
     value: `${option.id}`,
-    onChange: (e) => routeAnswerChange(e, option.id, question.question_format, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)
+    onChange: (e) => routeAnswerChange(e, option.id, question.question_format, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData),
+    checked: false
   }
   
   if (question.question_format !== "select all that apply") {
@@ -17,6 +18,10 @@ export default function createInputOption(question, option, setAnswerData, selec
     inputProps.className = "radio-input"
   }
   
+  if (answerData.option_id === option.id || (question.question_format === "select all that apply" && answerData.option_id.includes(option.id))) {
+    inputProps.checked = true
+  }
+    
   return React.createElement('div', {
     className: "option-input-container",
     key: `${option.id}`
@@ -26,24 +31,4 @@ export default function createInputOption(question, option, setAnswerData, selec
     React.createElement('label', {
     htmlFor: `${option.option_copy}`
   }, option.option_copy))
-
-  // return (
-  //   <div className="option-input-container" key={option.id}>
-      
-  //     <input
-  //       type={question.question_format === "select all that apply" ? "checkbox" : "radio"}
-  //       className={question.question_format === "select all that apply" ? "checkbox-input" : "radio-input"}
-  //       id={`${option.option_copy}`}
-  //       name="option_id"
-  //       value={option.id}
-  //       onChange={(e) => routeAnswerChange(e, option.id, question.question_format, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)}
-  //     />    
-      
-  //     <label
-  //       htmlFor={`${option.option_copy}`}
-  //       >
-  //       {option.option_copy}
-  //     </label>
-  //   </div>
-  // )
 }
