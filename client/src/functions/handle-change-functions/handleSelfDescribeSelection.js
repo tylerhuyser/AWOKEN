@@ -1,9 +1,4 @@
 export default function handleSelfDescribeSelection(optionID, questionFormat, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
-  console.log("Handle-Self-Describe-Selection")
-  console.log(questionFormat)
-  console.log(selectAllArray)
-  console.log(optionID)
-  console.log(selfDescribeVisibilitySwitch)
   if (questionFormat === "select all that apply" && selfDescribeVisibilitySwitch) {
     console.log("Handle-Select-Describe-Selection: Condition #1")
     setSelfDescribeVisibilitySwitch(false)

@@ -2,7 +2,7 @@ import React from 'react'
 import routeAnswerChange from '../routeAnswerChange'
 import handleSelfDescribeSelection from '../handle-change-functions/handleSelfDescribeSelection'
 
-export default function createSelfDescribeOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
+export default function createSelfDescribeOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, selectAllAnswerData, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
 
   let textareaProps = {
     className: 'self-describe-textarea hidden',
@@ -14,7 +14,7 @@ export default function createSelfDescribeOption(question, option, answerData, s
   }
 
   if (question.question_format === "select all that apply") {
-    textareaProps.value = setSelectAllAnswerData.free_response
+    textareaProps.value = selectAllAnswerData.free_response
   }
 
   let inputProps = {
