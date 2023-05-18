@@ -3,6 +3,7 @@ export default async function handleSelectAllAnswerChange (e, optionID, selectAl
   let { name, value } = e.target;
 
   if (name === "option_id" && selectAllArray.includes(parseInt(value))) {
+    console.log("Handle-Select-All-Answer-Change: NON-Free Response Condition #1")
     setSelectAllArray(prevState => {
       return (prevState.filter(e => e !== parseInt(value)))
     })
@@ -10,7 +11,8 @@ export default async function handleSelectAllAnswerChange (e, optionID, selectAl
       ...prevState,
       option_id: []
     }))
-  } if (name === "option_id" && !selectAllArray.includes(parseInt(value))) { 
+  } else if (name === "option_id" && !selectAllArray.includes(parseInt(value))) { 
+    console.log("Handle-Select-All-Answer-Change: NON-Free Response Condition #2")
     setSelectAllArray(prevState => {
       return [...prevState, parseInt(value)]
     })
@@ -18,7 +20,8 @@ export default async function handleSelectAllAnswerChange (e, optionID, selectAl
       ...prevState,
       option_id: value
     }))
-  } if (name === "free_response" && selectAllArray.includes(parseInt(optionID)) && value === "") {
+  } else if (name === "free_response" && selectAllArray.includes(parseInt(optionID)) && value === "") {
+    console.log("Handle-Select-All-Answer-Change: Free Response Condition #1")
     setSelectAllArray(prevState => {
       return (prevState.filter(e => e !== parseInt(optionID)))
     })
@@ -27,12 +30,16 @@ export default async function handleSelectAllAnswerChange (e, optionID, selectAl
         option_id: [],
         free_response: ""
     }))
-  } if (name === "free_response" && selectAllArray.includes(parseInt(optionID)) && value !== "") {
+  } else if (name === "free_response" && selectAllArray.includes(parseInt(optionID)) && value !== "") {
+    console.log("Handle-Select-All-Answer-Change: Free Response Condition #2")
+    console.log(value)
       setSelectAllAnswerData(prevState => ({
         ...prevState,
         free_response: value
     }))
-  } if (name === "free_response" && !selectAllArray.includes(parseInt(optionID))) {
+  } else if (name === "free_response" && !selectAllArray.includes(parseInt(optionID))) {
+    console.log("Handle-Select-All-Answer-Change: Free Response Condition #3")
+    console.log(value)
     setSelectAllArray(prevState => {
       return [...prevState, parseInt(optionID)]
     })

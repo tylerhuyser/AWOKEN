@@ -10,6 +10,7 @@ export default function Option(props) {
   const { setCompletedSurveyAnswers } = props
   const { answerData, setAnswerData } = props
   const { selectAllArray, setSelectAllArray } = props
+  const {selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch} = props
 
   const [selectAllAnswerData, setSelectAllAnswerData] = useState({
     employee_id: currentUser.id,
@@ -25,15 +26,15 @@ export default function Option(props) {
     }
   }, [completeSurveySwitch])
 
-  const optionJSX = routeOptionCreate(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData)
+  const optionJSX = routeOptionCreate(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch)
 
   return(
 
-    <div className="option-container" key={`${option.id}`}>
+    <>
 
       {optionJSX}
 
-    </div>
+    </>
 
   )
 }

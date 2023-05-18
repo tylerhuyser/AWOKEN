@@ -12,13 +12,13 @@ import './Question.css'
 
 export default function Questions(props) {
 
-  const { currentUser, question, index, totalQuestions, survey, setPendingSurvey } = props
-  const { questionCounter, setQuestionCounter } = props
-  const { setCompletedSurveyAnswers } = props
-  const { completeSurveySwitch, setCompleteSurveySwitch } = props
-  const [selectAllArray, setSelectAllArray] = useState([])
-  const history = useHistory()
+  // Current User
+  const { currentUser } = props
 
+  // Survey, Questions(s) & Answers
+  const { survey } = props
+  const { question, totalQuestions, index} = props
+  const [selectAllArray, setSelectAllArray] = useState([])
   const [answerData, setAnswerData] = useState({
     employee_id: currentUser.id,
     survey_id: [],
@@ -26,6 +26,14 @@ export default function Questions(props) {
     option_id: [],
     free_response: ""
   });
+
+  // Switches & Counters
+  const { setCompletedSurveyAnswers, setPendingSurvey } = props
+  const { completeSurveySwitch, setCompleteSurveySwitch } = props
+  const { questionCounter, setQuestionCounter } = props
+  const [selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch] = useState(false)
+  
+  const history = useHistory()
 
   useEffect(() => {
     if (question.question_format !== "select all that apply" && (answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
@@ -47,6 +55,8 @@ export default function Questions(props) {
     
     // Switches
       completeSurveySwitch={completeSurveySwitch}
+      selfDescribeVisibilitySwitch={selfDescribeVisibilitySwitch}
+      setSelfDescribeVisibilitySwitch={setSelfDescribeVisibilitySwitch}
     
     // Answers
       answerData={answerData}
@@ -99,18 +109,14 @@ export default function Questions(props) {
           </div>
 
           <p className="survey-title">Complete Your Profile:</p>
-
-          {/* <div className="question-form" id={`questionnaire-question-${props.question.id}`}> */}
         
-            <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
+          <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
 
-            <div className="options-container">
-              {optionsJSX}
-            </div>
+          <div className="options-container">
+            {optionsJSX}
+          </div>
         
-            {questionButtonJSX}
-
-          {/* </div> */}
+          {questionButtonJSX}
 
         </div>
         

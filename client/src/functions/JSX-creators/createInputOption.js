@@ -1,7 +1,7 @@
 import React from 'react'
 import routeAnswerChange from '../routeAnswerChange'
 
-export default function createInputOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData) {
+export default function createInputOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
   
   let inputProps = {
     type: 'checkbox',
@@ -9,7 +9,7 @@ export default function createInputOption(question, option, answerData, setAnswe
     id:`${option.option_copy}`,
     name: "option_id",
     value: `${option.id}`,
-    onChange: (e) => routeAnswerChange(e, option.id, question.question_format, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData),
+    onChange: (e) => routeAnswerChange(e, option.id, question.question_format, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch),
     checked: false
   }
   
@@ -23,7 +23,7 @@ export default function createInputOption(question, option, answerData, setAnswe
   }
     
   return React.createElement('div', {
-    className: "option-input-container",
+    className: "input-option-container",
     key: `${option.id}`
   }, React.createElement('input', {
     ...inputProps
