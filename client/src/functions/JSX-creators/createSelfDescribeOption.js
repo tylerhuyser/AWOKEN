@@ -37,7 +37,26 @@ export default function createSelfDescribeOption(question, option, answerData, s
     inputProps.checked = true
   }
 
+  // return React.createElement("div", {
+  //   className: "self-describe-option-container",
+  //   key: `${option.id}`
+  // }, React.createElement('input', {
+  //   ...inputProps
+  // }),
+  //   React.createElement('label', {
+  //     htmlFor: `${option.option_copy}`,
+  //     className: "self-describe-label"
+  //   }, option.option_copy,
+  //   React.createElement('textarea', {
+  //     ...textareaProps
+  //   }))
+  // )
+  
+  
   return React.createElement("div", {
+    className: "option-container",
+    key: `${option.id}`
+  }, React.createElement("div", {
     className: "self-describe-option-container",
     key: `${option.id}`
   }, React.createElement('input', {
@@ -46,9 +65,8 @@ export default function createSelfDescribeOption(question, option, answerData, s
     React.createElement('label', {
       htmlFor: `${option.option_copy}`,
       className: "self-describe-label"
-    }, option.option_copy,
-    React.createElement('textarea', {
-      ...textareaProps
-    }))
-  )
+    }, option.option_copy)
+  ), React.createElement('textarea', {
+    ...textareaProps
+  }))
 }

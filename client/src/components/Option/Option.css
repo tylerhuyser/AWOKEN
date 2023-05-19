@@ -1,3 +1,7 @@
+.option-container {
+  width: 100%;
+}
+
 .input-option-container, .self-describe-option-container, .free-response-option-container {
   width: 100%;
   margin: 5px 0px;
@@ -20,6 +24,13 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  width: 100%;
+}
+
+.self-describe-textarea {
+  width: 100%;
+  /* background: white; */
 }
 
 .hidden {
@@ -53,12 +64,12 @@
 
 .self-describe-textarea {
 
-  width: 90%;
+  /* width: 90%; */
   height: 10vh;
   margin-top: 5px;
   padding: 0px;
 
-  background: #F39C12;
+  background: rgba(255,165, 0, 0.1);
   color: white;
   font-weight: 300;
   text-align: left;

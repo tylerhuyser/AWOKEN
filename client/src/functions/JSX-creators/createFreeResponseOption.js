@@ -15,9 +15,12 @@ export default function createFreeResponseOption(question, answerData, setAnswer
   }
 
   return React.createElement('div', {
+    className: "option-container",
+    key: `${question.id}`
+  }, React.createElement('div', {
     className: "free-response-option-container",
     key: `${question.id}`
   }, React.createElement("textarea", {
     ...textareaProps
-  }))
+  })))
 }

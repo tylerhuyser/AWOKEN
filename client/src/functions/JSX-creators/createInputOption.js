@@ -23,6 +23,9 @@ export default function createInputOption(question, option, answerData, setAnswe
   }
     
   return React.createElement('div', {
+    className: "option-container",
+    key: `${option.id}`
+  }, React.createElement('div', {
     className: "input-option-container",
     key: `${option.id}`
   }, React.createElement('input', {
@@ -30,5 +33,5 @@ export default function createInputOption(question, option, answerData, setAnswe
   }),
     React.createElement('label', {
     htmlFor: `${option.option_copy}`
-  }, option.option_copy))
+  }, option.option_copy)))
 }
