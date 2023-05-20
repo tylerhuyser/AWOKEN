@@ -74,20 +74,15 @@
 }
 
 .survey-navigation-button {
-  
   color: white;
   margin: 5px;
-
 }
 
 .survey-title {
-
   font-size: 6vw;
   letter-spacing: 0.9px;
   flex-grow: 1;
-
 }
-
 
 .question-copy {
 
@@ -102,7 +97,7 @@
 
 }
 
-.options-container{
+.options-container {
   width: 100%;
   margin: 20px 0px;
 
@@ -138,33 +133,6 @@
 
   /* flex-grow: 1; */
 
-}
-
-.free-response-textarea {
-
-  width: 100%;
-  height: 10vh;
-  margin-top: 2px;
-  padding: 10px;
-
-  background: white;
-  color: #F39C12;
-
-  font-weight: 300;
-  text-align: left;
-
-  border: 1px solid white;
-  border-radius: 12px;
-  flex-grow: 1;
-
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;
-
-}
-
-.free-response-textarea::placeholder {
-  color: #F39C12;
 }
 
 

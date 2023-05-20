@@ -133,7 +133,7 @@ function App() {
           />
         </Route>
 
-        <Route path="/edit-journal">
+        {/* <Route path="/edit-journal">
           <EditContainer
             currentUser={currentUser}
             surveyFormat={srJournal}
@@ -141,8 +141,17 @@ function App() {
             setPendingSurvey={setPendingSurvey}
             activeSurveyID={activeSurveyID}
           />
-        </Route>
+        </Route> */}
 
+        <Route path="/edit-journal">
+          <SurveyContainer
+            currentUser={currentUser}
+            surveyFormat={srJournal}
+            setCompletedSurveys={setCompletedSurveys}
+            setPendingSurvey={setPendingSurvey}
+            activeSurveyID={activeSurveyID}
+          />
+        </Route>
           
         <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
 

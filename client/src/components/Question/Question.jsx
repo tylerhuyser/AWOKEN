@@ -9,6 +9,9 @@ import changeQuestion from "../../functions/changeQuestion.js"
 import exitSurvey from '../../functions/switch-handler-functions/exitSurvey.js';
 
 import './Question.css'
+import routeOptionCreate from '../../functions/routeOptionCreate.js';
+import handleFreeResponseAnswerChange from '../../functions/handle-change-functions/handleFreeResponseAnswerChange.js';
+import createFreeResponseOption from '../../functions/JSX-creators/createFreeResponseOption.js';
 
 export default function Questions(props) {
 
@@ -70,6 +73,8 @@ export default function Questions(props) {
     />
   ))
 
+  const freeResponseOptionJSX = createFreeResponseOption(question, answerData, setAnswerData)
+
   const questionButtonJSX = createQuestionButton(index, totalQuestions, questionCounter, setQuestionCounter, completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers, history)
 
   
@@ -113,7 +118,7 @@ export default function Questions(props) {
           <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
 
           <div className="options-container">
-            {optionsJSX}
+            {question.question_format === "free-response" ? freeResponseOptionJSX : optionsJSX}
           </div>
         
           {questionButtonJSX}

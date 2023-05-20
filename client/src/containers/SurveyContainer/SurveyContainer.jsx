@@ -12,7 +12,7 @@ import './SurveyContainer.css'
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat } = props;
+  const { currentUser, surveyFormat, activeSurveyID } = props;
   const { setCompletedSurveys, setPendingSurvey } = props;
 
   // BELOW: Executes on Component Mount - GETs the Survey Template to generate Questions and Options fro User to make selections
@@ -44,7 +44,6 @@ export default function SurveyContainer(props) {
     }
   }, [currentUser, surveyFormat])
 
-
   useEffect(() => {
     if (completedSurveyAnswers.length === 0 || !surveyTemplate.questions) {
       return
@@ -63,6 +62,20 @@ export default function SurveyContainer(props) {
       handlePostAnswers(surveyID, completedSurveyAnswers, setPendingSurvey, history)
     }
   }, [surveyID])
+
+  // For SurveyEdit
+
+  // useEffect(() => {
+  //   if (activeSurveyID !== null) {
+  //     const getEditAnswers = async () => {
+  //       const rawData = await getSurveyAnswers(activeSurveyID);
+  //       const data = rawData.data;
+  //       const rawAnswers = data.answers;
+  //       setOriginalAnswers(rawAnswers);
+  //     };
+  //     getEditAnswers(activeSurveyID);
+  //   }
+  // }, []);
 
 
   const surveyQuestionsJSX = surveyTemplate.questions && surveyTemplate.questions.map((question, index) => (
