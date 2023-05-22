@@ -26,9 +26,9 @@ export default function createInputOption(question, option, answerData, setAnswe
     inputProps.checked = true
   }
 
-  if (editAnswer.option_id === option.id && answerData.option_id.legnth === 0) {
-    inputProps.checked = true
-  }
+  // if (editAnswer.option_id === option.id && answerData.option_id.length === 0) {
+  //   inputProps.checked = true
+  // }
     
   return React.createElement('div', {
     className: "option-container",

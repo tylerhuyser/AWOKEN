@@ -5,11 +5,11 @@ import "./App.css";
 
 // Components
 import Layout from "./layout/Layout/Layout.jsx";
+import Loader from "./layout/Loader/Loader";
 import LandingPage from "./screens/LandingPage/LandingPage"
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 import SurveyContainer from "./containers/SurveyContainer/SurveyContainer";
-import EditContainer from "./containers/EditContainer/EditContainer";
 
 import Home from "./screens/Home/Home"
 import Journals from "./screens/Journals/Journals"
@@ -24,7 +24,7 @@ function App() {
   // Auth
   const [currentUser, setCurrentUser] = useState(null);
 
-// User Data
+  // User Data
   const [completedSurveys, setCompletedSurveys] = useState(null);
 
   // App Data
@@ -35,7 +35,6 @@ function App() {
   const [pendingSurvey, setPendingSurvey] = useState(false);
   // const [editSurvey, setEditSurvey] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false)
-  const [editSurveyID, setEditSurveyID] = useState(null);
 
   // Location
   const history = useHistory();
@@ -55,7 +54,7 @@ function App() {
   // const srQuestionnaire = surveyFormats[11];
   const srJournal = surveyFormats[12];
 
-// UseEffects
+  // UseEffects
 
   useEffect(() => {
     console.log('App.js - UseEffect #1 - Verify')
@@ -86,122 +85,56 @@ function App() {
   }, [currentUser]);
 
   // useEffect(() => {
+  //   const storedEditID = localStorage.getItem("editSurveyID")
+  //   const storedEditDate = localStorage.getItem("editSurveyDate")
+  //   if (currentUser !== null && storedEditID && ((Date.parse(storedEditDate) - new Date()) / (1000 * 60 * 60) > 1)) {
+  //     console.log('App.js - UseEffect #5 - Access EditSurveyID & Date from LocalStorage')
+  //     setEditSurveyID(parseInt(storedEditID))
+  //   }
+  // }, [currentUser])
+
+  // useEffect(() => {
   //   console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
   //   if (editSurvey) {
   //     history.push("/edit-journal")
   //   }
   // }, [editSurvey])
 
-  useEffect(() => {
-    console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
-    if (editSurveyID) {
-      history.push("/edit-journal")
-    }
-  }, [editSurveyID])
+  // useEffect(() => {
+  //   console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
+  //   if (editSurveyID) {
+  //     history.push("/edit-journal")
+  //   }
+  // }, [editSurveyID])
 
   return (
-    <div className="app-container">
+  
+    <>
 
-      <Switch>
-
-        <Route exact path="/">
-            <LandingPage />
-        </Route>
-
-        <Route path="/login">
-          <Login
-              setCurrentUser={setCurrentUser}
-          />
-        </Route>
-          
-        <Route path="/register">
-          <Register
-            companyInfo={companyInfo}
-            setCurrentUser={setCurrentUser}
-            setPendingSurvey={setPendingSurvey}
-          />
-        </Route>
-          
-        <Route path="/complete-profile">
-          <SurveyContainer
-            currentUser={currentUser}
-            surveyFormat={demographicsSurvey}
-            setCompletedSurveys={setCompletedSurveys}
-            setPendingSurvey={setPendingSurvey}
-          />
-          </Route>
-
-        <Route path="/new-journal">
-          <SurveyContainer
-            currentUser={currentUser}
-            surveyFormat={srJournal}
-            setCompletedSurveys={setCompletedSurveys}
-            setPendingSurvey={setPendingSurvey}
-          />
-        </Route>
-
-        {/* <Route path="/edit-journal">
-          <EditContainer
-            currentUser={currentUser}
-            surveyFormat={srJournal}
-            setCompletedSurveys={setCompletedSurveys}
-            setPendingSurvey={setPendingSurvey}
-            editSurveyID={editSurveyID}
-          />
-        </Route> */}
-
-        <Route path="/edit-journal">
-          <SurveyContainer
-            currentUser={currentUser}
-            surveyFormat={srJournal}
-            setCompletedSurveys={setCompletedSurveys}
-            setPendingSurvey={setPendingSurvey}
-            editSurveyID={editSurveyID}
-          />
-        </Route>
-          
-        <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
-
-          <Route exact path="/home">
-              <Home setPendingSurvey={setPendingSurvey} />
-          </Route>
-
-          <Route exact path="/journals">
-            <Journals
-              currentUser={currentUser}
-              completedSurveys={completedSurveys} setCompletedSurveys={setCompletedSurveys}
-              isDeleted={isDeleted} setIsDeleted={setIsDeleted}
-              setEditSurveyID={setEditSurveyID}
-              // setEditSurvey={setEditSurvey}
-              />
-          </Route>
-          
-        </Layout> 
-          
-      </Switch>
-
-
+      { currentUser && gatherCompanies && surveyFormats.length > 0 ?
       
-      {/* {!currentUser ? (
-        <Switch>
-          <Route path="/login">
-            <Login
-              handleLogin={handleLogin}
-              error=
-              {error} />
-          </Route>
+        <div className="app-container">
 
-          <Route path="/register">
-            <Register
-              handleRegister={handleRegister}
-              companyInfo={companyInfo}
-            />
-          </Route>
-        </Switch>
-      ) : (
-        <>
-          {(pendingSurvey) || (editSurvey) || (completedSurveys && completedSurveys.length === 0) ? (
             <Switch>
+
+              <Route exact path="/">
+                <LandingPage />
+              </Route>
+
+              <Route path="/login">
+                <Login
+                  setCurrentUser={setCurrentUser}
+                />
+              </Route>
+              
+              <Route path="/register">
+                <Register
+                  companyInfo={companyInfo}
+                  setCurrentUser={setCurrentUser}
+                  setPendingSurvey={setPendingSurvey}
+                />
+              </Route>
+              
               <Route path="/complete-profile">
                 <SurveyContainer
                   currentUser={currentUser}
@@ -220,35 +153,40 @@ function App() {
                 />
               </Route>
 
-              <Route path="/edit-journal">
-                <EditContainer
+              <Route path="/edit-journal/:id">
+                <SurveyContainer
                   currentUser={currentUser}
                   surveyFormat={srJournal}
                   setCompletedSurveys={setCompletedSurveys}
                   setPendingSurvey={setPendingSurvey}
-                  editSurveyID={editSurveyID}
                 />
               </Route>
+              
+              <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
+
+                <Route exact path="/home">
+                  <Home setPendingSurvey={setPendingSurvey} />
+                </Route>
+
+                <Route exact path="/journals">
+                  <Journals
+                    currentUser={currentUser}
+                    completedSurveys={completedSurveys} setCompletedSurveys={setCompletedSurveys}
+                    isDeleted={isDeleted} setIsDeleted={setIsDeleted}
+                  />
+                </Route>
+              
+              </Layout>
+              
             </Switch>
-          ) : (
-            <Layout currentUser={currentUser} handleLogout={handleLogout}>
-              <MainContainer
-                currentUser={currentUser}
-                srQuestionnaire={srQuestionnaire}
-                srJournal={srJournal}
-                setPendingSurvey={setPendingSurvey}
-                completedSurveys={completedSurveys}
-                setCompletedSurveys={setCompletedSurveys}
-                setEditSurveyID={setEditSurveyID}
-                setEditSurvey={setEditSurvey}
-              />
-            </Layout>
-          )}
-        </>
-      )} */}
 
+        </div>
 
-    </div>
+      :
+  
+        <Loader />
+      }
+    </>
   );
 }
 

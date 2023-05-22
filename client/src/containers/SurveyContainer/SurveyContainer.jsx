@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import Question from '../../components/Question/Question';
 import Loader from '../../layout/Loader/Loader'
@@ -13,7 +13,7 @@ import './SurveyContainer.css'
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat, editSurveyID } = props;
+  const { currentUser, surveyFormat } = props;
   const { setCompletedSurveys, setPendingSurvey } = props;
 
   // BELOW: Executes on Component Mount - GETs the Survey Template to generate Questions and Options fro User to make selections
@@ -39,6 +39,7 @@ export default function SurveyContainer(props) {
   const [editAnswers, setEditAnswers] = useState([])
 
   const history = useHistory();
+  const params = useParams()
 
   useEffect(() => {
     console.log('SurveyContainer.js - UseEffect #1 - Gathering Survey Data')
@@ -48,11 +49,11 @@ export default function SurveyContainer(props) {
   }, [currentUser, surveyFormat])
 
   useEffect(() => {
-    if (editSurveyID) {
-      console.log('SurveyContainer.js - UseEffect #1a - Gathering Edit Asnswers')
-      gatherEditAnswers(editSurveyID, setEditAnswers)
+    if (currentUser && surveyFormat && params.id) {
+      console.log('SurveyContainer.js - UseEffect #1a - Gathering Edit Answers')
+      gatherEditAnswers(params.id, setEditAnswers)
     }
-  }, [editSurveyID])
+  }, [surveyFormat])
 
   useEffect(() => {
     if (completedSurveyAnswers.length === 0 || !surveyTemplate.questions) {
@@ -118,13 +119,19 @@ export default function SurveyContainer(props) {
     />
   ))
 
-  console.log(surveyTemplate)
+  console.log(`Params: ${params}`)
+  console.log(`Params.ID: ${params.id}`)
+  console.log(`SurveyFormat: ${surveyFormat}`)
+  console.log(`SurveyTemplate ${surveyTemplate}`)
+  console.log(surveyFormat && surveyTemplate.length > 0)
+  console.log((!params.id || (params.id && editAnswers.length > 0)))
+  console.log(surveyFormat && surveyTemplate.length > 0 && (!params.id || (params.id && editAnswers.length > 0)))
 
   return (
 
     <>
       
-      { surveyTemplate && surveyTemplate.length <= 0 && (!editSurveyID || editAnswers.length > 0) ?
+      { surveyFormat !== undefined && surveyTemplate.length > 0 && (!params.id || (params.id && editAnswers.length > 0)) ?
       
 
         <Loader />

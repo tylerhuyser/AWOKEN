@@ -45,6 +45,17 @@ export default function Questions(props) {
     }
   }, [completeSurveySwitch])
 
+  useEffect(() => {
+    if (editAnswer && answerData && answerData.option_id.length === 0) {
+      setAnswerData(prevState => ({
+        ...prevState,
+        survey_id: editAnswer.survey_id,
+        option_id: editAnswer.option_id,
+        free_response: editAnswer.free_response
+      }))
+    }
+  }, [])
+
   const surveyProgressMarkersJSX = createSurveyProgressMarkers(index, totalQuestions)
 
   const optionsJSX = question.options.map(option => (

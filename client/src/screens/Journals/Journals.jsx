@@ -12,7 +12,6 @@ export default function Journals(props) {
   const { currentUser } = props;
   const { completedSurveys, setCompletedSurveys } = props
   const { isDeleted, setIsDeleted } = props
-  const { setEditSurveyID, setEditSurvey } = props
 
   // Location
   const history = useHistory();
@@ -43,7 +42,7 @@ export default function Journals(props) {
 
             <div className="journal-buttons-container" key={`${ index }-journal-buttons-container`}>
 
-              <button className="journal-button" id="journal-edit-button" key={`${ index }-journal-edit-button`} onClick={() => handleEdit(journal.id, setEditSurveyID, setEditSurvey, history)}>EDIT</button>
+              <button className="journal-button" id="journal-edit-button" key={`${ index }-journal-edit-button`} onClick={() => handleEdit(journal.id, history)}>EDIT</button>
               <button className="journal-button" id="journal-delete-button" key={`${ index }-journal-delete-button`} onClick={() => handleDelete(journal.id, isDeleted, setIsDeleted)}>DELETE</button>
 
             </div>
