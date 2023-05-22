@@ -7,7 +7,7 @@ import { getOneSurveyFormat } from "../../services/survey-constructors";
 import { putAnswer, getSurveyAnswers } from "../../services/answers";
 
 export default function SurveyContainer(props) {
-  const { currentUser, surveyFormat, activeSurveyID, setPendingSurvey } = props;
+  const { currentUser, surveyFormat, editSurveyID, setPendingSurvey } = props;
   const [surveyData, setSurveyData] = useState([]);
   const [originalAnswers, setOriginalAnswers] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -50,14 +50,14 @@ export default function SurveyContainer(props) {
   // Gathers Previous Answers To Edit using Survey ID reference
 
     useEffect(() => {
-      if (activeSurveyID !== null) {
+      if (editSurveyID !== null) {
         const getEditAnswers = async () => {
-          const rawData = await getSurveyAnswers(activeSurveyID);
+          const rawData = await getSurveyAnswers(editSurveyID);
           const data = rawData.data;
           const rawAnswers = data.answers;
           setOriginalAnswers(rawAnswers);
         };
-        getEditAnswers(activeSurveyID);
+        getEditAnswers(editSurveyID);
       }
     }, []);
 

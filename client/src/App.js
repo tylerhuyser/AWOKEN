@@ -33,9 +33,9 @@ function App() {
 
   // Switches
   const [pendingSurvey, setPendingSurvey] = useState(false);
-  const [editSurvey, setEditSurvey] = useState(false);
+  // const [editSurvey, setEditSurvey] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false)
-  const [activeSurveyID, setActiveSurveyID] = useState(0);
+  const [editSurveyID, setEditSurveyID] = useState(null);
 
   // Location
   const history = useHistory();
@@ -85,12 +85,19 @@ function App() {
     }
   }, [currentUser]);
 
+  // useEffect(() => {
+  //   console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
+  //   if (editSurvey) {
+  //     history.push("/edit-journal")
+  //   }
+  // }, [editSurvey])
+
   useEffect(() => {
     console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
-    if (editSurvey) {
+    if (editSurveyID) {
       history.push("/edit-journal")
     }
-  }, [editSurvey])
+  }, [editSurveyID])
 
   return (
     <div className="app-container">
@@ -139,7 +146,7 @@ function App() {
             surveyFormat={srJournal}
             setCompletedSurveys={setCompletedSurveys}
             setPendingSurvey={setPendingSurvey}
-            activeSurveyID={activeSurveyID}
+            editSurveyID={editSurveyID}
           />
         </Route> */}
 
@@ -149,7 +156,7 @@ function App() {
             surveyFormat={srJournal}
             setCompletedSurveys={setCompletedSurveys}
             setPendingSurvey={setPendingSurvey}
-            activeSurveyID={activeSurveyID}
+            editSurveyID={editSurveyID}
           />
         </Route>
           
@@ -164,8 +171,9 @@ function App() {
               currentUser={currentUser}
               completedSurveys={completedSurveys} setCompletedSurveys={setCompletedSurveys}
               isDeleted={isDeleted} setIsDeleted={setIsDeleted}
-              setActiveSurveyID={setActiveSurveyID}
-              setEditSurvey={setEditSurvey} />
+              setEditSurveyID={setEditSurveyID}
+              // setEditSurvey={setEditSurvey}
+              />
           </Route>
           
         </Layout> 
@@ -218,7 +226,7 @@ function App() {
                   surveyFormat={srJournal}
                   setCompletedSurveys={setCompletedSurveys}
                   setPendingSurvey={setPendingSurvey}
-                  activeSurveyID={activeSurveyID}
+                  editSurveyID={editSurveyID}
                 />
               </Route>
             </Switch>
@@ -231,7 +239,7 @@ function App() {
                 setPendingSurvey={setPendingSurvey}
                 completedSurveys={completedSurveys}
                 setCompletedSurveys={setCompletedSurveys}
-                setActiveSurveyID={setActiveSurveyID}
+                setEditSurveyID={setEditSurveyID}
                 setEditSurvey={setEditSurvey}
               />
             </Layout>

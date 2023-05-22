@@ -2,7 +2,7 @@ import React from 'react'
 import routeAnswerChange from '../routeAnswerChange'
 import handleSelfDescribeSelection from '../handle-change-functions/handleSelfDescribeSelection'
 
-export default function createSelfDescribeOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, selectAllAnswerData, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
+export default function createSelfDescribeOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, selectAllAnswerData, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch, editAnswer) {
 
   let textareaProps = {
     className: 'self-describe-textarea hidden',

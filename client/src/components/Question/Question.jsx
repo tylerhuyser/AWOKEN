@@ -20,7 +20,8 @@ export default function Questions(props) {
 
   // Survey, Questions(s) & Answers
   const { survey } = props
-  const { question, totalQuestions, index} = props
+  const { question, totalQuestions, index } = props
+  const { editAnswer } = props
   const [selectAllArray, setSelectAllArray] = useState([])
   const [answerData, setAnswerData] = useState({
     employee_id: currentUser.id,
@@ -31,7 +32,7 @@ export default function Questions(props) {
   });
 
   // Switches & Counters
-  const { setCompletedSurveyAnswers, setPendingSurvey } = props
+  const { completedSurveyAnswers, setCompletedSurveyAnswers, setPendingSurvey } = props
   const { completeSurveySwitch, setCompleteSurveySwitch } = props
   const { questionCounter, setQuestionCounter } = props
   const [selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch] = useState(false)
@@ -64,16 +65,20 @@ export default function Questions(props) {
     // Answers
       answerData={answerData}
       setAnswerData={setAnswerData}
+      completedSurveyAnswers={completedSurveyAnswers}
       setCompletedSurveyAnswers={setCompletedSurveyAnswers}
     
     // Select-All
       selectAllArray={selectAllArray}
       setSelectAllArray={setSelectAllArray}
 
+    // Edit
+      editAnswer={editAnswer}
+      
     />
   ))
 
-  const freeResponseOptionJSX = createFreeResponseOption(question, answerData, setAnswerData)
+  const freeResponseOptionJSX = createFreeResponseOption(question, answerData, setAnswerData, editAnswer)
 
   const questionButtonJSX = createQuestionButton(index, totalQuestions, questionCounter, setQuestionCounter, completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers, history)
 

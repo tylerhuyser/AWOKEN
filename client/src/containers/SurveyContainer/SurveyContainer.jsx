@@ -5,6 +5,7 @@ import Question from '../../components/Question/Question';
 import Loader from '../../layout/Loader/Loader'
 
 import gatherSurveyTemplate from '../../functions/CRUD/GET/gatherSurveyTemplate';
+import gatherEditAnswers from '../../functions/CRUD/GET/gatherEditAnswers';
 import handlePostNewSurvey from '../../functions/CRUD/POST/handlePostNewSurvey';
 import handlePostAnswers from '../../functions/CRUD/POST/handlePostAnswers';
 
@@ -12,7 +13,7 @@ import './SurveyContainer.css'
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat, activeSurveyID } = props;
+  const { currentUser, surveyFormat, editSurveyID } = props;
   const { setCompletedSurveys, setPendingSurvey } = props;
 
   // BELOW: Executes on Component Mount - GETs the Survey Template to generate Questions and Options fro User to make selections
@@ -35,6 +36,8 @@ export default function SurveyContainer(props) {
   // BELOW: After NEW Survey POSTed, the below ID is used to POST corresponding Answers
   const [surveyID, setSurveyID] = useState(null)
 
+  const [editAnswers, setEditAnswers] = useState([])
+
   const history = useHistory();
 
   useEffect(() => {
@@ -45,10 +48,17 @@ export default function SurveyContainer(props) {
   }, [currentUser, surveyFormat])
 
   useEffect(() => {
+    if (editSurveyID) {
+      console.log('SurveyContainer.js - UseEffect #1a - Gathering Edit Asnswers')
+      gatherEditAnswers(editSurveyID, setEditAnswers)
+    }
+  }, [editSurveyID])
+
+  useEffect(() => {
     if (completedSurveyAnswers.length === 0 || !surveyTemplate.questions) {
       return
     }
-    if (completedSurveyAnswers.length >= surveyTemplate.questions.length) {
+    if (completedSurveyAnswers.length >= surveyTemplate.questions.length && completeSurveySwitch) {
       console.log('SurveyContainer.js - UseEffect #2 - Posting Survey Instance')
       handlePostNewSurvey(survey, setCompletedSurveys, setSurveyID) 
     } else {
@@ -66,14 +76,14 @@ export default function SurveyContainer(props) {
   // For SurveyEdit
 
   // useEffect(() => {
-  //   if (activeSurveyID !== null) {
+  //   if (editSurveyID !== null) {
   //     const getEditAnswers = async () => {
-  //       const rawData = await getSurveyAnswers(activeSurveyID);
+  //       const rawData = await getSurveyAnswers(editSurveyID);
   //       const data = rawData.data;
   //       const rawAnswers = data.answers;
   //       setOriginalAnswers(rawAnswers);
   //     };
-  //     getEditAnswers(activeSurveyID);
+  //     getEditAnswers(editSurveyID);
   //   }
   // }, []);
 
@@ -99,7 +109,11 @@ export default function SurveyContainer(props) {
 
       // Data Forms
       survey={survey}
+      completedSurveyAnswers={completedSurveyAnswers}
       setCompletedSurveyAnswers={setCompletedSurveyAnswers}
+
+      // Edit
+      editAnswer={editAnswers[index]}
     
     />
   ))
@@ -110,7 +124,7 @@ export default function SurveyContainer(props) {
 
     <>
       
-      { surveyTemplate && surveyTemplate.length <= 0 ?
+      { surveyTemplate && surveyTemplate.length <= 0 && (!editSurveyID || editAnswers.length > 0) ?
       
 
         <Loader />

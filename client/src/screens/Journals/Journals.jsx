@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
+import { useHistory } from "react-router-dom";
 import { getOneEmployee } from '../../services/admin-info';
 
 import handleEdit from "../../functions/switch-handler-functions/handleEdit"
-import handleDelete from "../../functions/CRUD/DELETE/handleDelete.js"
+import handleDelete from "../../functions/CRUD/DELETE/handleDeleteSurvey.js"
 
 import './Journals.css'
 
@@ -11,7 +12,10 @@ export default function Journals(props) {
   const { currentUser } = props;
   const { completedSurveys, setCompletedSurveys } = props
   const { isDeleted, setIsDeleted } = props
-  const { setActiveSurveyID, setEditSurvey } = props
+  const { setEditSurveyID, setEditSurvey } = props
+
+  // Location
+  const history = useHistory();
 
   useEffect(() => {
       const userID = currentUser.id
@@ -39,7 +43,7 @@ export default function Journals(props) {
 
             <div className="journal-buttons-container" key={`${ index }-journal-buttons-container`}>
 
-              <button className="journal-button" id="journal-edit-button" key={`${ index }-journal-edit-button`} onClick={() => handleEdit(journal.id, setActiveSurveyID, setEditSurvey)}>EDIT</button>
+              <button className="journal-button" id="journal-edit-button" key={`${ index }-journal-edit-button`} onClick={() => handleEdit(journal.id, setEditSurveyID, setEditSurvey, history)}>EDIT</button>
               <button className="journal-button" id="journal-delete-button" key={`${ index }-journal-delete-button`} onClick={() => handleDelete(journal.id, isDeleted, setIsDeleted)}>DELETE</button>
 
             </div>

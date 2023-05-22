@@ -1,7 +1,7 @@
 import React from 'react'
 import routeAnswerChange from '../routeAnswerChange'
 
-export default function createFreeResponseOption(question, answerData, setAnswerData) {
+export default function createFreeResponseOption(question, answerData, setAnswerData, editAnswer) {
 
   let textareaProps = {
     className: "free-response-textarea",

@@ -9,6 +9,7 @@ export default function Option(props) {
   const { currentUser, question, option, completeSurveySwitch } = props
   const { setCompletedSurveyAnswers } = props
   const { answerData, setAnswerData } = props
+  const { editAnswer } = props
   const { selectAllArray, setSelectAllArray } = props
   const { selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch } = props
 
@@ -28,7 +29,7 @@ export default function Option(props) {
 
   console.log('OPTION Mount')
 
-  const optionJSX = routeOptionCreate(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, selectAllAnswerData, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch)
+  const optionJSX = routeOptionCreate(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, selectAllAnswerData, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch, editAnswer)
 
   return(
 
