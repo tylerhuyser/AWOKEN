@@ -6,9 +6,8 @@ import beginJournal from "../../functions/switch-handler-functions/beginJournal.
 import './Home.css'
 
 
-export default function Home(props) {
+export default function Home() {
   
-  const { setPendingSurvey } = props;
   const history = useHistory();
 
   return (
@@ -21,7 +20,7 @@ export default function Home(props) {
         <div className="home-card-content" id="notifications-content">
           <p className="home-card-copy">Let's get started!</p>
           <p className="home-card-copy">Complete Your Onboarding Assement</p>
-          <button className="home-journal-button" id="notification-begin-journal-button" onClick={(e) => beginJournal(e, history, setPendingSurvey)}>BEGIN</button>
+          <button className="home-journal-button" id="notification-begin-journal-button" onClick={(e) => beginJournal(e, history)}>BEGIN</button>
         </div>
       </div>
 

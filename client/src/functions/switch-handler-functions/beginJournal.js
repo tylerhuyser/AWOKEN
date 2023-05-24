@@ -1,7 +1,6 @@
 import handleNavigation from '../handleNavigation';
 
-export default function beginJournal(e, history, setPendingSurvey) {
+export default function beginJournal(e, history) {
   e.preventDefault();
-  setPendingSurvey(true)
   handleNavigation(history, '/new-journal')
 }

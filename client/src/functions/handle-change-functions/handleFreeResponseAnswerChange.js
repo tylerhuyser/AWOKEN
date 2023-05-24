@@ -2,8 +2,6 @@ export default async function handleFreeResponseAnswerChange (e, optionID, setAn
 
   let { value } = e.target;
 
-  console.log(value)
-
   setAnswerData(prevState => ({
     ...prevState,
     option_id: optionID,

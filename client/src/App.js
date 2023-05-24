@@ -32,8 +32,6 @@ function App() {
   const [surveyFormats, setSurveyFormats] = useState([]);
 
   // Switches
-  const [pendingSurvey, setPendingSurvey] = useState(false);
-  // const [editSurvey, setEditSurvey] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false)
 
   // Location
@@ -84,63 +82,38 @@ function App() {
     }
   }, [currentUser]);
 
-  // useEffect(() => {
-  //   const storedEditID = localStorage.getItem("editSurveyID")
-  //   const storedEditDate = localStorage.getItem("editSurveyDate")
-  //   if (currentUser !== null && storedEditID && ((Date.parse(storedEditDate) - new Date()) / (1000 * 60 * 60) > 1)) {
-  //     console.log('App.js - UseEffect #5 - Access EditSurveyID & Date from LocalStorage')
-  //     setEditSurveyID(parseInt(storedEditID))
-  //   }
-  // }, [currentUser])
-
-  // useEffect(() => {
-  //   console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
-  //   if (editSurvey) {
-  //     history.push("/edit-journal")
-  //   }
-  // }, [editSurvey])
-
-  // useEffect(() => {
-  //   console.log('App.js - UseEffect #5 - EditSurvey Pushes user to Edit-Journal')
-  //   if (editSurveyID) {
-  //     history.push("/edit-journal")
-  //   }
-  // }, [editSurveyID])
-
   return (
-  
-    <>
-
-      { currentUser && gatherCompanies && surveyFormats.length > 0 ?
       
-        <div className="app-container">
+    <div className="app-container">
 
-            <Switch>
+        <Switch>
 
-              <Route exact path="/">
-                <LandingPage />
-              </Route>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
 
-              <Route path="/login">
-                <Login
-                  setCurrentUser={setCurrentUser}
-                />
-              </Route>
+          <Route path="/login">
+            <Login
+              setCurrentUser={setCurrentUser}
+            />
+          </Route>
               
-              <Route path="/register">
-                <Register
-                  companyInfo={companyInfo}
-                  setCurrentUser={setCurrentUser}
-                  setPendingSurvey={setPendingSurvey}
-                />
-              </Route>
+          <Route path="/register">
+            <Register
+              companyInfo={companyInfo}
+              setCurrentUser={setCurrentUser}
+            />
+          </Route>
               
+          {currentUser && gatherCompanies && surveyFormats.length > 0 ?
+          
+            <>
+          
               <Route path="/complete-profile">
                 <SurveyContainer
                   currentUser={currentUser}
                   surveyFormat={demographicsSurvey}
                   setCompletedSurveys={setCompletedSurveys}
-                  setPendingSurvey={setPendingSurvey}
                 />
               </Route>
 
@@ -149,7 +122,6 @@ function App() {
                   currentUser={currentUser}
                   surveyFormat={srJournal}
                   setCompletedSurveys={setCompletedSurveys}
-                  setPendingSurvey={setPendingSurvey}
                 />
               </Route>
 
@@ -158,35 +130,37 @@ function App() {
                   currentUser={currentUser}
                   surveyFormat={srJournal}
                   setCompletedSurveys={setCompletedSurveys}
-                  setPendingSurvey={setPendingSurvey}
                 />
               </Route>
               
-              <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
 
-                <Route exact path="/home">
-                  <Home setPendingSurvey={setPendingSurvey} />
-                </Route>
+              <Route exact path="/home">
+                <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
+                  <Home />
+                </Layout>
+              </Route>
 
-                <Route exact path="/journals">
+              <Route exact path="/journals">
+                <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
                   <Journals
                     currentUser={currentUser}
                     completedSurveys={completedSurveys} setCompletedSurveys={setCompletedSurveys}
                     isDeleted={isDeleted} setIsDeleted={setIsDeleted}
-                  />
-                </Route>
+                />
+                </Layout>
+              </Route>  
+      
+            </>
               
-              </Layout>
-              
-            </Switch>
-
-        </div>
-
-      :
+          :
   
-        <Loader />
-      }
-    </>
+            <Loader />
+          
+          }
+        
+        </Switch>
+
+      </div>
   );
 }
 

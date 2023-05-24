@@ -1,7 +1,7 @@
 import React from 'react'
-import routeAnswerChange from '../routeAnswerChange'
+import routeAnswerChange from '../router-functions/routeAnswerChange'
 
-export default function createInputOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch, editAnswer) {
+export default function createInputOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
   
   let inputProps = {
     type: 'checkbox',
@@ -17,18 +17,10 @@ export default function createInputOption(question, option, answerData, setAnswe
     inputProps.type = "radio"
     inputProps.className = "radio-input"
   }
-
-  // if (editAnswer.option_id === option.id && (answerData.option_ID === editAnswer.option_ID || answerData.option_ID === [])) {
-  //   inputProps.checked = true
-  // }
   
   if (answerData.option_id === option.id || (question.question_format === "select all that apply" && selectAllArray.includes(option.id))) {
     inputProps.checked = true
   }
-
-  // if (editAnswer.option_id === option.id && answerData.option_id.length === 0) {
-  //   inputProps.checked = true
-  // }
     
   return React.createElement('div', {
     className: "option-container",

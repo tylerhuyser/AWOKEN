@@ -8,13 +8,14 @@ import gatherSurveyTemplate from '../../functions/CRUD/GET/gatherSurveyTemplate'
 import gatherEditAnswers from '../../functions/CRUD/GET/gatherEditAnswers';
 import handlePostNewSurvey from '../../functions/CRUD/POST/handlePostNewSurvey';
 import handlePostAnswers from '../../functions/CRUD/POST/handlePostAnswers';
+import handleEditSurvey from '../../functions/CRUD/PUT/handleEditSurvey';
 
 import './SurveyContainer.css'
 
 export default function SurveyContainer(props) {
 
   const { currentUser, surveyFormat } = props;
-  const { setCompletedSurveys, setPendingSurvey } = props;
+  const { setCompletedSurveys } = props;
 
   // BELOW: Executes on Component Mount - GETs the Survey Template to generate Questions and Options fro User to make selections
   const [surveyTemplate, setSurveyTemplate] = useState([]);
@@ -57,36 +58,34 @@ export default function SurveyContainer(props) {
 
   useEffect(() => {
     if (completedSurveyAnswers.length === 0 || !surveyTemplate.questions) {
+
       return
-    }
-    if (completedSurveyAnswers.length >= surveyTemplate.questions.length && completeSurveySwitch) {
+
+    } else if (completedSurveyAnswers.length >= surveyTemplate.questions.length && editAnswers.length > 0 && completeSurveySwitch) {
+
+      console.log('SurveyContainer.js - UseEffect #2 - PUTting Edited Answers')
+      console.log(completedSurveyAnswers)
+      console.log(editAnswers)
+      handleEditSurvey(surveyTemplate.questions, completedSurveyAnswers, editAnswers, history)
+
+    } else if (completedSurveyAnswers.length >= surveyTemplate.questions.length && completeSurveySwitch) {
+
       console.log('SurveyContainer.js - UseEffect #2 - Posting Survey Instance')
       handlePostNewSurvey(survey, setCompletedSurveys, setSurveyID) 
+
     } else {
+
       alert("Please complete all answers in order to continue!")
+
     }
   }, [completedSurveyAnswers])
 
   useEffect(() => {
     if (surveyID !== null) {
       console.log('SurveyContainer.js - UseEffect #3 - Posting Answers')
-      handlePostAnswers(surveyID, completedSurveyAnswers, setPendingSurvey, history)
+      handlePostAnswers(surveyID, completedSurveyAnswers, history)
     }
   }, [surveyID])
-
-  // For SurveyEdit
-
-  // useEffect(() => {
-  //   if (editSurveyID !== null) {
-  //     const getEditAnswers = async () => {
-  //       const rawData = await getSurveyAnswers(editSurveyID);
-  //       const data = rawData.data;
-  //       const rawAnswers = data.answers;
-  //       setOriginalAnswers(rawAnswers);
-  //     };
-  //     getEditAnswers(editSurveyID);
-  //   }
-  // }, []);
 
 
   const surveyQuestionsJSX = surveyTemplate.questions && surveyTemplate.questions.map((question, index) => (
@@ -106,7 +105,6 @@ export default function SurveyContainer(props) {
       // Switches
       completeSurveySwitch={completeSurveySwitch}
       setCompleteSurveySwitch={setCompleteSurveySwitch}
-      setPendingSurvey={setPendingSurvey}
 
       // Data Forms
       survey={survey}
@@ -114,18 +112,10 @@ export default function SurveyContainer(props) {
       setCompletedSurveyAnswers={setCompletedSurveyAnswers}
 
       // Edit
-      editAnswer={editAnswers[index]}
+      editAnswers={editAnswers.filter(answer => answer.question_id === question.id)}
     
     />
   ))
-
-  console.log(`Params: ${params}`)
-  console.log(`Params.ID: ${params.id}`)
-  console.log(`SurveyFormat: ${surveyFormat}`)
-  console.log(`SurveyTemplate ${surveyTemplate}`)
-  console.log(surveyFormat && surveyTemplate.length > 0)
-  console.log((!params.id || (params.id && editAnswers.length > 0)))
-  console.log(surveyFormat && surveyTemplate.length > 0 && (!params.id || (params.id && editAnswers.length > 0)))
 
   return (
 

@@ -5,7 +5,7 @@ import Carousel from "../../components/Carousel/Carousel"
 import images from "../../content/register-carousel-images.json"
 
 import handleRegister from '../../functions/auth/handleRegister.js';
-import validateRegister from '../../functions/validateRegister'
+import validateRegister from '../../functions/validation-functions/validateRegister'
 import handleInputChange from '../../functions/handle-change-functions/handleInputChange.js';
 
 import './Register.css'
@@ -23,7 +23,7 @@ export default function Register(props) {
   })
   const history = useHistory();
 
-  const { companyInfo, setCurrentUser, setPendingSurvey } = props;
+  const { companyInfo, setCurrentUser} = props;
 
   return (
     <div className="register-container">
@@ -39,7 +39,7 @@ export default function Register(props) {
         </div> 
 
       <form className="register-form" onSubmit={(e)=>{
-        validateRegister(e, handleRegister, formData, history, setCurrentUser, setPendingSurvey)
+        validateRegister(e, handleRegister, formData, history, setCurrentUser)
       }}>
 
         <label className="register-form-label">

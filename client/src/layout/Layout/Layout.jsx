@@ -12,8 +12,6 @@ export default function Layout(props) {
   
   const { currentUser, setCurrentUser } = props;
 
-  console.log(currentUser)
-
   return (
 
     <>

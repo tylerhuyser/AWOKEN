@@ -1,8 +1,8 @@
 import React from 'react'
-import routeAnswerChange from '../routeAnswerChange'
+import routeAnswerChange from '../router-functions/routeAnswerChange'
 import handleSelfDescribeSelection from '../handle-change-functions/handleSelfDescribeSelection'
 
-export default function createSelfDescribeOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, selectAllAnswerData, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch, editAnswer) {
+export default function createSelfDescribeOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, selectAllAnswerData, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
 
   let textareaProps = {
     className: 'self-describe-textarea hidden',
@@ -37,22 +37,6 @@ export default function createSelfDescribeOption(question, option, answerData, s
     textareaProps.className = "self-describe-textarea visible"
     inputProps.checked = true
   }
-
-  // return React.createElement("div", {
-  //   className: "self-describe-option-container",
-  //   key: `${option.id}`
-  // }, React.createElement('input', {
-  //   ...inputProps
-  // }),
-  //   React.createElement('label', {
-  //     htmlFor: `${option.option_copy}`,
-  //     className: "self-describe-label"
-  //   }, option.option_copy,
-  //   React.createElement('textarea', {
-  //     ...textareaProps
-  //   }))
-  // )
-  
   
   return React.createElement("div", {
     className: "option-container",

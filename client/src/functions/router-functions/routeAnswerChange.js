@@ -1,6 +1,6 @@
-import handleAnswerChange from "./handle-change-functions/handleAnswerChange"
-import handleFreeResponseAnswerChange from "./handle-change-functions/handleFreeResponseAnswerChange"
-import handleSelectAllAnswerChange from "./handle-change-functions/handleSelectAllAnswerChange"
+import handleAnswerChange from "../handle-change-functions/handleAnswerChange"
+import handleFreeResponseAnswerChange from "../handle-change-functions/handleFreeResponseAnswerChange"
+import handleSelectAllAnswerChange from "../handle-change-functions/handleSelectAllAnswerChange"
 
 export default function routeAnswerChange(e, optionID, questionFormat, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
   if (questionFormat === "select all that apply") {

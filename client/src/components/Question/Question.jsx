@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import Option from '../Option/Option.jsx'
 import createSurveyProgressMarkers from "../../functions/JSX-creators/createSurveyProgressMarkers"
 import createQuestionButton from '../../functions/JSX-creators/createQuestionButton';
+import createFreeResponseOption from '../../functions/JSX-creators/createFreeResponseOption.js';
 
 import changeQuestion from "../../functions/changeQuestion.js"
 import exitSurvey from '../../functions/switch-handler-functions/exitSurvey.js';
 
 import './Question.css'
-import routeOptionCreate from '../../functions/routeOptionCreate.js';
-import handleFreeResponseAnswerChange from '../../functions/handle-change-functions/handleFreeResponseAnswerChange.js';
-import createFreeResponseOption from '../../functions/JSX-creators/createFreeResponseOption.js';
+
 
 export default function Questions(props) {
 
@@ -21,7 +20,7 @@ export default function Questions(props) {
   // Survey, Questions(s) & Answers
   const { survey } = props
   const { question, totalQuestions, index } = props
-  const { editAnswer } = props
+  const { editAnswers } = props
   const [selectAllArray, setSelectAllArray] = useState([])
   const [answerData, setAnswerData] = useState({
     employee_id: currentUser.id,
@@ -32,29 +31,38 @@ export default function Questions(props) {
   });
 
   // Switches & Counters
-  const { completedSurveyAnswers, setCompletedSurveyAnswers, setPendingSurvey } = props
+  const { completedSurveyAnswers, setCompletedSurveyAnswers } = props
   const { completeSurveySwitch, setCompleteSurveySwitch } = props
   const { questionCounter, setQuestionCounter } = props
   const [selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch] = useState(false)
   
   const history = useHistory()
+  const params = useParams()
 
   useEffect(() => {
-    if (question.question_format !== "select all that apply" && (answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
+    if (question.question_format !== "select all that apply" && (answerData.option_id && answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
       setCompletedSurveyAnswers(prevState => ([...prevState, answerData]));
     }
   }, [completeSurveySwitch])
 
   useEffect(() => {
-    if (editAnswer && answerData && answerData.option_id.length === 0) {
+    if (editAnswers.length > 0 && question.question_format !== "select all that apply" && answerData.option_id.length === 0) {
       setAnswerData(prevState => ({
         ...prevState,
-        survey_id: editAnswer.survey_id,
-        option_id: editAnswer.option_id,
-        free_response: editAnswer.free_response
+        survey_id: editAnswers[0].survey_id,
+        option_id: editAnswers[0].option_id,
+        free_response: editAnswers[0].free_response
       }))
     }
   }, [])
+
+  useEffect(() => {
+    if (editAnswers.length > 0 && question.question_format === "select all that apply") {
+      let previousSelectAllAnswers = []
+      editAnswers.forEach((answer, index) => previousSelectAllAnswers.push(answer[index].option_id))
+      setSelectAllArray(previousSelectAllAnswers)
+    }
+  }, [editAnswers])
 
   const surveyProgressMarkersJSX = createSurveyProgressMarkers(index, totalQuestions)
 
@@ -84,12 +92,12 @@ export default function Questions(props) {
       setSelectAllArray={setSelectAllArray}
 
     // Edit
-      editAnswer={editAnswer}
+      editAnswer={editAnswers.filter(answer => answer.option_id === option.id)}
       
     />
   ))
 
-  const freeResponseOptionJSX = createFreeResponseOption(question, answerData, setAnswerData, editAnswer)
+  const freeResponseOptionJSX = createFreeResponseOption(question, answerData, setAnswerData)
 
   const questionButtonJSX = createQuestionButton(index, totalQuestions, questionCounter, setQuestionCounter, completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers, history)
 
@@ -110,7 +118,7 @@ export default function Questions(props) {
               
               { index === 0 ?
 
-                <i className="fas fa-chevron-left survey-navigation-button" id="exit-survey-button" onClick={() => exitSurvey(history, setPendingSurvey)} key={`chevron-icon-${index}`} />
+                <i className="fas fa-chevron-left survey-navigation-button" id="exit-survey-button" onClick={() => exitSurvey(history, params)} key={`chevron-icon-${index}`} />
                 
                 :
 

@@ -3,10 +3,9 @@ import {
 } from "../../services/auth"
 import handleNavigation from '../handleNavigation';
 
-export default async function handleRegister(registerData, history, setCurrentUser, setPendingSurvey) {
+export default async function handleRegister(registerData, history, setCurrentUser) {
 
   const employeeData = await registerEmployee(registerData);
     setCurrentUser(employeeData);
-    setPendingSurvey(true);
     handleNavigation(history, "/complete-profile");
 };
