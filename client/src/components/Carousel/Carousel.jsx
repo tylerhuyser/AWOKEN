@@ -10,44 +10,46 @@ export default function Carousel(props) {
 
   useEffect(() => {
     if (carouselType === "login") {
-      setTimeout(() => {
+      const loginCarouselTimer = setTimeout(() => {
         if (carouselCount === (data.length - 1)) {
           setCarouselCount(0)
         } else {
           setCarouselCount(carouselCount + 1)
         }
       }, [25000])
+      return () => clearTimeout(loginCarouselTimer)
     } else {
-      setTimeout(() => {
+      const carouselTimer = setTimeout(() => {
         if (carouselCount === (data.length - 1)) {
           setCarouselCount(0)
         } else {
           setCarouselCount(carouselCount + 1)
         }
       }, [5000])
+      return () => clearTimeout(carouselTimer)
     }
   }, [carouselCount])
 
   if (carouselType === "landing page") {
     
     let carouselSlides = data.map((slide, index) => (
-      <p className={index === carouselCount ? 'landing-page-carousel-copy active' : 'landing-page-carousel-copy inactive'}>
+      <p className={index === carouselCount ? 'landing-page-carousel-copy active' : 'landing-page-carousel-copy inactive'} key={slide.author}>
         <span className="landing-page-carousel-quote">{slide.quote}</span><br /><span className='landing-page-carousel-author'>{`- ${slide.author}`}</span>
       </p>))
 
     return (
-      <div className='landing-page-carousel-container'>
+      <div className='landing-page-carousel-container' >
 
       {carouselSlides}
       
-    </div>
+      </div>
     )
   }
 
   if (carouselType === "login") {
 
     let carouselSlides = data.map((gif, index) => (
-      <img className={index === carouselCount ? 'login-page-carousel-gif' : 'login-page-carousel-gif inactive'} src={gif.path} alt={gif.name} />
+      <img className={index === carouselCount ? 'login-page-carousel-gif' : 'login-page-carousel-gif inactive'} src={gif.path} alt={gif.name} key={gif.name} />
       ))
 
     return (
@@ -62,7 +64,7 @@ export default function Carousel(props) {
   if (carouselType === "register") {
 
     let carouselSlides = data.map((image, index) => (
-      <img className={index === carouselCount ? 'register-page-carousel-image active' : 'register-page-carousel-image inactive'} src={image.path} alt={image.name} />
+      <img className={index === carouselCount ? 'register-page-carousel-image active' : 'register-page-carousel-image inactive'} src={image.path} alt={image.name} key={image.name}/>
       ))
 
     return (
