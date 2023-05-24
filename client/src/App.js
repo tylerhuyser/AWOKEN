@@ -105,7 +105,7 @@ function App() {
             />
           </Route>
               
-          {currentUser && gatherCompanies && surveyFormats.length > 0 ?
+          {currentUser && companyInfo && surveyFormats.length > 0 ?
           
             <>
           
@@ -113,6 +113,7 @@ function App() {
                 <SurveyContainer
                   currentUser={currentUser}
                   surveyFormat={demographicsSurvey}
+                  completedSurveys={completedSurveys}
                   setCompletedSurveys={setCompletedSurveys}
                 />
               </Route>
@@ -121,19 +122,26 @@ function App() {
                 <SurveyContainer
                   currentUser={currentUser}
                   surveyFormat={srJournal}
+                  completedSurveys={completedSurveys}
                   setCompletedSurveys={setCompletedSurveys}
                 />
               </Route>
 
+            { completedSurveys && completedSurveys.length > 0 ?
+              
               <Route path="/edit-journal/:id">
                 <SurveyContainer
                   currentUser={currentUser}
-                  surveyFormat={srJournal}
+                  surveyFormat={null}
+                  completedSurveys={completedSurveys}
                   setCompletedSurveys={setCompletedSurveys}
                 />
               </Route>
               
-
+            :
+              
+              <></>
+            }
               <Route exact path="/home">
                 <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
                   <Home />

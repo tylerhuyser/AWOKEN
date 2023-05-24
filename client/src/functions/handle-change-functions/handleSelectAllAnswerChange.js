@@ -18,7 +18,7 @@ export default async function handleSelectAllAnswerChange (e, optionID, selectAl
     })
     setSelectAllAnswerData(prevState => ({
       ...prevState,
-      option_id: value
+      option_id: parseInt(value)
     }))
   } else if (name === "free_response" && selectAllArray.includes(parseInt(optionID)) && value === "") {
     console.log("Handle-Select-All-Answer-Change: Free Response Condition #1")

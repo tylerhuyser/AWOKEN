@@ -15,7 +15,7 @@ import './SurveyContainer.css'
 export default function SurveyContainer(props) {
 
   const { currentUser, surveyFormat } = props;
-  const { setCompletedSurveys } = props;
+  const { completedSurveys, setCompletedSurveys } = props;
 
   // BELOW: Executes on Component Mount - GETs the Survey Template to generate Questions and Options fro User to make selections
   const [surveyTemplate, setSurveyTemplate] = useState([]);
@@ -43,18 +43,42 @@ export default function SurveyContainer(props) {
   const params = useParams()
 
   useEffect(() => {
-    console.log('SurveyContainer.js - UseEffect #1 - Gathering Survey Data')
     if (currentUser && surveyFormat) {
-      gatherSurveyTemplate(surveyFormat, setSurveyTemplate)
-    }
-  }, [currentUser, surveyFormat])
-
-  useEffect(() => {
-    if (currentUser && surveyFormat && params.id) {
-      console.log('SurveyContainer.js - UseEffect #1a - Gathering Edit Answers')
-      gatherEditAnswers(params.id, setEditAnswers)
+      console.log('SurveyContainer.js - UseEffect #1a - NEW SURVEY MODE - Gathering Survey Question/Template Data')
+      gatherSurveyTemplate(surveyFormat.id, setSurveyTemplate)
     }
   }, [surveyFormat])
+
+  useEffect(() => {
+    if (currentUser && params.id) {
+      console.log('SurveyContainer.js - UseEffect #1b - EDIT SURVEY MODE - Gathering Edit Answers')
+      gatherEditAnswers(params.id, setEditAnswers)
+    }
+  }, [currentUser])
+
+  useEffect(() => {
+    if (params.id && editAnswers.length > 0 && completedSurveys && completedSurveys.length > 0) {
+      console.log('SurveyContainer.js - UseEffect #2 - EDIT SURVEY MODE - Gathering Survey Question/Template Data')
+      console.log(completedSurveys)
+      let editSurveyFormatID = completedSurveys.filter(survey => survey.id === parseInt(params.id))[0].survey_format_id
+      console.log(editSurveyFormatID)
+      gatherSurveyTemplate(editSurveyFormatID, setSurveyTemplate)
+    }
+  }, [editAnswers])
+
+  // useEffect(() => {
+  //   console.log('SurveyContainer.js - UseEffect #1 - Gathering Survey Data')
+  //   if (currentUser && surveyFormat) {
+  //     gatherSurveyTemplate(surveyFormat, setSurveyTemplate)
+  //   }
+  // }, [currentUser, surveyFormat])
+
+  // useEffect(() => {
+  //   if (currentUser && surveyFormat && params.id) {
+  //     console.log('SurveyContainer.js - UseEffect #1a - Gathering Edit Answers')
+  //     gatherEditAnswers(params.id, setEditAnswers)
+  //   }
+  // }, [surveyFormat])
 
   useEffect(() => {
     if (completedSurveyAnswers.length === 0 || !surveyTemplate.questions) {
@@ -121,14 +145,14 @@ export default function SurveyContainer(props) {
 
     <>
       
-      { surveyFormat !== undefined && surveyTemplate.length > 0 && (!params.id || (params.id && editAnswers.length > 0)) ?
+      { surveyTemplate.length > 0 && (!params.id || (params.id && editAnswers.length > 0 && completedSurveys.lenght > 0)) ?
       
 
         <Loader />
         
         :
 
-        <div className={"survey-container slide-in-left-survey-container"} key={`${surveyFormat.id}`}>
+        <div className={"survey-container slide-in-left-survey-container"}>
       
           {surveyQuestionsJSX}
 

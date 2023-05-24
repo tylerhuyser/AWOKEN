@@ -20,18 +20,15 @@ export default async function routeEditAnswers (surveyTemplate, completedSurveyA
       let relevantCompletedAnswers = completedSurveyAnswers.filter(answer => answer.question_id === question.id)
       console.log(`RouteEditAnswers - relevantCompletedAnswers Below:`)
       console.log(relevantCompletedAnswers)
-      console.log(relevantCompletedAnswers[0])
   
       let relevantOriginalAnswers = editAnswers.filter(answer => answer.question_id === question.id)
       console.log(`RouteEditAnswers - relevantOriginalAnswers Below:`)
       console.log(relevantOriginalAnswers)
-      console.log(relevantOriginalAnswers[0])
 
       if (question.question_format !== "select all that apply") {
 
         console.log('RouteEditAnswers - PromiseALL - IF Conidtion NOT "Select All That Apply"')
         console.log(`Mapping RouteEditAnswer PUT ${index}`)
-        console.log(relevantOriginalAnswers[0].id)
 
         return handleEditAnswer(relevantOriginalAnswers[0].id, relevantCompletedAnswers[0])
 
@@ -50,9 +47,9 @@ export default async function routeEditAnswers (surveyTemplate, completedSurveyA
 
           console.log(`RouteEditAnswers - PromiseALL - IF Conidtion IS "Select ALL That Apply" - Completed Answer MAP ${index}`)
 
-          if (relevantOriginalAnswers.filter(originalAnswer => originalAnswer.option_id === completedAnswer.option_id) === 0) {
+          if (relevantOriginalAnswers.filter(originalAnswer => originalAnswer.option_id === completedAnswer.option_id).length === 0) {
 
-            console.log(`RouteEditAnswers - PromiseALL - IF Conidtion IS "Select ALL That Apply" - Completed Answer MAP ${index} - DESTROYING Select All Answer`)
+            console.log(`RouteEditAnswers - PromiseALL - IF Conidtion IS "Select ALL That Apply" - Completed Answer MAP ${index} - Post New Answer`)
 
             return postAnswer(completedAnswer)
           }

@@ -9,11 +9,11 @@ export default function Option(props) {
   const { currentUser, question, option, completeSurveySwitch } = props
   const { setCompletedSurveyAnswers } = props
   const { answerData, setAnswerData } = props
-  const { editAnswer } = props
+  const { editSurveyID, editAnswer } = props
   const { selectAllArray, setSelectAllArray } = props
   const { selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch } = props
 
-  const [selectAllAnswerData, setSelectAllAnswerData] = useState({
+  const [ selectAllAnswerData, setSelectAllAnswerData ] = useState({
     employee_id: currentUser.id,
     survey_id: [],
     question_id: question.id,
@@ -28,12 +28,29 @@ export default function Option(props) {
   }, [completeSurveySwitch])
 
   useEffect(() => {
-    if (editAnswer && question.question_format === "select all that apply" && selectAllAnswerData.option_id.length === 0) {
+    if (editAnswer && question.question_format === "select all that apply") {
       setSelectAllAnswerData(prevState => ({
         ...prevState,
-        survey_id: editAnswer.survey_id,
-        option_id: editAnswer.option_id,
-        free_response: editAnswer.free_response
+        survey_id: editSurveyID,
+      }))
+    }
+  }, [editAnswer])
+
+  useEffect(() => {
+    if (editAnswer.length > 0 && question.question_format === "select all that apply" && selectAllArray.includes(editAnswer[0].option_id)) {
+      console.log('resetting original option_id')
+      setSelectAllAnswerData(prevState => ({
+        ...prevState,
+        option_id: editAnswer[0].option_id,
+      }))
+    }
+  }, [editAnswer])
+
+  useEffect(() => {
+    if (editAnswer.length > 0 && question.question_format === "select all that apply" && selectAllArray.includes(editAnswer[0].option_id) && selectAllAnswerData.free_response === "") {
+      setSelectAllAnswerData(prevState => ({
+        ...prevState,
+        free_response: editAnswer[0].free_response
       }))
     }
   }, [editAnswer])

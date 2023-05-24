@@ -11,7 +11,7 @@ export default function createSelfDescribeOption(question, option, answerData, s
     rows: 2,
     onChange: (e) => routeAnswerChange(e, option.id, question.question_format, setAnswerData, selectAllArray, setSelectAllArray, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch),
     value: answerData.free_response,
-    placeHolder: "Please share your self-described identity in the space below..."
+    placeholder: "Please share your self-described identity in the space below..."
   }
 
   if (question.question_format === "select all that apply") {

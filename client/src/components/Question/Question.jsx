@@ -59,7 +59,7 @@ export default function Questions(props) {
   useEffect(() => {
     if (editAnswers.length > 0 && question.question_format === "select all that apply") {
       let previousSelectAllAnswers = []
-      editAnswers.forEach((answer, index) => previousSelectAllAnswers.push(answer[index].option_id))
+      editAnswers.forEach((answer) => previousSelectAllAnswers.push(answer.option_id))
       setSelectAllArray(previousSelectAllAnswers)
     }
   }, [editAnswers])
@@ -92,6 +92,7 @@ export default function Questions(props) {
       setSelectAllArray={setSelectAllArray}
 
     // Edit
+      editSurveyID={editAnswers[0].survey_id}
       editAnswer={editAnswers.filter(answer => answer.option_id === option.id)}
       
     />
