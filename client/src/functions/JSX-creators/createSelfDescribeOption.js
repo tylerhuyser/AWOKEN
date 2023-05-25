@@ -5,7 +5,7 @@ import handleSelfDescribeSelection from '../handle-change-functions/handleSelfDe
 export default function createSelfDescribeOption(question, option, answerData, setAnswerData, selectAllArray, setSelectAllArray, selectAllAnswerData, setSelectAllAnswerData, selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch) {
 
   let textareaProps = {
-    className: 'self-describe-textarea hidden',
+    className: 'self-describe-textarea self-describe-textarea-hidden',
     id: `${option.option_copy}`,
     name: "free_response",
     rows: 2,

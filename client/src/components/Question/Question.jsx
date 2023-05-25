@@ -92,7 +92,7 @@ export default function Questions(props) {
       setSelectAllArray={setSelectAllArray}
 
     // Edit
-      editSurveyID={editAnswers[0].survey_id}
+      editSurveyID={editAnswers[0]?.survey_id}
       editAnswer={editAnswers.filter(answer => answer.option_id === option.id)}
       
     />
