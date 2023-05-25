@@ -1,0 +1,94 @@
+@keyframes fade {
+  0% { opacity: 0; }
+  25% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+  75% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  0% {transform: translateX (0%)}
+  100% {transform: translateX (-100%)}
+}
+
+.landing-page-carousel-container, .login-page-carousel-container, .register-page-carousel-container {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .landing-page-carousel-container, .login-page-carousel-container, .register-page-carousel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 50vw;
+    height: 100vh;
+    padding: 50px;
+
+    outline-offset: -25px;
+
+    font-size: calc(5vw / 2);
+    color: white;
+    letter-spacing: 10px;
+    font-weight: 100;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+  }
+
+  .landing-page-carousel-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('/images/carousel-images/landing-page/landing-page-carousel-background-image.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    outline: 1px solid #F39C12;
+  }
+
+  .landing-page-carousel-container:hover, .login-page-carousel-container:hover, .register-page-carousel-container:hover {
+    outline: 1px solid white;
+  }
+
+  .login-page-carousel-container, .register-page-carousel-container {
+    padding: 0px;
+    background-color: #F39C12;
+
+    outline: 1px solid #F39C12;
+
+    animation: slide-in-left ease-in-out 0.75s;
+  }
+
+  .active {
+    animation: fade ease-in-out 0.75s;
+  }
+
+  .inactive {
+    display: none;
+  }
+
+  .landing-page-carousel-quote::before {
+    content: open-quote;
+    color: white;
+  }
+
+  .landing-page-carousel-quote::after {
+    content: close-quote;
+    color: white;
+  }
+
+  .landing-page-carousel-author {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .login-page-carousel-gif, .register-page-carousel-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+}

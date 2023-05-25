@@ -1,74 +1,50 @@
 import React, { useEffect } from 'react'
+import { useHistory } from "react-router-dom";
 import { getOneEmployee } from '../../services/admin-info';
+
+import editSurvey from "../../functions/switch-handler-functions/editSurvey"
+import handleDelete from "../../functions/CRUD/DELETE/handleDeleteSurvey.js"
 
 import './Journals.css'
 
 export default function Journals(props) {
 
-  const { currentUser, deleteJournal, handleEdit } = props;
-  const { userSurveys, setUserSurveys } = props
-  const { isDeleted } = props
+  const { currentUser } = props;
+  const { completedSurveys, setCompletedSurveys } = props
+  const { isDeleted, setIsDeleted } = props
+
+  // Location
+  const history = useHistory();
 
   useEffect(() => {
-      const userID = currentUser.id
       const getEmployeeSurveys = async (userID) => {
         const employee = await getOneEmployee(userID);
         const employeeSurveys = employee.surveys
-        setUserSurveys(employeeSurveys);
+        setCompletedSurveys(employeeSurveys);
       }
-      getEmployeeSurveys(userID)
+      getEmployeeSurveys(currentUser.id)
   }, [isDeleted])
 
 
-  const journals = userSurveys?.filter((journal) => journal.survey_format_id === 13).map((journal, index) => {
+  const journals = completedSurveys?.filter((journal) => journal.survey_format_id === 13).map((journal, index) => {
 
-    if ((journal.survey_format_id === 13) && (index % 2 === 0)) {
       return (
 
-        <div className="journal-card-container" key={`${ index }-journal-card-container`}>
-
-          <div className="journal-card-orange" key={`${ index }-journal-card-orange`}>
+          <div className="journal-card" key={`${ index }-journal-card`}>
 
             <p className="journal-title" key={`${index}-journal-title`}>{`Journal ${journal.iteration}`}</p>
 
-            {/* <p className="journal-date">{Date.parse(parseInt(journal.created_at.split("").splice(10).join("")))}</p> */}
-
             <div className="journal-buttons-container" key={`${ index }-journal-buttons-container`}>
 
-              <button className="journal-button" id="journal-edit-button" key={`${ index }-journal-edit-button`} onClick={() => handleEdit(journal.id)}>EDIT</button>
-              <button className="journal-button" id="journal-delete-button" key={`${ index }-journal-delete-button`} onClick={() => deleteJournal(journal.id)}>DELETE</button>
+              <button className="journal-button" id="journal-edit-button" key={`${ index }-journal-edit-button`} onClick={() => editSurvey(journal.id, history)}>EDIT</button>
+              <button className="journal-button" id="journal-delete-button" key={`${ index }-journal-delete-button`} onClick={() => handleDelete(journal.id, isDeleted, setIsDeleted)}>DELETE</button>
 
             </div>
 
           </div>
-          
-        </div>
 
       )
-    } else if (journal.survey_format_id === 13) {
-      return (
-
-        <div className="journal-card-container" key={`${ index }-journal-card-container`}>
-
-          <div className="journal-card-purple" key={`${ index }-journal-card-purple`}>
-
-            <p className="journal-title" key={`${index}-journal-title`}>{`Journal ${journal.iteration}`}</p>
-
-            {/* <p className="journal-date">{Date.parse(parseInt(journal.created_at.split("").splice(10).join("")))}</p> */}
-
-            <div className="journal-buttons-container" key={`${ index }-journal-buttons-container`}>
-
-              <button className="journal-button" id="journal-edit-button" key={`${ index }-journal-edit-button`} onClick={() => handleEdit(journal.id)}>EDIT</button>
-              <button className="journal-button" id="journal-delete-button" key={`${ index }-journal-delete-button`} onClick={() => deleteJournal(journal.id)}>DELETE</button>
-
-            </div>
-
-          </div>
-          
-        </div>
-      )
-    }
-  })
+    })
 
   
   return (
@@ -76,7 +52,7 @@ export default function Journals(props) {
     <>
       
       {
-        userSurveys ?
+        completedSurveys ?
 
         <>
           

@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory} from 'react-router-dom';
 
-import PreLogin from "./PreLogin.jsx"
+import Carousel from "../../components/Carousel/Carousel"
+import gifs from "../../content/login-carousel-gifs.json"
+
+import handleLogin from '../../functions/auth/handleLogin.js';
+import handleInputChange from '../../functions/handle-change-functions/handleInputChange.js';
+
 import './Login.css'
 
 
@@ -11,80 +16,68 @@ export default function Login(props) {
     username: "",
     password: ""
   })
-  const [beginLogin, setBeginLogin] = useState(false);
-  const { username, password } = formData;
-  const { error, handleLogin } = props;
+  const [error, setError] = useState("")
+  const history = useHistory();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
+  const  { setCurrentUser } = props
+
+  useEffect(() => {
+    if (error === "unauthorized") {
+      alert("Invalid login credentials. Please check your username and/or password!")
+    }
+  }, [error])
 
   return (
     <div className="login-container">
 
-      { beginLogin ?
+      <Carousel carouselType="login" data={gifs} />
  
       <div className="login-form-container">
           
-        <div className="login-form-header">
-          <img className="login-logo-orange" alt="login-wims-logo" src="https://i.imgur.com/ioUfIYI.png" />
-          <p className="login-header-subtitle">EMBRACE NEW PERSPECTIVES</p>
+        <div className="login-form-header-container">
+          <img className="login-container-logo" alt="login-AWOKEN-logo" src="/images/logos/AWOKEN-logo-orange.png" />
+          <p className="login-container-title">EMBRACE NEW PERSPECTIVES</p>
         </div> 
         
       <form className="login-form" onSubmit={(e) => {
         e.preventDefault();
-        handleLogin(formData);
+        handleLogin(formData, history, setCurrentUser, setError);
       }}>
-            
-        <p className="login-form-title">LOGIN</p>
-        {
-          error &&
-          <p className="login-error">{error}</p>
-        }
+
         <label className="login-form-label">
               Username:
           <input
-            className="login-form-input"
+            className={ error === "unauthorized" ? "login-form-input invalid" : "login-form-input"}
             type="text"
-            value={username}
+            value={formData.username}
             name="username"
-            onChange={handleChange}
+            onChange={(e) => handleInputChange(e, setFormData)}
           />
         </label>
         <label className="login-form-label">
               Password:
           <input
-            className="login-form-input"
+            className={ error === "unauthorized" ? "login-form-input invalid" : "login-form-input"}
             type="password"
-            value={password}
+            value={formData.password}
             name="password"
-            onChange={handleChange}
+            onChange={(e) => handleInputChange(e, setFormData)}
           />
         </label>
           <button className="sign-in-button">SIGN IN</button>
             
-          <p className="password-recovery-copy">Forgot your password?</p>
+          {/* <p className="password-recovery-copy">Forgot your password?</p> */}
       </form>
 
 
-        <div className="register-prompt-container">
+        <div className="register-navigation-container">
           
-          <p className="register-prompt-copy">Don't have an account?</p>
+          <p className="register-navigation-copy">Don't have an account?</p>
       
-          <Link to='/register'><button className="register-button">SIGN UP</button></Link>
+          <Link to='/register'><button className="register-navigation-button">SIGN UP</button></Link>
          </div>
           
       </div>
-
-        :
-        
-        <PreLogin setBeginLogin={setBeginLogin} />
-    
-      }
 
     </div>
   )

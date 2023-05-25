@@ -10,7 +10,7 @@ export const getOneCompany = async (id) => {
   return resp.data;
 }
 
-export const getAllEmpployees = async () => {
+export const getAllEmployees = async () => {
   const resp = await api.get('/employees');
   return resp.data;
 }

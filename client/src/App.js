@@ -5,176 +5,116 @@ import "./App.css";
 
 // Components
 import Layout from "./layout/Layout/Layout.jsx";
+import Loader from "./layout/Loader/Loader";
+import LandingPage from "./screens/LandingPage/LandingPage"
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
-import MainContainer from "./containers/MainContainer/MainContainer";
 import SurveyContainer from "./containers/SurveyContainer/SurveyContainer";
-import EditContainer from "./containers/EditContainer/EditContainer";
+
+import Home from "./screens/Home/Home"
+import Journals from "./screens/Journals/Journals"
 
 // Functions
-import {
-  loginEmployee,
-  registerEmployee,
-  removeToken,
-  verifyEmployee,
-} from "./services/auth";
-import { getAllCompanies, getOneEmployee } from "./services/admin-info";
-import { getAllSurveyFormats } from "./services/survey-constructors.js";
+import handleVerify from "./functions/auth/handleVerify";
+import gatherCompanies from "./functions/CRUD/GET/gatherCompanies";
+import gatherSurveyFormats from './functions/CRUD/GET/gatherSurveyFormats'
+import gatherCompletedSurveys from "./functions/CRUD/GET/gatherCompletedSurveys"
 
 function App() {
   // Auth
   const [currentUser, setCurrentUser] = useState(null);
-  const [error, setError] = useState("")
 
-// User Data
-  const [userSurveys, setUserSurveys] = useState(null);
-  const [pendingSurvey, setPendingSurvey] = useState(false);
-  const [editSurvey, setEditSurvey] = useState(false);
-  const [activeSurveyID, setActiveSurveyID] = useState(0);
+  // User Data
+  const [completedSurveys, setCompletedSurveys] = useState(null);
 
   // App Data
   const [companyInfo, setCompanyInfo] = useState([]);
   const [surveyFormats, setSurveyFormats] = useState([]);
+
+  // Switches
+  const [isDeleted, setIsDeleted] = useState(false)
 
   // Location
   const history = useHistory();
 
   // Survey_Formats:
   const demographicsSurvey = surveyFormats[0];
-  const IMS = surveyFormats[1];
-  const EMS = surveyFormats[2];
-  const MP = surveyFormats[3];
-  const IAT = surveyFormats[4];
-  const shouldsWoulds = surveyFormats[5];
-  const modernRacism2000 = surveyFormats[6];
-  const subtleBlatant = surveyFormats[7];
-  const organizationalInclusivityAudit = surveyFormats[8];
-  const concern = surveyFormats[9];
-  const priming = surveyFormats[10];
-  const srQuestionnaire = surveyFormats[11];
+  // const IMS = surveyFormats[1];
+  // const EMS = surveyFormats[2];
+  // const MP = surveyFormats[3];
+  // const IAT = surveyFormats[4];
+  // const shouldsWoulds = surveyFormats[5];
+  // const modernRacism2000 = surveyFormats[6];
+  // const subtleBlatant = surveyFormats[7];
+  // const organizationalInclusivityAudit = surveyFormats[8];
+  // const concern = surveyFormats[9];
+  // const priming = surveyFormats[10];
+  // const srQuestionnaire = surveyFormats[11];
   const srJournal = surveyFormats[12];
 
-// UseEffects
+  // UseEffects
 
-  // Login - Verifies User
   useEffect(() => {
-    const handleVerify = async () => {
-      const userData = await verifyEmployee();
-      setCurrentUser(userData);
-      if (userData === null) {
-        history.push("/login");
-      }
-    };
-    handleVerify();
+    console.log('App.js - UseEffect #1 - Verify')
+    handleVerify(history, setCurrentUser);
   }, []);
 
   // Register - Generates Company List (Dropdown)
   useEffect(() => {
-    const generateCompanyList = async () => {
-      const companyInfo = await getAllCompanies();
-      setCompanyInfo(companyInfo);
-    };
-    generateCompanyList();
+    console.log('App.js - UseEffect #2 - Generate Company List')
+    gatherCompanies(setCompanyInfo)
   }, []);
 
   // Survey Foramts - Gathers All Survey_Format IDs
   useEffect(() => {
-    const getAllSurveyFormatData = async () => {
-      const surveyFormatData = await getAllSurveyFormats();
-      setSurveyFormats(surveyFormatData);
-    };
-    getAllSurveyFormatData();
-  }, []);
-
-  // Demographics Redirect - Redirects to Complete Profile
-  useEffect(() => {
     if (currentUser !== null) {
-      const userID = currentUser.id;
-
-      const getEmployeeSurveys = async (userID) => {
-        const employee = await getOneEmployee(userID);
-        const employeeSurveys = employee.surveys;
-        setUserSurveys(employeeSurveys);
-        if (employeeSurveys === null || employeeSurveys.length === 0) {
-          history.push("/complete-profile");
-        }
-      };
-      getEmployeeSurveys(userID);
+      console.log('App.js - UseEffect #3 - Get All Survey Data')
+      gatherSurveyFormats(setSurveyFormats)
     }
   }, [currentUser]);
 
-  // Functions
-
-  // Login Functions
-
-  const handleLogin = async (loginData) => {
-    const employeeData = await loginEmployee(loginData);
-    if (employeeData.error) {
-      setError(employeeData.error)
-    } else {
-      setCurrentUser(employeeData);
-      history.push("/home");
-    }
-  };
-
-  const handleRegister = async (registerData) => {
-    const employeeData = await registerEmployee(registerData);
-    if (employeeData.error) {
-      setError(employeeData.error)
-    } else {
-      setCurrentUser(employeeData);
-      setPendingSurvey(true);
-      history.push("/complete-profile");
-    }
-  };
-
-  const handleLogout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem("authToken");
-    removeToken();
-    history.push("/login");
-  };
-
-  // Journal Edit Function
-
-  const handleEdit = (e) => {
-    setActiveSurveyID(e);
-    // setPendingSurvey(true);
-    setEditSurvey(true)
-  };
-
+  // Demographics Redirect - Redirects to Complete Profile
   useEffect(() => {
-    if (editSurvey) {
-      history.push("/edit-journal")
+
+    if (currentUser !== null) {
+      console.log('App.js - UseEffect #4 - Gathers Current User (Employee) Surveys')
+      gatherCompletedSurveys(currentUser.id, history, setCompletedSurveys)
     }
-  }, [editSurvey])
+  }, [currentUser]);
 
   return (
-    <div className="app-container">
       
-      {!currentUser ? (
+    <div className="app-container">
+
         <Switch>
-          <Route path="/login">
-            <Login handleLogin={handleLogin} />
+
+          <Route exact path="/">
+            <LandingPage />
           </Route>
 
-          <Route path="/register">
-            <Register
-              handleRegister={handleRegister}
-              companyInfo={companyInfo}
+          <Route path="/login">
+            <Login
+              setCurrentUser={setCurrentUser}
             />
           </Route>
-        </Switch>
-      ) : (
-        <>
-          {(pendingSurvey) || (editSurvey) || (userSurveys && userSurveys.length === 0) ? (
-            <Switch>
+              
+          <Route path="/register">
+            <Register
+              companyInfo={companyInfo}
+              setCurrentUser={setCurrentUser}
+            />
+          </Route>
+              
+          {currentUser && companyInfo && surveyFormats.length > 0 ?
+          
+            <>
+          
               <Route path="/complete-profile">
                 <SurveyContainer
                   currentUser={currentUser}
                   surveyFormat={demographicsSurvey}
-                  setUserSurveys={setUserSurveys}
-                  setPendingSurvey={setPendingSurvey}
+                  completedSurveys={completedSurveys}
+                  setCompletedSurveys={setCompletedSurveys}
                 />
               </Route>
 
@@ -182,37 +122,53 @@ function App() {
                 <SurveyContainer
                   currentUser={currentUser}
                   surveyFormat={srJournal}
-                  setUserSurveys={setUserSurveys}
-                  setPendingSurvey={setPendingSurvey}
+                  completedSurveys={completedSurveys}
+                  setCompletedSurveys={setCompletedSurveys}
                 />
               </Route>
 
-              <Route path="/edit-journal">
-                <EditContainer
+            { completedSurveys && completedSurveys.length > 0 ?
+              
+              <Route path="/edit-journal/:id">
+                <SurveyContainer
                   currentUser={currentUser}
-                  surveyFormat={srJournal}
-                  setUserSurveys={setUserSurveys}
-                  setPendingSurvey={setPendingSurvey}
-                  activeSurveyID={activeSurveyID}
+                  surveyFormat={null}
+                  completedSurveys={completedSurveys}
+                  setCompletedSurveys={setCompletedSurveys}
                 />
               </Route>
-            </Switch>
-          ) : (
-            <Layout currentUser={currentUser} handleLogout={handleLogout}>
-              <MainContainer
-                currentUser={currentUser}
-                srQuestionnaire={srQuestionnaire}
-                srJournal={srJournal}
-                setPendingSurvey={setPendingSurvey}
-                userSurveys={userSurveys}
-                setUserSurveys={setUserSurveys}
-                handleEdit={handleEdit}
-              />
-            </Layout>
-          )}
-        </>
-      )}
-    </div>
+              
+            :
+              
+              <></>
+            }
+              <Route exact path="/home">
+                <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
+                  <Home />
+                </Layout>
+              </Route>
+
+              <Route exact path="/journals">
+                <Layout currentUser={currentUser} setCurrentUser={setCurrentUser}>
+                  <Journals
+                    currentUser={currentUser}
+                    completedSurveys={completedSurveys} setCompletedSurveys={setCompletedSurveys}
+                    isDeleted={isDeleted} setIsDeleted={setIsDeleted}
+                />
+                </Layout>
+              </Route>  
+      
+            </>
+              
+          :
+  
+            <Loader />
+          
+          }
+        
+        </Switch>
+
+      </div>
   );
 }
 

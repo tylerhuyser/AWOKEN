@@ -1,95 +1,118 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import Question from '../../components/Question/Question';
+import Loader from '../../layout/Loader/Loader'
 
-import { getOneSurveyFormat } from '../../services/survey-constructors'
-import { postSurvey } from '../../services/surveys';
-import { postAnswer } from '../../services/answers';
+import gatherSurveyTemplate from '../../functions/CRUD/GET/gatherSurveyTemplate';
+import gatherEditAnswers from '../../functions/CRUD/GET/gatherEditAnswers';
+import handlePostNewSurvey from '../../functions/CRUD/POST/handlePostNewSurvey';
+import handlePostAnswers from '../../functions/CRUD/POST/handlePostAnswers';
+import handleEditSurvey from '../../functions/CRUD/PUT/handleEditSurvey';
 
 import './SurveyContainer.css'
 
 export default function SurveyContainer(props) {
 
-  const { currentUser, surveyFormat, setUserSurveys, setPendingSurvey } = props;
-  const [surveyData, setSurveyData] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [surveyID, setSurveyID] = useState(null)
-  const [submitAnswers, setSubmitAnswers] = useState(false)
-  const history = useHistory();
+  const { currentUser, surveyFormat } = props;
+  const { completedSurveys, setCompletedSurveys } = props;
+
+  // BELOW: Executes on Component Mount - GETs the Survey Template to generate Questions and Options fro User to make selections
+  const [surveyTemplate, setSurveyTemplate] = useState([]);
+
+  // BELOW: Counter for current Question rendered to the DOM and displayed to User
+  const [questionCounter, setQuestionCounter] = useState(0)
+
+  // BELOW: Switch to initiate POSTing of Completed Survey & Answers
+  const [completeSurveySwitch, setCompleteSurveySwitch] = useState(false)
+
+  // BELOW: Immediately after COMPLETESURVEYSWITCH changes, Answers are gathered in the below array, before POST Survey and POST Answer Executes
+  const [completedSurveyAnswers, setCompletedSurveyAnswers] = useState([])
   
+  // BELOW: Delivers the survey_format_id in Object format for POSTing the NEW Survey
   const survey = {
     survey_format_id: surveyFormat?.id,
   }
 
-  const [surveyAnswers, setSurveyAnswers] = useState([])
+  // BELOW: After NEW Survey POSTed, the below ID is used to POST corresponding Answers
+  const [surveyID, setSurveyID] = useState(null)
 
-  // Submit Survey & Answers Functions
+  const [editAnswers, setEditAnswers] = useState([])
 
-  const postNewSurvey = async (surveyData) => {
-    const newSurvey = await postSurvey(surveyData)
-    setUserSurveys(prevState => [...prevState, newSurvey])
-    return newSurvey
-  }
-
-  const handleSubmit = async (survey) => {
-    setSurveyAnswers([])
-    setSubmitAnswers(!submitAnswers)
-  }
-
-  // Return Home Function
-
-  const exitSurvey = () => {
-    setPendingSurvey(false)
-    history.push('/home')
-  }
-
-  // UseEffects Below:
-
-  // Grabs Survey-specific data including questions & options
+  const history = useHistory();
+  const params = useParams()
 
   useEffect(() => {
-    if (surveyFormat !== null) {
-      const getSurveyData = async () => {
-        const rawSurveyData = await getOneSurveyFormat(surveyFormat.id);
-        setSurveyData(rawSurveyData)
-      }
-      getSurveyData(surveyFormat.id);
+    if (currentUser && surveyFormat) {
+      console.log('SurveyContainer.js - UseEffect #1a - NEW SURVEY MODE - Gathering Survey Question/Template Data')
+      gatherSurveyTemplate(surveyFormat.id, setSurveyTemplate)
     }
-  }, [])
+  }, [surveyFormat])
 
   useEffect(() => {
-    if (surveyAnswers.length !== 0 && surveyData.questions !== undefined) {
-      if (surveyAnswers.length >= surveyData.questions.length) {
-        const handlePost = async (survey, surveyAnswers) => {
-          const newSurvey = await postNewSurvey(survey)
-          const newSurveyID = newSurvey.id
-          setSurveyID(newSurveyID)
-        }
-        handlePost(survey, surveyAnswers)
-      } else {
-        alert("Please complete all answers in order to continue!")
-      }
+    if (currentUser && params.id) {
+      console.log('SurveyContainer.js - UseEffect #1b - EDIT SURVEY MODE - Gathering Edit Answers')
+      gatherEditAnswers(params.id, setEditAnswers)
     }
-  }, [surveyAnswers])
+  }, [currentUser])
+
+  useEffect(() => {
+    if (params.id && editAnswers.length > 0 && completedSurveys && completedSurveys.length > 0) {
+      console.log('SurveyContainer.js - UseEffect #2 - EDIT SURVEY MODE - Gathering Survey Question/Template Data')
+      console.log(completedSurveys)
+      let editSurveyFormatID = completedSurveys.filter(survey => survey.id === parseInt(params.id))[0].survey_format_id
+      console.log(editSurveyFormatID)
+      gatherSurveyTemplate(editSurveyFormatID, setSurveyTemplate)
+    }
+  }, [editAnswers])
+
+  // useEffect(() => {
+  //   console.log('SurveyContainer.js - UseEffect #1 - Gathering Survey Data')
+  //   if (currentUser && surveyFormat) {
+  //     gatherSurveyTemplate(surveyFormat, setSurveyTemplate)
+  //   }
+  // }, [currentUser, surveyFormat])
+
+  // useEffect(() => {
+  //   if (currentUser && surveyFormat && params.id) {
+  //     console.log('SurveyContainer.js - UseEffect #1a - Gathering Edit Answers')
+  //     gatherEditAnswers(params.id, setEditAnswers)
+  //   }
+  // }, [surveyFormat])
+
+  useEffect(() => {
+    if (completedSurveyAnswers.length === 0 || !surveyTemplate.questions) {
+
+      return
+
+    } else if (completedSurveyAnswers.length >= surveyTemplate.questions.length && editAnswers.length > 0 && completeSurveySwitch) {
+
+      console.log('SurveyContainer.js - UseEffect #2 - PUTting Edited Answers')
+      console.log(completedSurveyAnswers)
+      console.log(editAnswers)
+      handleEditSurvey(surveyTemplate.questions, completedSurveyAnswers, editAnswers, history)
+
+    } else if (completedSurveyAnswers.length >= surveyTemplate.questions.length && completeSurveySwitch) {
+
+      console.log('SurveyContainer.js - UseEffect #2 - Posting Survey Instance')
+      handlePostNewSurvey(survey, setCompletedSurveys, setSurveyID) 
+
+    } else {
+
+      alert("Please complete all answers in order to continue!")
+
+    }
+  }, [completedSurveyAnswers])
 
   useEffect(() => {
     if (surveyID !== null) {
-      Promise.all(surveyAnswers.map((pendingAnswer) => {
-        pendingAnswer.survey_id = surveyID
-        const postAnswers = async (pendingAnswer) => {
-          const newAnswer = await postAnswer(pendingAnswer);
-          return newAnswer
-        }
-        return postAnswers(pendingAnswer)
-      }))
-      history.push('/home')
-      setPendingSurvey(false)
+      console.log('SurveyContainer.js - UseEffect #3 - Posting Answers')
+      handlePostAnswers(surveyID, completedSurveyAnswers, history)
     }
   }, [surveyID])
 
 
-  const surveyQuestions = surveyData.questions && surveyData.questions.map((question, index) => (
+  const surveyQuestionsJSX = surveyTemplate.questions && surveyTemplate.questions.map((question, index) => (
     <Question
     
       // Data
@@ -97,19 +120,23 @@ export default function SurveyContainer(props) {
       currentUser={currentUser}
       question={question}
       index={index}
-      totalQuestions={surveyData.questions.length - 1}
+      totalQuestions={surveyTemplate.questions.length - 1}
 
       // Functions
-      handleSubmit={handleSubmit}
-      currentQuestion={currentQuestion}
-      setCurrentQuestion={setCurrentQuestion}
-      submitAnswers={submitAnswers}
-      exitSurvey={exitSurvey}
+      questionCounter={questionCounter}
+      setQuestionCounter={setQuestionCounter}
+
+      // Switches
+      completeSurveySwitch={completeSurveySwitch}
+      setCompleteSurveySwitch={setCompleteSurveySwitch}
 
       // Data Forms
       survey={survey}
-      surveyAnswers={surveyAnswers}
-      setSurveyAnswers={setSurveyAnswers}
+      completedSurveyAnswers={completedSurveyAnswers}
+      setCompletedSurveyAnswers={setCompletedSurveyAnswers}
+
+      // Edit
+      editAnswers={editAnswers.filter(answer => answer.question_id === question.id)}
     
     />
   ))
@@ -118,16 +145,16 @@ export default function SurveyContainer(props) {
 
     <>
       
-      { surveyData === undefined ?
+      { surveyTemplate.length > 0 && (!params.id || (params.id && editAnswers.length > 0 && completedSurveys.lenght > 0)) ?
       
 
-        <div className="loader slide-in-left-survey-container"></div>
+        <Loader />
         
         :
 
-        <div className={"questionnaire-container slide-in-left-survey-container"} key={`${surveyFormat.id}`}>
+        <div className={"survey-container slide-in-left-survey-container"}>
       
-          {surveyQuestions}
+          {surveyQuestionsJSX}
 
         </div>
 

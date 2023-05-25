@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '../Header/Header.jsx'
 import Nav from '../Nav/Nav.jsx'
 import Footer from '../Footer/Footer.jsx'
+import Loader from '../Loader/Loader.jsx'
 
 import './Layout.css'
 
@@ -9,47 +10,43 @@ export default function Layout(props) {
   
   const [toggleDesktopMenu, setToggleDesktopMenu] = useState(false)
   
-  const { currentUser, handleLogout } = props;
+  const { currentUser, setCurrentUser } = props;
 
   return (
+
     <>
-      <div className="layout-container-mobile">
-        <Header
-          currentUser={currentUser}
-          handleLogout={handleLogout}
-          toggleDesktopMenu={toggleDesktopMenu}
-          setToggleDesktopMenu={setToggleDesktopMenu}
-        />
+      
+      {currentUser ? 
+        
+        <div className="layout-container">
 
-        {props.children}
+          <Header
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            toggleDesktopMenu={toggleDesktopMenu}
+            setToggleDesktopMenu={setToggleDesktopMenu}
+          />
+    
+          <div className='body-container'>
+            {props.children}
+          </div>
+    
+          <Footer />
+    
+          <Nav
+            toggleDesktopMenu={toggleDesktopMenu}
+          />
+    
+        </div>
+      
 
-        <Nav
-          toggleDesktopMenu={toggleDesktopMenu}
-          setToggleDesktopMenu={setToggleDesktopMenu}
-        />
-      </div>
+        :
 
-      <div className="layout-container-desktop">
+        <Loader />
 
-        <Header
-          currentUser={currentUser}
-          handleLogout={handleLogout}
-          toggleDesktopMenu={toggleDesktopMenu}
-          setToggleDesktopMenu={setToggleDesktopMenu}
-        />
-
-        <div className="desktop-layout-floater"></div>
-
-        {props.children}
-
-        <Footer />
-
-        <Nav
-          toggleDesktopMenu={toggleDesktopMenu}
-          setToggleDesktopMenu={setToggleDesktopMenu}
-        />
-    </div>
-
+      }
+    
     </>
+
   )
 }

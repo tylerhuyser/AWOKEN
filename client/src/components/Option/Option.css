@@ -1,11 +1,15 @@
 .option-container {
   width: 100%;
-  margin: 5px;
+}
+
+.input-option-container, .self-describe-option-container {
+  width: 100%;
+  margin: 5px 0px;
   padding: 5px;
   
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
 
   border: 1px solid white;
   border-radius: 15px;
@@ -13,6 +17,29 @@
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;
+}
+
+.free-response-option-container {
+  width: calc(100vw - 110px);
+  /* margin: 5px 0px; */
+  padding: 5px;
+}
+
+.self-describe-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 100%;
+}
+
+.self-describe-textarea-hidden {
+  display: none;
+}
+
+.visible {
+  display: inline-block;
 }
 
 .radio-input {
@@ -32,41 +59,78 @@
 
 }
 
-.self-describe-textarea {
-
-  width: 90%;
-  height: 10vh;
-  margin-top: 5px;
-  padding: 0px;
-
-  background: #F39C12;
-  color: white;
-  font-weight: 300;
-  text-align: left;
+.self-describe-textarea, .free-response-textarea {
 
   width: 100%;
-  border: none;
-  flex-grow: 1;
+  height: 150%;
+  margin-top: 5px;
+  padding: 10px;
+
+  background: rgba(241, 241, 241, 0.75);
+  border: solid white 1px;
+  border-radius: 5px;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+}
+
+.self-describe-textarea, .self-describe-textarea::placeholder, .free-response-textarea, .free-response-textarea::placeholder {
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkgray;
+  letter-spacing: 1.2px;
+  font-weight: 100;
+  font-style: italic;
+  text-align: left;
+}
+
+@media only screen and (min-width: 375px) {
 
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 481px) {
 
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 1024px) {
   .option-container {
-    width: 100%;
-    margin: 5px;
-    padding: 5px;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  
-    border: 1px solid white;
-    border-radius: 15px;
-  
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;
+    width: calc((50vw - 200px)/2);
+    margin-right: 10px;
   }
+
+  .option-container:nth-child(even) {
+    margin-left: 10px;
+  }
+
+  .input-option-container, .self-describe-option-container {
+    background: white;
+    color: #F39C12;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .free-response-option-container {
+    width: calc(50vw - 175px)
+  }
+
+  .radio-input, .checkbox-input {
+    border: 2px solid #F39C12;
+  }
+
+  .self-describe-textarea, .free-response-textarea {
+    height: 10vh;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+
+}
+
+@media only screen and (min-width: 1600px) {
 
 }

@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom'
+
 import Option from '../Option/Option.jsx'
-import { useHistory } from 'react-router-dom'
+import createSurveyProgressMarkers from "../../functions/JSX-creators/createSurveyProgressMarkers"
+import createQuestionButton from '../../functions/JSX-creators/createQuestionButton';
+import createFreeResponseOption from '../../functions/JSX-creators/createFreeResponseOption.js';
+
+import changeQuestion from "../../functions/changeQuestion.js"
+import exitSurvey from '../../functions/switch-handler-functions/exitSurvey.js';
 
 import './Question.css'
 
+
 export default function Questions(props) {
 
-  const { currentUser, question, index, totalQuestions, handleSubmit, survey, submitAnswers, exitSurvey } = props
-  const { currentQuestion, setCurrentQuestion } = props
-  const { surveyAnswers, setSurveyAnswers } = props
-  const [selectAllArray, setSelectAllArray] = useState([])
-  const question_format = props.question.question_format
-  const history = useHistory()
+  // Current User
+  const { currentUser } = props
 
+  // Survey, Questions(s) & Answers
+  const { survey } = props
+  const { question, totalQuestions, index } = props
+  const { editAnswers } = props
+  const [selectAllArray, setSelectAllArray] = useState([])
   const [answerData, setAnswerData] = useState({
     employee_id: currentUser.id,
     survey_id: [],
@@ -21,177 +30,130 @@ export default function Questions(props) {
     free_response: ""
   });
 
+  // Switches & Counters
+  const { completedSurveyAnswers, setCompletedSurveyAnswers } = props
+  const { completeSurveySwitch, setCompleteSurveySwitch } = props
+  const { questionCounter, setQuestionCounter } = props
+  const [selfDescribeVisibilitySwitch, setSelfDescribeVisibilitySwitch] = useState(false)
+  
+  const history = useHistory()
+  const params = useParams()
+
   useEffect(() => {
-    if (question_format !== "select all that apply" && (answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
-      setSurveyAnswers(prevState => ([...prevState, answerData]));
+    if (question.question_format !== "select all that apply" && (answerData.option_id && answerData.option_id.length !== 0 || answerData.free_response !== "") ) {
+      setCompletedSurveyAnswers(prevState => ([...prevState, answerData]));
     }
-  }, [submitAnswers])
+  }, [completeSurveySwitch])
 
-  const handleAnswerChange = async (e, props) => {
-
-    let { name, value } = e.target;
-    
-    if (name === "free_response") {
+  useEffect(() => {
+    if (editAnswers.length > 0 && question.question_format !== "select all that apply" && answerData.option_id.length === 0) {
       setAnswerData(prevState => ({
         ...prevState,
-        free_response: value
-      }))
-    } 
-    else if (question_format === "boolean" || question_format === "multiple-choice") {
-      setAnswerData(prevState => ({
-        ...prevState,
-        option_id: props,
-        free_response: ""
+        survey_id: editAnswers[0].survey_id,
+        option_id: editAnswers[0].option_id,
+        free_response: editAnswers[0].free_response
       }))
     }
-  }
+  }, [])
 
-  function changeQuestion(n) {
-    
-    if ((n === (-1)) && (currentQuestion === 0)) {
-      history.push('/')
-    } else if ((n === (-1)) && (currentQuestion !== 0)) {
-      setCurrentQuestion(currentQuestion - 1)
-    } else if ((n === 1) && (currentQuestion !== totalQuestions)) {
-      setCurrentQuestion(currentQuestion + 1)
+  useEffect(() => {
+    if (editAnswers.length > 0 && question.question_format === "select all that apply") {
+      let previousSelectAllAnswers = []
+      editAnswers.forEach((answer) => previousSelectAllAnswers.push(answer.option_id))
+      setSelectAllArray(previousSelectAllAnswers)
     }
-  }
+  }, [editAnswers])
 
-  function createQuestionButton(survey, surveyAnswers) {
-    if (index === totalQuestions) {
+  const surveyProgressMarkersJSX = createSurveyProgressMarkers(index, totalQuestions)
 
-      return (
-        <button className="question-button" onClick={(e) => {
-          e.preventDefault();
-          handleSubmit(survey, surveyAnswers);
-        }}>SUBMIT</button>
-      )
-    } else {
-
-      return (
-        <button className="question-button" onClick={() => changeQuestion(1)}>CONTINUE</button>
-      )
-    }
-  }
-
-  const questionButton = createQuestionButton(survey, surveyAnswers)
-
-  function createQuestionnaireTabs() {
-    let tabs = []
-    for (let i = 0; i <= totalQuestions; i++) {
-      if (i === index) {
-        tabs[i] = <span className="questionnaire-tab active" key={`${question.id} ${i}`}></span>
-      } else {
-        tabs[i] = <span className="questionnaire-tab inactive" key={`${question.id} ${i}`}></span>
-      }
-    }
-    return tabs
-  }
-
-  const questionnaireTabs = createQuestionnaireTabs()
-  
-  function createOptions(question) {
-    if (question.question_format === "free-response") {
-      return (
-
-        <textarea
-          className="free-response-textarea"
-          id={`${question.question_copy}`}
-          key={`${question.id}`}
-          name="free_response"
-          rows={2}
-          placeholder="Enter below..."
-          onChange={handleAnswerChange}
-          vale={answerData.free_response}
-        />
-
-      )
-    } else if (question.question_format === "boolean" || question.question_format === "multiple-choice" || question.question_format === "select all that apply") {
-      const options = question.options.map((option, index) => (
-          <Option
+  const optionsJSX = question.options.map(option => (
+    <Option
       
-          // Question & Option Info
-            key={option.id}
-            currentUser={currentUser}
-            question={question}
-            questionCopy={question.question_copy}
-            question_format={question_format}
-            option={option}
-            index={index}
+    // Question & Option Info
+      key={option.id}
+      currentUser={currentUser}
+      question={question}
+      option={option}
+      index={index}
+    
+    // Switches
+      completeSurveySwitch={completeSurveySwitch}
+      selfDescribeVisibilitySwitch={selfDescribeVisibilitySwitch}
+      setSelfDescribeVisibilitySwitch={setSelfDescribeVisibilitySwitch}
+    
+    // Answers
+      answerData={answerData}
+      setAnswerData={setAnswerData}
+      completedSurveyAnswers={completedSurveyAnswers}
+      setCompletedSurveyAnswers={setCompletedSurveyAnswers}
+    
+    // Select-All
+      selectAllArray={selectAllArray}
+      setSelectAllArray={setSelectAllArray}
 
-          // Answer Change Functionality
-            handleAnswerChange={handleAnswerChange}
-          
-          // Answer Data
-            submitAnswers={submitAnswers}
-            setSurveyAnswers={setSurveyAnswers}
-          
-          // Select-All-Answers
-            selectAllArray={selectAllArray}
-            setSelectAllArray={setSelectAllArray}
-  
-          />
-        ))
-        return options
-        }
-      }
+    // Edit
+      editSurveyID={editAnswers[0]?.survey_id}
+      editAnswer={editAnswers.filter(answer => answer.option_id === option.id)}
+      
+    />
+  ))
 
-      const optionData = createOptions(question)
+  const freeResponseOptionJSX = createFreeResponseOption(question, answerData, setAnswerData)
+
+  const questionButtonJSX = createQuestionButton(index, totalQuestions, questionCounter, setQuestionCounter, completeSurveySwitch, setCompleteSurveySwitch, setCompletedSurveyAnswers, history)
+
   
   return (
 
     <>
 
-      { currentQuestion === index ?
+      { questionCounter === index ?
 
         <div className="question-container" key={`${question.id}`}>
 
-          <div className="questionnaire-header-container">
-      
-            <div className="questionnaire-tabs-container">
-       
-              {questionnaireTabs}
+          <div className="survey-header-container">
 
-            </div>
-
-            {survey.survey_format_id === 1 && index === 0 ? <> </> :
+          {survey.survey_format_id === 1 && index === 0 ? <> </> :
               
               <>
               
               { index === 0 ?
 
-                <i className="fas fa-chevron-left white" onClick={exitSurvey} key={`chevron-icon-${index}`} />
+                <i className="fas fa-chevron-left survey-navigation-button" id="exit-survey-button" onClick={() => exitSurvey(history, params)} key={`chevron-icon-${index}`} />
                 
                 :
 
-                <i className="fas fa-chevron-left white" onClick={() => changeQuestion(-1)} key={`chevron-icon-${index}`} />
+                <i className="fas fa-chevron-left survey-navigation-button" id="previous-question-button" onClick={() => changeQuestion(-1, totalQuestions, questionCounter, setQuestionCounter, history)} key={`chevron-icon-${index}`} />
               
               }
                 
               </>
             }
+      
+            <div className="survey-progress-markers-container">
+       
+              {surveyProgressMarkersJSX}
 
-          </div>
-
-          <p className="questionnaire-title">Complete Your Profile:</p>
-
-          <div className="question-form" id={`questionnaire-question-${props.question.id}`}>
-        
-            <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
-
-            <div className="options-container">
-              {optionData}
             </div>
-        
-            {questionButton}
 
           </div>
+
+          <p className="survey-title">Complete Your Profile:</p>
+        
+          <p className="question-copy" id={`question-${props.question.id}`}>{props.question.question_copy}</p>
+
+          <div className="options-container">
+            {question.question_format === "free-response" ? freeResponseOptionJSX : optionsJSX}
+          </div>
+        
+          {questionButtonJSX}
 
         </div>
         
         :
 
-        null
+        <></>
+
       }
       
     </>

@@ -4,42 +4,33 @@ import './Nav.css'
 
 export default function Nav(props) {
   
-  const {toggleDesktopMenu, setToggleDesktopMenu } = props
+  const { toggleDesktopMenu } = props
 
   return (
-    <>
-      <div className="nav-container-mobile slide-in-bottom-nav">
-        <Link to="/home"><i className="fas fa-home"></i></Link>
-        <i className="fas fa-calendar-alt"></i>
-        <Link to="/journals"><i className="fas fa-book"></i></Link>
-        <i className="fas fa-layer-group"></i>
-        <i className="fas fa-bell"></i>
+      
+    <div className={toggleDesktopMenu ? "navigation-container" : "navigation-container navigation-hidden"}>
+      <Link className="navigation-link" to="/home">
+          <i className="navigation-link-icon fas fa-home"></i>
+          <p className="navigation-link-copy">Home</p>
+      </Link>
+
+      <div className="navigation-link">
+        <i className="navigation-link-icon fas fa-calendar-alt"></i>
+        <p className="navigation-link-copy">Calendar</p>
       </div>
 
-      <div className={toggleDesktopMenu ? "nav-container-desktop scale-in-hor-left" : "nav-container-hidden"} >
-        <Link className="nav-link" to="/home">
-          <i className="fas fa-home"></i>
-          Home
-        </Link>
+      <Link className="navigation-link" to="/journals">
+        <i className="navigation-link-icon fas fa-book"></i>
+        <p className="navigation-link-copy">Journals</p>
+      </Link>
 
-        <Link className="nav-link">
-          <i className="fas fa-calendar-alt"></i>
-          Calender
-        </Link>
-
-        <Link className="nav-link" to="/journals">
-          <i className="fas fa-book"></i>
-          Journals
-        </Link>
-
-        <Link className="nav-link">
-          <i className="fas fa-layer-group"></i>
-          Lessons
-        </Link>
-
+      <div className="navigation-link">
+        <i className="navigation-link-icon fas fa-layer-group"></i>
+        <p className="navigation-link-copy">Lessons</p>
       </div>
-    </>
-    )
+    </div>
+
+  )
 }
 
 

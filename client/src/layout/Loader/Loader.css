@@ -1,0 +1,94 @@
+@-webkit-keyframes shine {
+  0% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  20% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  40% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  60% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  80% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  100% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+}
+
+@keyframes shine {
+  0% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  20% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  40% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  60% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  80% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  100% {
+    -webkit-background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,  rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+} 
+
+@keyframes shine2 {
+  0% {
+    -webkit-background-image: linear-gradient(135deg,rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg,rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  20% {
+    -webkit-background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  40% {
+    -webkit-background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0),rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0),rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  60% {
+    -webkit-background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  80% {
+    -webkit-background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+  100% {
+    -webkit-background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.5)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  }
+} 
+
+.loader-container {
+  width: 100vw;
+  height: 100vh;
+
+  background-image: linear-gradient(to right,  rgba(0, 0, 0, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1),rgba(255, 255, 255, 1)), url('/images/logos/AWOKEN-logo-seamless-pattern-orange.png');
+  background-size: contain;
+  background-repeat: repeat;
+  background-position: center center;
+  background-attachment: fixed;
+
+  animation: shine2 ease-in-out 0.75s;
+  animation-iteration-count: infinite;
+}
