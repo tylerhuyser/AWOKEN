@@ -166,6 +166,10 @@
 
 @media only screen and (min-width: 1200px) {
 
+  .navigation-link:hover, .navigation-link-icon:hover, .navigation-link-copy:hover {
+    color: #551a8b;
+  }
+  
 }
 
 @media only screen and (min-width: 1600px) {

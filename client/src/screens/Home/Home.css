@@ -1,3 +1,53 @@
+@-webkit-keyframes slide-down {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+}
+@keyframes slide-down {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+}
+
+@-webkit-keyframes slide-left {
+  0% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+  }
+  100% {
+    -webkit-transform: scaleX(1.02);
+            transform: scaleX(1.02);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+  }
+}
+@keyframes slide-left {
+  0% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+  }
+  100% {
+    -webkit-transform: scaleX(1.02);
+            transform: scaleX(1.02);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+  }
+}
+
 .home-container {
 
   width: 100vw;
@@ -295,10 +345,20 @@
     padding-right: 25px;
   }
 
+  .home-card-content:hover {
+    -webkit-animation: slide-left 0.5s both;
+    animation: slide-left 0.5s both;
+  }
+
   #notification-begin-journal-button {
     width: 25%;
     height: 5vh;
     font-size: 2vw;
+  }
+
+  #notification-begin-journal-button:hover {
+    -webkit-animation: slide-down 0.5s both;
+    animation: slide-down 0.5s both;
   }
 
   #event-content {
