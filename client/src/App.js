@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, useHistory, Switch } from "react-router-dom";
 
 import "./App.css";
-
+ 
 // Components
 import Layout from "./layout/Layout/Layout.jsx";
 import Loader from "./layout/Loader/Loader";
