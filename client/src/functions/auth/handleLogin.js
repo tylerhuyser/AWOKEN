@@ -5,15 +5,26 @@ import {
 import handleNavigation from '../handleNavigation';
 
 export default async function handleLogin(loginData, history, setCurrentUser, setError) {
-  
-  const employeeData = await loginEmployee(loginData);
 
-  if (employeeData.errors) {
+  if (loginData.username.length === 0 || loginData.password.length === 0) {
 
-    setError(employeeData.errors)
+    console.log("No Credentials Entered.")
+    setError('No Credentials Entered.')
+    return
 
   } else {
-    setCurrentUser(employeeData);
-    handleNavigation(history, '/home');
+
+    const employeeData = await loginEmployee(loginData);
+
+    if (employeeData.errors) {
+  
+      setError(employeeData.errors)
+  
+    } else {
+      setCurrentUser(employeeData);
+      handleNavigation(history, '/home');
+    }
+
+
   }
 };

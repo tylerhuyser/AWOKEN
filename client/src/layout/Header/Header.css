@@ -67,6 +67,10 @@
   flex-grow: 1;
 }
 
+.header-menu-icon-container, .header-current-user-container {
+  width: 30vw;
+}
+
 .header-menu-icon-container {
   justify-content: flex-start;
 }
@@ -83,9 +87,30 @@
   font-size: 40px;
 }
 
+.logout-text  {
+  font-size: 20px;
+  margin-left: 25px
+}
+
 .header-logo {
   height: 50px;
 }
+
+/* Please remove the below CSS when the app is live - temporarily removing visibility on Mobile Icon to prevent confusion */
+
+#header-menu-icon-mobile {
+  display: none;
+}
+
+.header-menu-icon-container {
+  display: none;
+}
+
+.header-logo-container {
+  justify-content: flex-start;
+}
+
+/* END DELETE PORTION */
 
 
 @media only screen and (min-width: 375px) {
@@ -112,6 +137,14 @@
   .mobile {
     display: none;
   }
+  
+  .header-menu-icon-container {
+    display: flex;
+  }
+  
+  .header-logo-container {
+    justify-content: center;
+  }
 
   .header-icon  {
     margin-right: 50px;
@@ -119,7 +152,10 @@
 
   .header-icon:hover, .current-user-name:hover {
     color: #551a8b;
-  
+  }
+
+  .header-menu-icon-container, .header-current-user-container {
+    width: 30vw;
   }
 
 }

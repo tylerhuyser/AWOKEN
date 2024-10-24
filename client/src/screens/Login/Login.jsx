@@ -24,6 +24,8 @@ export default function Login(props) {
   useEffect(() => {
     if (error === "unauthorized") {
       alert("Invalid login credentials. Please check your username and/or password!")
+    } else if (error === "No Credentials Entered.") {
+      alert("Please enter login credentials. Please check your username and/or password!")
     }
   }, [error])
 
@@ -47,7 +49,7 @@ export default function Login(props) {
         <label className="login-form-label">
               Username:
           <input
-            className={ error === "unauthorized" ? "login-form-input invalid" : "login-form-input"}
+            className={ error.length > 0 ? "login-form-input invalid" : "login-form-input"}
             type="text"
             value={formData.username}
             name="username"
@@ -57,7 +59,7 @@ export default function Login(props) {
         <label className="login-form-label">
               Password:
           <input
-            className={ error === "unauthorized" ? "login-form-input invalid" : "login-form-input"}
+            className={ error.length > 0 ? "login-form-input invalid" : "login-form-input"}
             type="password"
             value={formData.password}
             name="password"

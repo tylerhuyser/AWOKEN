@@ -21,7 +21,7 @@ export default function Header(props) {
     <div className="header-container"> 
         
       <div className='header-menu-icon-container'>
-        <i className="header-icon mobile fas fa-bars" id="header-menu-icon"></i>
+        <i className="header-icon mobile fas fa-bars" id="header-menu-icon-mobile"></i>
         {toggleDesktopMenu ? <i className="header-icon desktop fas fa-times" id="header-menu-icon" onClick={changeDesktopMenuVisibility}></i> : <i className="header-icon desktop fas fa-bars" id="header-menu-icon" onClick={changeDesktopMenuVisibility}></i>}
       </div>
 
@@ -31,6 +31,7 @@ export default function Header(props) {
         
       <div className="header-current-user-container">
         <i className="header-icon mobile far fa-user-circle" onClick={() => handleLogout(history, setCurrentUser)}></i>
+        <div className="logout-text mobile" onClick={() => handleLogout(history, setCurrentUser)}>LOGOUT</div>
         <i className="header-icon desktop fas fa-bell"></i>
         <div className="current-user-name desktop" onClick={() => handleLogout(history, setCurrentUser)}>{currentUser.first_name} {currentUser.last_name}</div>
       </div>

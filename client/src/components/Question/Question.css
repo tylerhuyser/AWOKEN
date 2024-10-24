@@ -159,6 +159,7 @@
 @media only screen and (min-width: 1024px) {
   .question-container {
     width: 50vw;
+    max-width: 50vw;
     height: 100vh;
     max-height: 100vh;
     padding: 75px;
@@ -168,6 +169,8 @@
     outline-offset: -25px;
 
     overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
   }
 
   .survey-header-container { 
@@ -208,6 +211,7 @@
     justify-content: space-between;
     align-items: flex-start;
     overflow-y: scroll;
+    scrollbar-width: none;
   }
 
   .question-button {

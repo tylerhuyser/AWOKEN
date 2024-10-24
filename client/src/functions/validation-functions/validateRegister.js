@@ -4,7 +4,9 @@ export default function validateRegister(e, handleRegister, formData, history, s
   
   if (!formData.username) {
     let invalid = document.querySelector('.invalid')
-    invalid.classList.remove('invalid')
+    if (invalid) {
+      invalid.classList.remove('invalid')
+    }
     let usernameInput = document.querySelector('#register-form-username-input')
     usernameInput.classList.add('invalid')
     alert(`Please create a username.`);
