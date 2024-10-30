@@ -46,11 +46,11 @@ AWOKEN uses a Ruby-on-Rails framework for its back-end. In order to facilitate l
 
 There are two types of users that access AWOKEN: admins and employees. The user is offered a different experience depending on their role. 
 
-Empoloyees are able to AWOKEN's bias-measuring tools, bias-reduction intervention, and educational modules.
+Employees are able to use AWOKEN's bias-measuring tools, bias-reduction intervention, and educational modules.
 
 Admins are able to access data visualization tools that display insights about a cohort of employees.
 
-In order to create two different roles, an 'admin' attribute is added to the 'user' model. The 'admin' attribute only accepts Boolean values. If the value is 'true', the user receives the 'admin' view. Conversely, if the valie is 'false' the user receives the employee version of the app.
+In order to create two different roles, an 'admin' attribute is added to the 'user' model. The 'admin' attribute only accepts Boolean values. If the value is 'true', the user receives the 'admin' view. Conversely, if the value is 'false' the user receives the employee version of the app.
 
 ```
 
