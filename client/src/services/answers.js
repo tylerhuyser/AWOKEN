@@ -24,7 +24,7 @@ export const destroyAnswer = async (id) => {
   const resp = await api.delete(`/answers/${id}`);
   return resp;
 }
-
+ 
 export const getSurveyAnswers = async (id) => {
   const resp = await api.get(`/surveys/${id}/answers`);
   return resp;
