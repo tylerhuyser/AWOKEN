@@ -174,7 +174,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
-  dockerfile-rails
+  dockerfile-rails (>= 1.7)
   jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
