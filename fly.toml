@@ -9,27 +9,26 @@ primary_region = "iad"
   release_command = './bin/rails db:prepare'
 
 [processes]
-  web = './bin/rails server -e production -b 0.0.0.0 -p $PORT'
-
+web = './bin/rails server -e production -b 0.0.0.0 -p $PORT'
 
 [env]
-  RAILS_ENV = "production"
+RAILS_ENV = "production"
 
 [[services]]
-  internal_port = 3000
-  protocol = "tcp"
+internal_port = 3000
+protocol = "tcp"
 
   [[services.ports]]
-    port = 80
-    handlers = ["http"]
+  port = 80
+  handlers = ["http"]
 
   [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
+  port = 443
+  handlers = ["tls", "http"]
 
   [[services.http_checks]]
-    interval = "15s"
-    timeout = "5s"
-    path = "/up"
-    method = "GET"
-    protocol = "http"
+  interval = "15s"
+  timeout = "5s"
+  path = "/up"
+  method = "GET"
+  protocol = "http"
