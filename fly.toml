@@ -16,6 +16,7 @@ RAILS_ENV = "production"
 [[services]]
 internal_port = 3000
 protocol = "tcp"
+processes = ["web"]
 
   [[services.ports]]
   port = 80
