@@ -4,11 +4,8 @@ primary_region = "iad"
 [build]
   image = "ruby:3.2.2"
 
-[deploy]
-  release_command = './bin/rails db:prepare'
-
 [processes]
-web = './bin/rails server -e production -b 0.0.0.0 -p $PORT'
+  web = "bin/rails server -e production -b 0.0.0.0 -p ${PORT:-3000}"
 
 [env]
 RAILS_ENV = "production"
