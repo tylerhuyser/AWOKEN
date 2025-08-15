@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/survey_formats/:survey_format_id/questions', to: 'questions#index'
   get '/questions/:question_id/options', to: 'options#index'
   get '/surveys/:survey_id/answers', to: 'answers#index'
+  get "/up", to: ->(_) { [200, {}, ["OK"]] }
 
   resources :employees
   resources :companies

@@ -1,0 +1,35 @@
+app = "awoken-backend"
+primary_region = "iad"
+
+[build]
+  image = "ruby:3.2.2"
+  build-target = "production"
+
+[deploy]
+  release_command = './bin/rails db:prepare'
+
+[processes]
+  web = './bin/rails server -e production -b 0.0.0.0 -p $PORT'
+
+
+[env]
+  RAILS_ENV = "production"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [[services.http_checks]]
+    interval = "15s"
+    timeout = "5s"
+    path = "/up"
+    method = "GET"
+    protocol = "http"
