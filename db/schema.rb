@@ -83,20 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2020_10_22_032842) do
     t.index ["survey_format_id"], name: "index_surveys_on_survey_format_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.date "date_of_birth"
-    t.boolean "admin", default: false
-    t.bigint "company_id", null: false
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_users_on_company_id"
-  end
-
   add_foreign_key "answers", "employees"
   add_foreign_key "answers", "options"
   add_foreign_key "answers", "questions"
