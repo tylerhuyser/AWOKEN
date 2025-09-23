@@ -44,7 +44,7 @@ export default function Carousel(props) {
       
       </div>
     )
-  }
+  } 
 
   if (carouselType === "login") {
 
